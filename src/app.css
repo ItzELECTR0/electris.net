@@ -14,7 +14,7 @@ a {
 }
 
 .circle {
-    --circle-size: 40px;
+    --circle-size: 25px;
     position: fixed;
     height: var(--circle-size);
     width: var(--circle-size);
@@ -29,7 +29,15 @@ a {
     z-index: 500;
 }
 
-.circle.hovered {
+.circle.hovered-text-grow {
+    --circle-size: 80px;
+    height: var(--circle-size);
+    width: var(--circle-size);
+    top: calc(var(--circle-size) / 2 * -1);
+    left: calc(var(--circle-size) / 2 * -1);
+}
+
+.circle.hovered-button-grow {
     --circle-size: 60px;
     height: var(--circle-size);
     width: var(--circle-size);

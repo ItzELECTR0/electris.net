@@ -1,7 +1,7 @@
 <nav class="navbar">
-    <a href="/about">About Us</a>
-    <a href="/">ELECTRIS</a>
-    <a href="/projects">Projects</a>
+    <a class="nav-button" href="/about">About Us</a>
+    <a class="nav-button" href="/">ELECTRIS</a>
+    <a class="nav-button" href="/projects">Projects</a>
   </nav>
   
 <style>
@@ -16,7 +16,8 @@
       gap: 20px;
       z-index: 100;
     }
-    .navbar a {
+
+    .nav-button {
       text-decoration: none;
       color: #f65901;
       font-size: 1.2rem;

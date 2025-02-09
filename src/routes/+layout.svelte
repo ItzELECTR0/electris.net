@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TopNav from '$lib/TopNav.svelte';
-	import '../app.css';
+	import '/src/app.css';
   import { onMount } from "svelte";
 
   let circleElement: HTMLElement | null = null;
@@ -38,7 +38,7 @@
 
       const angle = Math.atan2(deltaMouseY, deltaMouseX) * 180 / Math.PI;
 
-      if (mouseVelocity > 20) {
+      if (mouseVelocity > 10) {
         currentAngle = angle;
       }
 
@@ -53,15 +53,28 @@
 
     tick();
 
-    document.querySelectorAll("a, img, h1, h2, h3, p, .hamburger-button").forEach((el) => {
+    document.querySelectorAll("a, h1, h2, h3, p").forEach((el) => {
       el.addEventListener("mouseenter", () => {
         if (circleElement) {
-          circleElement.classList.add("hovered");
+          circleElement.classList.add("hovered-text-grow");
         }
       });
       el.addEventListener("mouseleave", () => {
         if (circleElement) {
-          circleElement.classList.remove("hovered");
+          circleElement.classList.remove("hovered-text-grow");
+        }
+      });
+    });
+
+    document.querySelectorAll(".nav-button, .hamburger-button").forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        if (circleElement) {
+          circleElement.classList.add("hovered-button-grow");
+        }
+      });
+      el.addEventListener("mouseleave", () => {
+        if (circleElement) {
+          circleElement.classList.remove("hovered-button-grow");
         }
       });
     });
