@@ -12,3 +12,27 @@ a {
     color: #f65901;
     text-decoration: none;
 }
+
+.circle {
+    --circle-size: 40px;
+    position: fixed;
+    height: var(--circle-size);
+    width: var(--circle-size);
+    border: 2px solid #f65901;
+    border-radius: 50%;
+    top: calc(var(--circle-size) / 2.2 * -1);
+    left: calc(var(--circle-size) / 2.2 * -1);
+    pointer-events: none;
+    will-change: transform;
+    transition: box-shadow 0.2s ease-out;
+    transition: width 0.2s ease-out, height 0.2s ease-out, top 0.2s ease-out, left 0.2s ease-out;
+    z-index: 500;
+}
+
+.circle.hovered {
+    --circle-size: 60px;
+    height: var(--circle-size);
+    width: var(--circle-size);
+    top: calc(var(--circle-size) / 2 * -1);
+    left: calc(var(--circle-size) / 2 * -1);
+}

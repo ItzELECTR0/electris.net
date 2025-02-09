@@ -14,7 +14,7 @@
 <div class="hamburger {isOpen ? 'open' : ''}">
   {#each items as item}
     <div class="menu-item">
-      <a href={item.href} target="_blank">{item.label}</a>
+      <a href={item.href}>{item.label}</a>
     </div>
   {/each}
 </div>
