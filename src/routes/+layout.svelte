@@ -7,9 +7,3 @@
   <TopNav />
   <slot />
 </main>
-  
-<style>
-  main {
-    margin-top: 60px;
-  }
-</style>

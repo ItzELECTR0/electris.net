@@ -32,16 +32,17 @@
 
   .hamburger {
     position: fixed;
-    top: 0px;
+    top: 0;
     left: 0;
     background-color: #131615;
     width: 250px;
-    height: 5000px;
+    height: 100vh;
     max-width: 80%;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 110;
     padding: 20px;
+    padding-top: 80px;
   }
 
   .hamburger-button {
@@ -60,7 +61,6 @@
   }
 
   .menu-item {
-    top: -20px;
     margin-top: 5px;
     margin-bottom: 15px;
   }
