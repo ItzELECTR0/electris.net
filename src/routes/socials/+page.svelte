@@ -25,7 +25,7 @@
         title: 'Hassan (Varrow) Alnomani',
         description: 'Free code is best code',
         platformLogo: '/icons/github.svg',
-        profilePicture: '/icons/eltr-v10.png',
+        profilePicture: '/icons/VArrow.png',
         url: 'https://github.com/Varrow1'
       }
     ];
