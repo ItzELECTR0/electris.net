@@ -4,13 +4,13 @@
   </div>
   
   <style>
-
     .hero {
-      min-height: 100vh;
+      min-height: calc(20vh - 25px);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding-top: 80px;
       text-align: center;
     }
     .hero h1 {

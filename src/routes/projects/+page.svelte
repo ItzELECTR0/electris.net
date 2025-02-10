@@ -41,6 +41,10 @@
     text-align: center;
     padding-top: 80px;
     margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .hero h1 {
     font-family: 'Letric';
@@ -49,15 +53,18 @@
   }
   .twaos {
     display: flex;
-    flex-direction: column;
+    flex-direction: line;
     align-items: center;
     gap: 20px;
     padding: 0 20px 20px;
+    justify-content: center;
+    align-items: center;
   }
   .twaos-card {
     font-family: 'sans-serif';
     display: flex;
-    align-items: center;
+    flex-direction: line;
+    align-items: left;
     background-color: #222;
     padding: 10px;
     border-radius: 8px;
@@ -66,6 +73,8 @@
     width: 100%;
     max-width: 600px;
     transition: transform 0.2s;
+    justify-content: left;
+    text-align: left;
   }
   .twaos-card:hover {
     transform: scale(1.02);

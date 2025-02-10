@@ -46,10 +46,10 @@
   </script>
   
   <div class="socials-page">
-    <header>
+    <div class="hero">
       <h1>Social Media</h1>
       <p>Follow the changes all around</p>
-    </header>
+    </div>
   
     <div class="cards-container">
       {#each socialCards as card}
@@ -75,18 +75,23 @@
       min-height: 100vh;
     }
   
-    header {
-      text-align: center;
+    .hero {
+      min-height: calc(20vh - 25px);
       margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
   
-    header h1 {
+    .hero h1 {
       font-family: 'Letric';
       font-size: 3rem;
       margin: 0;
     }
   
-    header p {
+    .hero p {
       font-size: 1.5rem;
       margin: 10px 0 0;
     }

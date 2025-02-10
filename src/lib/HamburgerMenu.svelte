@@ -53,14 +53,14 @@
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 110;
-    padding: 20px;
-    padding-top: 80px;
+    padding: 17px;
+    padding-top: 60px;
   }
 
   .hamburger-button {
     user-select: none;
     position: fixed;
-    top: 20px;
+    top: 5px;
     left: 10px;
     z-index: 111;
     cursor: pointer;

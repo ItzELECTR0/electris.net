@@ -15,7 +15,7 @@
   
   <style>
     .hero {
-      min-height: calc(100vh - 200px);
+      min-height: calc(20vh - 25px);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -34,8 +34,9 @@
       max-width: 80%;
     }
     .discography {
-      display: flex;
+      display: grid;
       justify-content: center;
+      align-items: center;
     }
     .disc-card {
       display: flex;

@@ -5,7 +5,7 @@
   
   <style>
     .hero {
-      min-height: 100vh;
+      min-height: calc(20vh - 25px);
       display: flex;
       flex-direction: column;
       justify-content: center;
