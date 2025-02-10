@@ -1,11 +1,12 @@
 @import 'tailwindcss';
+@import '../static/fonts/fonts.css';
 
 body {
+    font-family: 'sans-sherif', 'Nightcore', 'Letric', 'Redwing Medium';
     margin: 0;
     padding: 0;
     background-color: #131615;
     color: #f65901;
-    font-family: sans-serif;
 }
   
 a {

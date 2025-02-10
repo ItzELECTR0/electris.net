@@ -10,7 +10,7 @@
       top: 0;
       width: 100%;
       background-color: #131615;
-      padding: 10px 20px;
+      padding: 20px 10px;
       display: flex;
       justify-content: center;
       gap: 20px;
@@ -18,6 +18,7 @@
     }
 
     .nav-button {
+      font-family: sans-serif;
       text-decoration: none;
       color: #f65901;
       font-size: 1.2rem;

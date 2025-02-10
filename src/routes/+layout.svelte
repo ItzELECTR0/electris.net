@@ -66,7 +66,7 @@
       });
     });
 
-    document.querySelectorAll(".nav-button, .hamburger-button").forEach((el) => {
+    document.querySelectorAll(".nav-button, .hamburger-button, .twaos").forEach((el) => {
       el.addEventListener("mouseenter", () => {
         if (circleElement) {
           circleElement.classList.add("hovered-button-grow");

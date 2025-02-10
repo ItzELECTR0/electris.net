@@ -66,6 +66,7 @@
   }
 
   .menu-item a {
+    font-family: sans-serif;
     text-decoration: none;
     color: #f65901;
     font-size: 1.2rem;
