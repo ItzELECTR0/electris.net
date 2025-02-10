@@ -51,7 +51,7 @@
       <p>Follow the changes all around</p>
     </div>
   
-    <div class="cards-container">
+    <div class="hero">
       {#each socialCards as card}
         <a class="social-card" href={card.url} target="_blank">
           <div class="icons">
@@ -83,8 +83,9 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      gap: 20px;
     }
-  
+    
     .hero h1 {
       font-family: 'Letric';
       font-size: 3rem;
@@ -94,13 +95,6 @@
     .hero p {
       font-size: 1.5rem;
       margin: 10px 0 0;
-    }
-  
-    .cards-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
     }
   
     .social-card {
@@ -127,15 +121,16 @@
     }
   
     .platform-logo {
-      width: 50px;
-      height: 50px;
+      width: 4vh;
+      height: 4vh;
+      image-resolution: 80px;
       border-radius: 50%;
       background-color: #fff;
     }
   
     .profile-picture {
-      width: 40px;
-      height: 40px;
+      width: 3vh;
+      height: 3vh;
       border-radius: 50%;
       position: absolute;
       right: -10px;
@@ -146,10 +141,12 @@
     .card-text h2 {
       margin: 0;
       font-size: 1.8rem;
+      text-align: left;
     }
   
     .card-text p {
       margin: 5px 0 0;
       font-size: 1rem;
+      text-align: left;
     }
   </style>

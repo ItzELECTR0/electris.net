@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '../static/fonts/fonts.css';
+
 @media (hover: none) and (pointer: coarse) {
   .circle {
     display: none;
@@ -15,21 +16,55 @@ body {
     font-size: 1rem;
     margin: 0;
     padding: 0;
+}
+
+.dark {
     background-color: #131615;
     color: #f65901;
 }
-  
+
+.light {
+    background-color: #f5f5f5;
+    color: #131615;
+}
+
 a {
-    color: #f65901;
     text-decoration: none;
 }
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #0f1010;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-grow: 1;
+    margin-left: 37px;
+  }
+
+  .nav-button {
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #f65901;
+    font-size: 1.2rem;
+  }
 
 .circle {
     --circle-size: 25px;
     position: fixed;
     height: var(--circle-size);
     width: var(--circle-size);
-    border: 2px solid #f65901;
+    border: 2px solid;
     border-radius: 50%;
     top: calc(var(--circle-size) / 2.2 * -1);
     left: calc(var(--circle-size) / 2.2 * -1);

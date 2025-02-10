@@ -10,9 +10,9 @@
   ];
 </script>
 
-<div class="hamburger-button" on:click={() => isOpen = !isOpen}>
+<button type="button" class="hamburger-button" on:click={() => isOpen = !isOpen}>
   &#9776;
-</div>
+</button>
 
 {#if isOpen}
   <div class="overlay" on:click={() => isOpen = false} transition:fade={{ duration: 200 }}></div>
@@ -60,12 +60,14 @@
   .hamburger-button {
     user-select: none;
     position: fixed;
-    top: 5px;
-    left: 10px;
+    top: 1vh;
+    left: 1vh;
     z-index: 111;
     cursor: pointer;
     font-size: 2rem;
     color: #f65901;
+    background: none;
+    border: none;
   }
 
   .hamburger.open {

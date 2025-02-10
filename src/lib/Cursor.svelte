@@ -50,10 +50,16 @@ onMount(() => {
 
   const addHoverClasses = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (target.closest("a, h1, h2, h3, p")) {
+      if (target.closest("a, h1, h2, h3, h4, h5, p")) {
+        if (target.closest(".circle-no-interact")) {
+          return;
+        }
         circleElement?.classList.add("hovered-text-grow");
       }
-      if (target.closest(".nav-button, .hamburger-button, .twaos")) {
+      if (target.closest(".social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
+        if (target.closest(".circle-no-interact")) {
+          return;
+        }
         circleElement?.classList.add("hovered-button-grow");
       }
     };
@@ -63,7 +69,7 @@ onMount(() => {
       if (target.closest("a, h1, h2, h3, h4, h5, p")) {
         circleElement?.classList.remove("hovered-text-grow");
       }
-      if (target.closest(".nav-button, .hamburger-button, .twaos")) {
+      if (target.closest(".social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
         circleElement?.classList.remove("hovered-button-grow");
       }
     };
