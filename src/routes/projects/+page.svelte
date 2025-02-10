@@ -1,15 +1,6 @@
 <script>
-  import HamburgerMenu from '$lib/HamburgerMenu.svelte';
 
   let iconSize = 150;
-
-  const menuItems = [
-    { label: 'Back', href: '/' },
-    { label: 'TWAOS', href: 'https://github.com/ItzELECTR0/TWAOS' },
-    { label: 'Game Studios', href: '/egs' },
-    { label: 'Media Studios', href: '/ems' },
-    { label: 'Source Code', href: 'https://github.com/ItzELECTR0/electris.net' }
-  ];
 
   const projects = [
     {
@@ -21,8 +12,6 @@
     }
   ];
 </script>
-
-<HamburgerMenu items={menuItems} />
 
 <div class="hero">
   <h1>Projects</h1>

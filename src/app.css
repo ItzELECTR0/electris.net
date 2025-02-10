@@ -1,8 +1,18 @@
 @import 'tailwindcss';
 @import '../static/fonts/fonts.css';
+@media (hover: none) and (pointer: coarse) {
+  .circle {
+    display: none;
+  }
+}
+
+html {
+    font-size: clamp(14px, 1.2vw, 18px);
+}
 
 body {
-    font-family: 'sans-sherif', 'Nightcore', 'Letric', 'Redwing Medium';
+    font-family: 'sans-sherif';
+    font-size: 1rem;
     margin: 0;
     padding: 0;
     background-color: #131615;
@@ -25,7 +35,6 @@ a {
     left: calc(var(--circle-size) / 2.2 * -1);
     pointer-events: none;
     will-change: transform;
-    transition: box-shadow 0.2s ease-out;
     transition: width 0.2s ease-out, height 0.2s ease-out, top 0.2s ease-out, left 0.2s ease-out;
     z-index: 500;
 }

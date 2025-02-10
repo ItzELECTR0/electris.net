@@ -1,17 +1,4 @@
-<script>
-    import HamburgerMenu from '$lib/HamburgerMenu.svelte';
-  
-    const menuItems = [
-      { label: 'TWAOS', href: 'https://github.com/ItzELECTR0/TWAOS' },
-      { label: 'Game Studios', href: '/egs' },
-      { label: 'Media Studios', href: '/ems' },
-      { label: 'Source Code', href: 'https://github.com/ItzELECTR0/electris.net' }
-    ];
-  </script>
-  
-  <HamburgerMenu items={menuItems} />
-  
-  <div class="hero">
+<div class="hero">
     <h1>ELECTRIS</h1>
     <p>Heart like a pen, On paper it bleeds</p>
   </div>

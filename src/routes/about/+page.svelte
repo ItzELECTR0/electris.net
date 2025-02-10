@@ -1,21 +1,6 @@
-<script>
-    import HamburgerMenu from '$lib/HamburgerMenu.svelte';
-  
-    // Hamburger menu items for About Us page
-    const menuItems = [
-      { label: 'Back', href: '/' },
-      { label: 'TWAOS', href: 'https://github.com/ItzELECTR0/TWAOS' },
-      { label: 'Game Studios', href: '/egs' },
-      { label: 'Media Studios', href: '/ems' },
-      { label: 'Source Code', href: 'https://github.com/ItzELECTR0/electris.net' }
-    ];
-  </script>
-
-<HamburgerMenu items={menuItems} />
-  
   <div class="hero">
     <h1>About Us</h1>
-    <p>[Enter description here later]</p>
+    <p>[More info here coming soon]</p>
   </div>
   
   <style>
@@ -33,7 +18,8 @@
       margin: 0;
     }
     .hero p {
-      font-size: 1.5rem;
+      font-family: 'Nightcore';
+      font-size: 6.5rem;
       margin-top: 20px;
       max-width: 80%;
     }

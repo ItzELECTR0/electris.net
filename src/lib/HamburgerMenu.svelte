@@ -1,6 +1,13 @@
 <script>
-  export let items = [];
+  import { fade } from 'svelte/transition';
   let isOpen = false;
+  const menuItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Game Studios', href: '/egs' },
+    { label: 'Media Studios', href: '/ems' },
+    { label: 'Source Code', href: 'https://github.com/ItzELECTR0/electris.net', newTab: true },
+    { label: 'Social Media', href: '/socials' }
+  ];
 </script>
 
 <div class="hamburger-button" on:click={() => isOpen = !isOpen}>
@@ -8,13 +15,18 @@
 </div>
 
 {#if isOpen}
-  <div class="overlay" on:click={() => isOpen = false}></div>
+  <div class="overlay" on:click={() => isOpen = false} transition:fade={{ duration: 200 }}></div>
 {/if}
 
 <div class="hamburger {isOpen ? 'open' : ''}">
-  {#each items as item}
+  {#each menuItems as item}
     <div class="menu-item">
-      <a href={item.href}>{item.label}</a>
+      <a 
+        href={item.href} 
+        target={item.newTab ? "_blank" : "_self"}
+        on:click={() => isOpen = false}>
+        {item.label}
+      </a>
     </div>
   {/each}
 </div>

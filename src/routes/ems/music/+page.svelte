@@ -1,13 +1,4 @@
 <script>
-  import HamburgerMenu from '$lib/HamburgerMenu.svelte';
-
-  const menuItems = [
-    { label: 'Back', href: '/ems' },
-    { label: 'Home', href: '/' },
-    { label: 'TWAOS', href: 'https://github.com/ItzELECTR0/TWAOS' },
-    { label: 'Game Studios', href: '/egs' },
-    { label: 'Source Code', href: 'https://github.com/ItzELECTR0/electris.net' }
-  ];
 
   const songs = [
     {
@@ -24,8 +15,6 @@
     }
   ];
 </script>
-
-<HamburgerMenu items={menuItems} />
 
 <div class="music-container">
   {#each songs as song}

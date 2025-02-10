@@ -1,23 +1,10 @@
-<script>
-    import HamburgerMenu from '$lib/HamburgerMenu.svelte';
-  
-    const menuItems = [
-      { label: 'Back', href: '/projects' },
-      { label: 'TWAOS', href: 'https://github.com/ItzELECTR0/TWAOS' },
-      { label: 'Game Studios', href: '/egs' },
-      { label: 'Media Studios', href: '/ems' },
-      { label: 'Source Code', href: 'https://github.com/ItzELECTR0/electris.net' }
-    ];
-  </script>
-  
-  <HamburgerMenu items={menuItems} />
-  
   <div class="hero">
     <h1>The Wonderful Adventures Of SIP</h1>
     <h5>An open-source Indie Game created by a Solo Developer</h5>
   </div>
 
 <style>
+
 .hero {
     min-height: 100vh;
     display: flex;
@@ -39,4 +26,5 @@
   font-size: 1.5rem;
   margin: 0;
 }
+
 </style>

@@ -1,17 +1,3 @@
-<script>
-    import HamburgerMenu from '$lib/HamburgerMenu.svelte';
-  
-    // Hamburger menu items for Media Studios page
-    const menuItems = [
-      { label: 'Back', href: '/' },
-      { label: 'TWAOS', href: 'https://github.com/ItzELECTR0/TWAOS' },
-      { label: 'Game Studios', href: '/egs' },
-      { label: 'Source Code', href: 'https://github.com/ItzELECTR0/electris.net' }
-    ];
-  </script>
-  
-  <HamburgerMenu items={menuItems} />
-  
   <div class="hero">
     <h1>ELECTRIS Media Studios</h1>
     <p>A studio is a room with a microphone, A set is a phone and a couple of chairs for it to sit on</p>
@@ -38,6 +24,7 @@
       text-align: center;
     }
     .hero h1 {
+      font-family: 'Letric';
       font-size: 3.5rem;
       margin: 0;
     }
@@ -49,7 +36,6 @@
     .discography {
       display: flex;
       justify-content: center;
-      margin-top: 40px;
     }
     .disc-card {
       display: flex;
