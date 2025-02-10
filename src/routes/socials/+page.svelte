@@ -1,28 +1,42 @@
 <script>
     const socialCards = [
       {
-        title: 'ELECTRO',
+        title: 'ELECTRIS (YouTube)',
+        description: 'Heart like a pen, On paper it bleeds',
+        platformLogo: '/icons/yt.svg',
+        profilePicture: '/icons/elts-v1.png',
+        url: 'https://youtube.com/@ELECTRIS'
+      },
+      {
+        title: 'ELECTRIS (Discord)',
+        description: 'Legends of Lightning',
+        platformLogo: '/icons/discord.svg',
+        profilePicture: '/icons/elts-v1.png',
+        url: 'https://discord.gg/TgtCGKxbZr'
+      },
+      {
+        title: 'ELECTRO (YouTube)',
         description: 'Dancing with the Lightning',
         platformLogo: '/icons/yt.svg',
         profilePicture: '/icons/eltr-v10.png',
         url: 'https://youtube.com/@ELEC7RO'
       },
       {
-        title: 'Varrow',
-        description: 'Cheap coding & Lazy programming',
-        platformLogo: '/icons/yt.svg',
-        profilePicture: '/icons/VArrow.png',
-        url: 'https://youtube.com/@V4rrow'
-      },
-      {
-        title: 'Tiberiu (ELECTRO) Lazar',
-        description: 'Dancing with the Code',
+        title: 'ELECTRO (GitHub)',
+        description: 'Free as in Freedom',
         platformLogo: '/icons/github.svg',
         profilePicture: '/icons/eltr-v10.png',
         url: 'https://github.com/ItzELECTR0'
       },
       {
-        title: 'Hassan (Varrow) Alnomani',
+        title: 'Varrow (YouTube)',
+        description: 'Cheap learning & Lazy programming',
+        platformLogo: '/icons/yt.svg',
+        profilePicture: '/icons/VArrow.png',
+        url: 'https://youtube.com/@V4rrow'
+      },
+      {
+        title: 'Varrow (GitHub)',
         description: 'Free code is best code',
         platformLogo: '/icons/github.svg',
         profilePicture: '/icons/VArrow.png',
