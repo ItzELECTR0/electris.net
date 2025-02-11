@@ -16,6 +16,8 @@ body {
     font-size: 1rem;
     margin: 0;
     padding: 0;
+    background-color: #131615;
+    color: #f65901;
 }
 
 .dark {
@@ -37,6 +39,7 @@ a {
     top: 0;
     width: 100%;
     background-color: #0f1010;
+    color: #f65901;
     padding: 20px 10px;
     display: flex;
     justify-content: space-between;
@@ -64,7 +67,7 @@ a {
     position: fixed;
     height: var(--circle-size);
     width: var(--circle-size);
-    border: 2px solid;
+    border: 2px solid #f65901;
     border-radius: 50%;
     top: calc(var(--circle-size) / 2.2 * -1);
     left: calc(var(--circle-size) / 2.2 * -1);
