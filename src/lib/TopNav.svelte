@@ -48,9 +48,9 @@
   <div transition:slide={{ duration: 300 }}>
     <h2 class="circle-no-interact">Options</h2>
     <div class="option">
-      <label for="hamburger-toggle">Enable Hamburger Menu</label>
+      <label for="testing-toggle">Testing Option</label>
       <input
-        id="hamburger-toggle"
+        id="testing-option"
         type="checkbox" />
     </div>
   </div>
