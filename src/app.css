@@ -20,16 +20,6 @@ body {
     color: #f65901;
 }
 
-.dark {
-    background-color: #131615;
-    color: #f65901;
-}
-
-.light {
-    background-color: #f5f5f5;
-    color: #131615;
-}
-
 a {
     text-decoration: none;
 }
