@@ -3,19 +3,16 @@
 
   let circleElement: HTMLElement | null = null;
 
-  // Shared mouse/cursor state
   const mouse = { x: 0, y: 0 };
   const previousMouse = { x: 0, y: 0 };
   const circle = { x: 0, y: 0 };
   let currentScale = 0;
   let currentAngle = 0;
 
-  // Mobile-specific variables:
   let isTouchActive = false;
-  let touchVisibility = 1; // On non-touch devices, we keep this 1.
+  let touchVisibility = 1;
   let isTouchDevice = false;
 
-  // Touch event handlers – update mouse coordinates and flag touch activity.
   function handleTouchStart(e: TouchEvent) {
     isTouchActive = true;
     const touch = e.touches[0];
@@ -34,16 +31,20 @@
 
   onMount(() => {
     isTouchDevice = 'ontouchstart' in window;
-    if (isTouchDevice) {
-      touchVisibility = 0;
-      window.addEventListener("touchstart", handleTouchStart);
-      window.addEventListener("touchmove", handleTouchMove);
-      window.addEventListener("touchend", handleTouchEnd);
-    } else {
-      window.addEventListener("mousemove", (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-      });
+
+    switch (isTouchDevice) {
+      case true:
+        touchVisibility = 0
+        window.addEventListener("touchstart", handleTouchStart)
+        window.addEventListener("touchmove", handleTouchMove)
+        window.addEventListener("touchend", handleTouchEnd)
+        break;
+      case false:
+        window.addEventListener("mousemove", (e) => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+        });
+        break;
     }
 
     const speed = 0.17;
