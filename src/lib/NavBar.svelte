@@ -3,6 +3,15 @@
   import { slide, fade } from 'svelte/transition';
 
   let showOptions = false;
+  let isOpen = false;
+
+  const menuItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Game Studios', href: '/egs' },
+    { label: 'Media Studios', href: '/ems' },
+    { label: 'Source Code', href: 'https://github.com/ItzELECTR0/electris.net', newTab: true },
+    { label: 'Social Media', href: '/socials' }
+  ];
 
   onMount(() => {
     if (typeof document !== 'undefined') {
@@ -17,6 +26,7 @@
   });
 
   function handleClickOutside(event: MouseEvent) {
+    if (typeof document === 'undefined') return;
     if (showOptions) {
       const optionsMenu = document.querySelector('.options-menu');
       const logoButton = document.querySelector('.logo-button');
@@ -38,9 +48,33 @@
     <a class="nav-button" href="/">ELECTRIS</a>
     <a class="nav-button" href="/projects">Projects</a>
   </div>
-  <button type="button" class="logo-button" on:click={() => showOptions = !showOptions}>
+  <button type="button" class="hamburger-button" on:click={() => isOpen = !isOpen}>
+    &#9776;
+  </button>
+  {#if isOpen}
+  <div class="overlay" on:click={() => isOpen = false} transition:fade={{ duration: 200 }}></div>
+  {/if}
+  <button
+    type="button"
+    class="logo-button"
+    on:click={(event) => {
+      event.stopPropagation();
+      showOptions = !showOptions;
+    }}>
     <img class="logo" src='/icons/elts-v1-transparent.png' alt='ELECTRIS' />
   </button>
+  <div class="hamburger {isOpen ? 'open' : ''}">
+    {#each menuItems as item}
+      <div class="menu-item">
+        <a 
+          href={item.href} 
+          target={item.newTab ? "_blank" : "_self"}
+          on:click={() => isOpen = false}>
+          {item.label}
+        </a>
+      </div>
+    {/each}
+  </div>
 </nav>
 
 {#if showOptions}
@@ -52,6 +86,9 @@
       <input
         id="testing-option"
         type="checkbox" />
+    </div>
+    <div class="option">
+      <a href="https://testing.electris.net">Switch to Testing</a>
     </div>
   </div>
 </div>
@@ -81,23 +118,39 @@
     color: #f65901;
     width: 250px;
   }
+  
   .options-menu h2 {
     font-family: 'sans-sherif';
     margin-top: 0;
     font-size: 1.5rem;
   }
+
   .option {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
+
   .option label {
     font-family: 'sans-sherif';
     font-size: 1rem;
     margin-bottom: 0.1vh;
   }
+
   .option input[type="checkbox"] {
     width: 1.5vh;
     height: 1.5vh;
+  }
+
+  .menu-item {
+    margin-top: 0.5vh;
+    margin-bottom: 0.8vh;
+  }
+
+  .menu-item a {
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #f65901;
+    font-size: 1.2rem;
   }
 </style>

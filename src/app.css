@@ -25,32 +25,74 @@ a {
 }
 
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #0f1010;
-    color: #f65901;
-    padding: 20px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-  }
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #0f1010;
+  color: #f65901;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
 
-  .nav-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-grow: 1;
-    margin-left: 37px;
-  }
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-grow: 1;
+  margin-left: 3vh;
+}
 
-  .nav-button {
-    font-family: sans-serif;
-    text-decoration: none;
-    color: #f65901;
-    font-size: 1.2rem;
-  }
+.nav-button {
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #f65901;
+  font-size: 1.2rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.hamburger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #131615;
+  width: 250px;
+  height: 100vh;
+  max-width: 80%;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 110;
+  padding: 17px;
+  padding-top: 60px;
+}
+
+.hamburger-button {
+  user-select: none;
+  position: fixed;
+  align-items: center;
+  left: 1.2vh;
+  z-index: 121;
+  cursor: pointer;
+  font-size: 2rem;
+  color: #f65901;
+  background: none;
+  border: none;
+}
+
+.hamburger.open {
+  transform: translateX(0);
+}
 
 .circle {
     --circle-size: 25px;

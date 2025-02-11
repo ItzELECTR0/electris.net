@@ -56,7 +56,7 @@ onMount(() => {
         }
         circleElement?.classList.add("hovered-text-grow");
       }
-      if (target.closest(".social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
+      if (target.closest(".option, .social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
         if (target.closest(".circle-no-interact")) {
           return;
         }
@@ -69,7 +69,7 @@ onMount(() => {
       if (target.closest("a, h1, h2, h3, h4, h5, p")) {
         circleElement?.classList.remove("hovered-text-grow");
       }
-      if (target.closest(".social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
+      if (target.closest(".option, .social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
         circleElement?.classList.remove("hovered-button-grow");
       }
     };
