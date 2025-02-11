@@ -3,28 +3,8 @@
   import { slide, fade } from 'svelte/transition';
 
   let showOptions = false;
-  let enableHamburger = true;
-  let useDarkMode = false;
-  let enableCursorFollower = true;
 
   onMount(() => {
-    if (typeof window !== 'undefined') {
-      const storedHamburger = localStorage.getItem('enableHamburger');
-      const storedDarkMode = localStorage.getItem('useDarkMode');
-      const storedCursor = localStorage.getItem('enableCursorFollower');
-
-      if (storedHamburger !== null) {
-        enableHamburger = storedHamburger === 'true';
-      }
-      if (storedDarkMode !== null) {
-        useDarkMode = storedDarkMode === 'true';
-        updateDarkMode(useDarkMode);
-      }
-      if (storedCursor !== null) {
-        enableCursorFollower = storedCursor === 'true';
-      }
-    }
-
     if (typeof document !== 'undefined') {
       document.addEventListener('click', handleClickOutside);
     }
@@ -35,43 +15,6 @@
       document.removeEventListener('click', handleClickOutside);
     }
   });
-
-  function toggleHamburger() {
-    enableHamburger = !enableHamburger;
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('enableHamburger', enableHamburger.toString());
-      window.dispatchEvent(new CustomEvent('preferencesUpdated'));
-    }
-  }
-
-  function toggleDarkMode() {
-    useDarkMode = !useDarkMode;
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('useDarkMode', useDarkMode.toString());
-      updateDarkMode(useDarkMode);
-      window.dispatchEvent(new CustomEvent('preferencesUpdated'));
-    }
-  }
-
-  function toggleCursor() {
-    enableCursorFollower = !enableCursorFollower;
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('enableCursorFollower', enableCursorFollower.toString());
-      window.dispatchEvent(new CustomEvent('preferencesUpdated'));
-    }
-  }
-
-  function updateDarkMode(isDark: boolean) {
-    if (typeof document !== 'undefined') {
-      if (isDark) {
-        document.body.classList.add('dark');
-        document.body.classList.remove('light');
-      } else {
-        document.body.classList.add('light');
-        document.body.classList.remove('dark');
-      }
-    }
-  }
 
   function handleClickOutside(event: MouseEvent) {
     if (showOptions) {
@@ -108,25 +51,7 @@
       <label for="hamburger-toggle">Enable Hamburger Menu</label>
       <input
         id="hamburger-toggle"
-        type="checkbox"
-        bind:checked={enableHamburger}
-        on:change={toggleHamburger} />
-    </div>
-    <div class="option">
-      <label for="darkmode-toggle">Use Dark Mode</label>
-      <input
-        id="darkmode-toggle"
-        type="checkbox"
-        bind:checked={useDarkMode}
-        on:change={toggleDarkMode} />
-    </div>
-    <div class="option">
-      <label for="cursor-toggle">Enable Cursor Follower</label>
-      <input
-        id="cursor-toggle"
-        type="checkbox"
-        bind:checked={enableCursorFollower}
-        on:change={toggleCursor} />
+        type="checkbox" />
     </div>
   </div>
 </div>
