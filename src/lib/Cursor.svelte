@@ -1,65 +1,109 @@
 <script lang="ts">
+  import { onMount } from "svelte";
 
-import { onMount } from "svelte";
+  let circleElement: HTMLElement | null = null;
 
-let circleElement: HTMLElement | null = null;
+  // Shared mouse/cursor state
+  const mouse = { x: 0, y: 0 };
+  const previousMouse = { x: 0, y: 0 };
+  const circle = { x: 0, y: 0 };
+  let currentScale = 0;
+  let currentAngle = 0;
 
-const mouse = { x: 0, y: 0 };
-const previousMouse = { x: 0, y: 0 };
-const circle = { x: 0, y: 0 };
-let currentScale = 0;
-let currentAngle = 0;
+  // Mobile-specific variables:
+  let isTouchActive = false;
+  let touchVisibility = 1; // On non-touch devices, we keep this 1.
+  let isTouchDevice = false;
 
-onMount(() => {
-  window.addEventListener("mousemove", (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
+  // Touch event handlers – update mouse coordinates and flag touch activity.
+  function handleTouchStart(e: TouchEvent) {
+    isTouchActive = true;
+    const touch = e.touches[0];
+    mouse.x = touch.clientX;
+    mouse.y = touch.clientY;
+  }
+  function handleTouchMove(e: TouchEvent) {
+    isTouchActive = true;
+    const touch = e.touches[0];
+    mouse.x = touch.clientX;
+    mouse.y = touch.clientY;
+  }
+  function handleTouchEnd(e: TouchEvent) {
+    isTouchActive = false;
+  }
 
-  const speed = 0.17;
-
-  const tick = () => {
-    circle.x += (mouse.x - circle.x) * speed;
-    circle.y += (mouse.y - circle.y) * speed;
-    const translateTransform = `translate(${circle.x}px, ${circle.y}px)`;
-
-    const deltaMouseX = mouse.x - previousMouse.x
-    const deltaMouseY = mouse.y - previousMouse.y
-    previousMouse.x = mouse.x;
-    previousMouse.y = mouse.y;
-    const mouseVelocity = Math.min(Math.sqrt(deltaMouseX**2 + deltaMouseY**2) * 5, 150);
-    const scaleValue = (mouseVelocity / 150) * 0.5;
-    currentScale += (scaleValue - currentScale) * speed;
-    const scaleTransform = `scale(${1 + currentScale}, ${1 - currentScale})`;
-    const angle = Math.atan2(deltaMouseY, deltaMouseX) * 180 / Math.PI;
-
-    if (mouseVelocity > 10) {
-      currentAngle = angle;
+  onMount(() => {
+    isTouchDevice = 'ontouchstart' in window;
+    if (isTouchDevice) {
+      touchVisibility = 0;
+      window.addEventListener("touchstart", handleTouchStart);
+      window.addEventListener("touchmove", handleTouchMove);
+      window.addEventListener("touchend", handleTouchEnd);
+    } else {
+      window.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
     }
 
-    const rotateTransform = `rotate(${currentAngle}deg)`;
+    const speed = 0.17;
 
-    if (circleElement) {
-      circleElement.style.transform = `${translateTransform} ${rotateTransform} ${scaleTransform}`;
-    }
+    const tick = () => {
+      circle.x += (mouse.x - circle.x) * speed;
+      circle.y += (mouse.y - circle.y) * speed;
+      const translateTransform = `translate(${circle.x}px, ${circle.y}px)`;
 
-    requestAnimationFrame(tick);
-  };
+      const deltaMouseX = mouse.x - previousMouse.x;
+      const deltaMouseY = mouse.y - previousMouse.y;
+      previousMouse.x = mouse.x;
+      previousMouse.y = mouse.y;
+      const mouseVelocity = Math.min(Math.sqrt(deltaMouseX**2 + deltaMouseY**2) * 5, 150);
+      const scaleValue = (mouseVelocity / 150) * 0.5;
+      currentScale += (scaleValue - currentScale) * speed;
 
-  tick();
+      let finalScaleX = (1 + currentScale);
+      let finalScaleY = (1 - currentScale);
 
-  const addHoverClasses = (event: MouseEvent) => {
+      if (isTouchDevice) {
+        finalScaleX *= touchVisibility;
+        finalScaleY *= touchVisibility;
+      }
+
+      const scaleTransform = `scale(${finalScaleX}, ${finalScaleY})`;
+
+      const angle = Math.atan2(deltaMouseY, deltaMouseX) * 180 / Math.PI;
+      if (mouseVelocity > 10) {
+        currentAngle = angle;
+      }
+      const rotateTransform = `rotate(${currentAngle}deg)`;
+
+      if (circleElement) {
+        circleElement.style.transform = `${translateTransform} ${rotateTransform} ${scaleTransform}`;
+      }
+
+      if (isTouchDevice) {
+        if (isTouchActive) {
+          touchVisibility += (1 - touchVisibility) * 0.1;
+        } else {
+          touchVisibility += (0 - touchVisibility) * 0.1;
+        }
+      } else {
+        touchVisibility = 1;
+      }
+
+      requestAnimationFrame(tick);
+    };
+
+    tick();
+    
+    const addHoverClasses = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (target.closest("a, h1, h2, h3, h4, h5, p")) {
-        if (target.closest(".circle-no-interact")) {
-          return;
-        }
+        if (target.closest(".circle-no-interact")) return;
         circleElement?.classList.add("hovered-text-grow");
       }
       if (target.closest(".option, .social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
-        if (target.closest(".circle-no-interact")) {
-          return;
-        }
+        if (target.closest(".circle-no-interact")) return;
         circleElement?.classList.add("hovered-button-grow");
       }
     };
@@ -77,7 +121,6 @@ onMount(() => {
     document.addEventListener("mouseover", addHoverClasses);
     document.addEventListener("mouseout", removeHoverClasses);
   });
-
 </script>
 
 <div bind:this={circleElement} class="circle"></div>

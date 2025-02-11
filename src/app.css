@@ -1,11 +1,11 @@
 @import 'tailwindcss';
 @import '../static/fonts/fonts.css';
 
-@media (hover: none) and (pointer: coarse) {
+/* @media (hover: none) and (pointer: coarse) {
   .circle {
     display: none;
   }
-}
+} */
 
 html {
     font-size: clamp(14px, 1.2vw, 18px);
