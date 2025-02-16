@@ -69,6 +69,27 @@ a {
   z-index: 110;
   padding: 17px;
   padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #131615;
+  width: 250px;
+  height: 100vh;
+  max-width: 80%;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 110;
+  padding: 17px;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .hamburger-button {
@@ -82,6 +103,15 @@ a {
   color: #f65901;
   background: none;
   border: none;
+}
+
+.hamburger-footer {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  color: #f65901;
+  border-top: 1px solid #f65901;
+  padding-top: 10px;
 }
 
 .hamburger.open {

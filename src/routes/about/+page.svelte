@@ -1,5 +1,5 @@
   <div class="hero">
-    <h1>About Us</h1>
+    <h1><u>About Us</u></h1>
     <p>[More info here coming soon]</p>
   </div>
   
