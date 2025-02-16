@@ -69,7 +69,7 @@
         <div class="menu-item">
           <a 
             href={item.href} 
-            target={item.newTab ? "_blank" : "_self"}
+            target={item.newTab ? "_blank" : null}
             on:click={() => isOpen = false}>
             {item.label}
           </a>
@@ -77,8 +77,8 @@
       {/each}
     </div>
     <div class="hamburger-footer">
-      <p>ELECTRIS &#169;2025</p>
-      <p>v0.0.1</p>
+      <p><u>ELECTRIS &#169;2025</u></p>
+      <a href="https://github.com/ItzELECTR0/electris.net"><u>v0.0.1</u></a>
     </div>
   </div>
 </nav>
@@ -147,8 +147,11 @@
   }
 
   .menu-item {
-    margin-top: 0.5vh;
-    margin-bottom: 0.8vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
   }
 
   .menu-item a {

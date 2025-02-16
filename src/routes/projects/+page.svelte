@@ -47,6 +47,7 @@
     align-items: center;
   }
   .hero h1 {
+    padding-top: 1vh;
     font-family: 'Letric';
     font-size: 4rem;
     margin: 0;

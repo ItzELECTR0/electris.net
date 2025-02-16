@@ -76,7 +76,7 @@
     }
   
     .hero {
-      min-height: calc(20vh - 25px);
+      min-height: calc(20vh - 25vh);
       margin-bottom: 40px;
       display: flex;
       flex-direction: column;
@@ -87,6 +87,7 @@
     }
     
     .hero h1 {
+      padding-top: 1vh;
       font-family: 'Letric';
       font-size: 3rem;
       margin: 0;

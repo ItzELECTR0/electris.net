@@ -107,6 +107,9 @@
         if (target.closest(".circle-no-interact")) return;
         circleElement?.classList.add("hovered-button-grow");
       }
+      if (target.closest(".hamburger-footer")) {
+        circleElement?.classList.add("hovered-footer");
+      }
     };
 
     const removeHoverClasses = (event: MouseEvent) => {
@@ -116,6 +119,9 @@
       }
       if (target.closest(".option, .social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
         circleElement?.classList.remove("hovered-button-grow");
+      }
+      if (target.closest(".hamburger-footer")) {
+        circleElement?.classList.remove("hovered-footer");
       }
     };
 

@@ -2,7 +2,7 @@
 @import '../static/fonts/fonts.css';
 
 html {
-    font-size: clamp(14px, 1.2vw, 18px);
+    font-size: clamp(1vh, 1.2vw, 1.36vh);
 }
 
 body {
@@ -24,7 +24,7 @@ a {
   width: 100%;
   background-color: #0f1010;
   color: #f65901;
-  padding: 20px 10px;
+  padding: 1.5vh 1vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,7 +34,7 @@ a {
 .nav-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 1.5vh;
   flex-grow: 1;
   margin-left: 3vh;
 }
@@ -61,32 +61,14 @@ a {
   top: 0;
   left: 0;
   background-color: #131615;
-  width: 250px;
+  width: 20vh;
   height: 100vh;
   max-width: 80%;
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   z-index: 110;
-  padding: 17px;
-  padding-top: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.hamburger {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #131615;
-  width: 250px;
-  height: 100vh;
-  max-width: 80%;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 110;
-  padding: 17px;
-  padding-top: 60px;
+  padding: 1.4vh;
+  padding-top: 4.5vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -110,8 +92,13 @@ a {
   font-family: sans-serif;
   font-size: 0.9rem;
   color: #f65901;
-  border-top: 1px solid #f65901;
-  padding-top: 10px;
+  border-top: 0.1vh solid #f65901;
+  padding-top: 1vh;
+}
+
+.hamburger-footer a {
+  color: #ff6811;
+  font-size: 1rem;
 }
 
 .hamburger.open {
@@ -119,22 +106,22 @@ a {
 }
 
 .circle {
-    --circle-size: 25px;
+    --circle-size: 2vh;
     position: fixed;
     height: var(--circle-size);
     width: var(--circle-size);
-    border: 2px solid #f65901;
+    border: 0.2vh solid #f65901;
     border-radius: 50%;
     top: calc(var(--circle-size) / 2.2 * -1);
     left: calc(var(--circle-size) / 2.2 * -1);
     pointer-events: none;
     will-change: transform;
-    transition: width 0.1s ease-out, height 0.1s ease-out, top 0.1s ease-out, left 0.1s ease-out;
+    transition: width 0.1s ease-out, height 0.1s ease-out, top 0.1s ease-out, left 0.1s ease-out, border 0.2s ease-in-out;
     z-index: 500;
 }
 
 .circle.hovered-text-grow {
-    --circle-size: 80px;
+    --circle-size: 7vh;
     height: var(--circle-size);
     width: var(--circle-size);
     top: calc(var(--circle-size) / 2 * -1);
@@ -142,9 +129,19 @@ a {
 }
 
 .circle.hovered-button-grow {
-    --circle-size: 60px;
+    --circle-size: 5vh;
     height: var(--circle-size);
     width: var(--circle-size);
     top: calc(var(--circle-size) / 2 * -1);
     left: calc(var(--circle-size) / 2 * -1);
+}
+
+.circle.hovered-footer {
+  --circle-size: 5.5vh;
+  height: var(--circle-size);
+  width: var(--circle-size);
+  top: calc(var(--circle-size) / 2 * -1);
+  left: calc(var(--circle-size) / 2 * -1);
+  border: 0.2vh solid #ffae66;
+  border-radius: 50%;
 }
