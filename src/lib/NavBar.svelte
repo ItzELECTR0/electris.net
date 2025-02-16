@@ -52,7 +52,7 @@
     &#9776;
   </button>
   {#if isOpen}
-  <div class="overlay" on:click={() => isOpen = false} transition:fade={{ duration: 200 }}></div>
+    <div class="overlay" on:click={() => isOpen = false} transition:fade={{ duration: 200 }}></div>
   {/if}
   <button
     type="button"
@@ -64,37 +64,125 @@
     <img class="logo" src='/icons/elts-v1-transparent.png' alt='ELECTRIS' />
   </button>
   <div class="hamburger {isOpen ? 'open' : ''}">
-    {#each menuItems as item}
-      <div class="menu-item">
-        <a 
-          href={item.href} 
-          target={item.newTab ? "_blank" : "_self"}
-          on:click={() => isOpen = false}>
-          {item.label}
-        </a>
-      </div>
-    {/each}
+    <div class="hamburger-content">
+      {#each menuItems as item}
+        <div class="menu-item">
+          <a 
+            href={item.href} 
+            target={item.newTab ? "_blank" : "_self"}
+            on:click={() => isOpen = false}>
+            {item.label}
+          </a>
+        </div>
+      {/each}
+    </div>
+    <div class="hamburger-footer">
+      <p>ELECTRIS &#169;2025</p>
+      <p>v0.0.1</p>
+    </div>
   </div>
 </nav>
 
 {#if showOptions}
-<div class="options-menu" transition:fade={{ duration: 200 }}>
-  <div transition:slide={{ duration: 300 }}>
-    <h2 class="circle-no-interact">Options</h2>
-    <div class="option">
-      <label for="testing-toggle">Testing Option</label>
-      <input
-        id="testing-option"
-        type="checkbox" />
-    </div>
-    <div class="option">
-      <a href="https://testing.electris.net">Switch to Testing</a>
+  <div class="options-menu" transition:fade={{ duration: 200 }}>
+    <div transition:slide={{ duration: 300 }}>
+      <h2 class="circle-no-interact">Options</h2>
+      <div class="option">
+        <label for="testing-toggle">Testing Option</label>
+        <input id="testing-option" type="checkbox" />
+      </div>
+      <div class="option">
+        <a href="https://testing.electris.net">Switch to Testing</a>
+      </div>
     </div>
   </div>
-</div>
 {/if}
 
 <style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #131615;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-grow: 1;
+    margin-left: 37px;
+  }
+
+  .nav-button {
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #f65901;
+    font-size: 1.2rem;
+  }
+
+  .hamburger-button {
+    user-select: none;
+    position: fixed;
+    top: 5px;
+    left: 10px;
+    z-index: 111;
+    cursor: pointer;
+    font-size: 2rem;
+    color: #f65901;
+    background: none;
+    border: none;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
+
+  .hamburger {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #131615;
+    width: 250px;
+    height: 100vh;
+    max-width: 80%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 110;
+    padding: 17px;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hamburger.open {
+    transform: translateX(0);
+  }
+
+  .menu-item {
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+
+  .menu-item a {
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #f65901;
+    font-size: 1.2rem;
+  }
+
   .logo-button {
     user-select: none;
     background: none;
@@ -107,6 +195,15 @@
     height: 3vh;
   }
   
+  .hamburger-footer {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    color: #f65901;
+    border-top: 1px solid #f65901;
+    padding-top: 10px;
+  }
+
   .options-menu {
     position: fixed;
     top: 5vh;
@@ -124,33 +221,21 @@
     margin-top: 0;
     font-size: 1.5rem;
   }
-
+  
   .option {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-
+  
   .option label {
     font-family: 'sans-sherif';
     font-size: 1rem;
     margin-bottom: 0.1vh;
   }
-
+  
   .option input[type="checkbox"] {
     width: 1.5vh;
     height: 1.5vh;
-  }
-
-  .menu-item {
-    margin-top: 0.5vh;
-    margin-bottom: 0.8vh;
-  }
-
-  .menu-item a {
-    font-family: sans-serif;
-    text-decoration: none;
-    color: #f65901;
-    font-size: 1.2rem;
   }
 </style>
