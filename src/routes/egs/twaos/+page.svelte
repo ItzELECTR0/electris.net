@@ -1,21 +1,21 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
+  const anchor = document.querySelector('.styled-sip') as HTMLElement;
+  const eyes = document.querySelectorAll('.eye') as NodeListOf<HTMLElement>;
+  const rekt = anchor.getBoundingClientRect();
+  const anchorX = rekt.left + rekt.width / 1.5;
+  const anchorY = rekt.top + rekt.height / 3;
+
   onMount(() => {
     document.addEventListener('mousemove', (e) => {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
 
-      const anchor = document.querySelector('.styled-sip') as HTMLElement;
       if (!anchor) return;
-
-      const rekt = anchor.getBoundingClientRect();
-      const anchorX = rekt.left + rekt.width / 1.5;
-      const anchorY = rekt.top + rekt.height / 3;
 
       const angleDeg = angle(mouseX, mouseY, anchorX, anchorY);
 
-      const eyes = document.querySelectorAll('.eye') as NodeListOf<HTMLElement>;
       eyes.forEach((eye) => {
         eye.style.transform = `rotate(${90 + angleDeg}deg)`;
       });
