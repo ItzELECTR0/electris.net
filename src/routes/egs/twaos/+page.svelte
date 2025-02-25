@@ -1,10 +1,49 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    document.addEventListener('mousemove', (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      const anchor = document.querySelector('.styled-sip') as HTMLElement;
+      if (!anchor) return;
+
+      const rekt = anchor.getBoundingClientRect();
+      const anchorX = rekt.left + rekt.width / 1.5;
+      const anchorY = rekt.top + rekt.height / 3;
+
+      const angleDeg = angle(mouseX, mouseY, anchorX, anchorY);
+
+      const eyes = document.querySelectorAll('.eye') as NodeListOf<HTMLElement>;
+      eyes.forEach((eye) => {
+        eye.style.transform = `rotate(${90 + angleDeg}deg)`;
+      });
+    });
+  });
+
+  function angle(cx: number, cy: number, ex: number, ey: number): number {
+    const dy: number = ey - cy;
+    const dx: number = ex - cx;
+    const rad: number = Math.atan2(dy, dx);
+    const deg: number = rad * 180 / Math.PI;
+    return deg;
+  }
+</script>
+
 <div class="hero">
   <h2>The Wonderful</h2>
   <h3>Adventures Of</h3>
   <h1 class="sip">SIP</h1>
   <h5>An open-source Indie Game created by a Solo Developer</h5>
   
-  <img class="styled-sip" src="/media/StyledSip.png" alt="SIP" width="500" height="500">
+  <div class="sip-icon">
+    <img class="styled-sip" src="/media/StyledSip.png" alt="SIP">
+    <div class="eyes">
+      <img class="eye" src="/media/StyledSipEye.png" alt="SIPEYE-LEFT" style="top: 82.5vh; left: 21vh;">
+      <img class="eye" src="/media/StyledSipEye.png" alt="SIPEYE-RIGHT" style="top: 79.7vh; left: 33.1vh;">
+    </div>
+  </div>
 </div>
 
 <style>
@@ -26,6 +65,21 @@
     bottom: 2vh;
     left: 2vh;
     right: 2vh;
+    width: 40vh;
+    height: 40vh;
+  }
+
+  .eye {
+    position: absolute;
+    bottom: 2vh;
+    right: 2vh;
+    width: 3vh;
+    height: 3vh;
+  }
+
+  .sip-icon {
+    display: grid;
+    place-items: center;
   }
 
   .hero h1 {
