@@ -1,21 +1,25 @@
 <script>
-    const socialCards = [
-      {
-        title: 'YouTube',
-        description: 'Dancing with the Lightning',
-        platformLogo: '/icons/yt.svg',
-        profilePicture: '/icons/eltr-v10.png',
-        url: 'https://youtube.com/@ELEC7RO'
-      },
-      {
-        title: 'GitHub',
-        description: 'Free as in Freedom',
-        platformLogo: '/icons/github.svg',
-        profilePicture: '/icons/eltr-v10.png',
-        url: 'https://github.com/ItzELECTR0'
-      }
-    ];
-  </script>
+  const socialCards = [
+    {
+      title: 'YouTube',
+      description: 'Dancing with the Lightning',
+      platformLogo: '/icons/yt.svg',
+      profilePicture: '/icons/eltr-v10.png',
+      url: 'https://youtube.com/@ELEC7RO'
+    },
+    {
+      title: 'GitHub',
+      description: 'Free as in Freedom',
+      platformLogo: '/icons/github.svg',
+      profilePicture: '/icons/eltr-v10.png',
+      url: 'https://github.com/ItzELECTR0'
+    }
+  ];
+</script>
+
+<svelte:head>
+  <title>Socials | ELTR</title>
+</svelte:head>
   
   <div class="socials-page">
     <div class="hero">

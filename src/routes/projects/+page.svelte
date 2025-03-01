@@ -13,6 +13,10 @@
   ];
 </script>
 
+<svelte:head>
+  <title>Projects | ELECTRIS</title>
+</svelte:head>
+
 <div class="hero">
   <h1>Projects</h1>
 </div>

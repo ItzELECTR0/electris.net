@@ -16,6 +16,10 @@
       }
     ];
   </script>
+
+<svelte:head>
+  <title>Socials | VRRW</title>
+</svelte:head>
   
   <div class="socials-page">
     <div class="hero">

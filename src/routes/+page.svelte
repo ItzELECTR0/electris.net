@@ -2,6 +2,10 @@
   <h1>ELECTRIS</h1>
   <p>Heart like a pen, On paper it bleeds</p>
 </div>
+
+<svelte:head>
+  <title>ELECTRIS</title>
+</svelte:head>
   
 <style>
   .hero {

@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>ELECTRIS Media Studios</title>
+</svelte:head>
+  
   <div class="hero">
     <h1>ELECTRIS Media Studios</h1>
     <p>Room with a microphone, a phone and some chairs</p>

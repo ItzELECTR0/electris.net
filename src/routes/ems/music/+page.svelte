@@ -1,5 +1,4 @@
 <script>
-
   const songs = [
     {
       cover: 'https://i1.sndcdn.com/artworks-DEJ2oIyB3AEYbg18-PNhitw-t500x500.jpg',
@@ -15,6 +14,10 @@
     }
   ];
 </script>
+
+<svelte:head>
+  <title>Music | ELECTRIS</title>
+</svelte:head>
 
 <div class="music-container">
   {#each songs as song}

@@ -23,6 +23,10 @@
       }
     ];
   </script>
+
+<svelte:head>
+  <title>Socials | ELECTRIS</title>
+</svelte:head>
   
   <div class="socials-page">
     <div class="hero">
