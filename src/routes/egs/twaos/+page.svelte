@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  const anchor = document.querySelector('.styled-sip') as HTMLElement;
-  const eyes = document.querySelectorAll('.eye') as NodeListOf<HTMLElement>;
-  const rekt = anchor.getBoundingClientRect();
-  const anchorX = rekt.left + rekt.width / 1.5;
-  const anchorY = rekt.top + rekt.height / 3;
-
   onMount(() => {
+    const anchor = document.querySelector('.styled-sip') as HTMLElement;
+    const eyes = document.querySelectorAll('.eye') as NodeListOf<HTMLElement>;
+    const rekt = anchor.getBoundingClientRect();
+    const anchorX = rekt.left + rekt.width / 1.5;
+    const anchorY = rekt.top + rekt.height / 3;
+
     document.addEventListener('mousemove', (e) => {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
@@ -20,15 +20,15 @@
         eye.style.transform = `rotate(${90 + angleDeg}deg)`;
       });
     });
-  });
 
-  function angle(cx: number, cy: number, ex: number, ey: number): number {
-    const dy: number = ey - cy;
-    const dx: number = ex - cx;
-    const rad: number = Math.atan2(dy, dx);
-    const deg: number = rad * 180 / Math.PI;
-    return deg;
-  }
+    function angle(cx: number, cy: number, ex: number, ey: number): number {
+      const dy: number = ey - cy;
+      const dx: number = ex - cx;
+      const rad: number = Math.atan2(dy, dx);
+      const deg: number = rad * 180 / Math.PI;
+      return deg;
+    }
+  });
 </script>
 
 <div class="hero">
@@ -38,15 +38,20 @@
   <h5>An open-source Indie Game created by a Solo Developer</h5>
   
   <div class="sip-icon">
-    <img class="styled-sip" src="/media/StyledSip.png" alt="SIP">
+    <a href="https://github.com/ItzELECTR0/TWAOS" target="_blank" class="styled-sip-link">
+      <img class="styled-sip" src="/media/StyledSip.svg" alt="SIP">
+    </a>
     <div class="eyes">
-      <img class="eye" src="/media/StyledSipEye.png" alt="SIPEYE-LEFT" style="top: 82.5vh; left: 21vh;">
-      <img class="eye" src="/media/StyledSipEye.png" alt="SIPEYE-RIGHT" style="top: 79.7vh; left: 33.1vh;">
+      <a href="https://github.com/ItzELECTR0/TWAOS" target="_blank" class="styled-sip-link">
+        <img class="eye" src="/media/StyledSipEye.png" alt="SIPEYE-LEFT" style="top: 82vh; left: 24vh;">
+        <img class="eye" src="/media/StyledSipEye.png" alt="SIPEYE-RIGHT" style="top: 80vh; left: 32.8vh;">
+      </a>
     </div>
   </div>
 </div>
 
 <style>
+
   .hero {
     min-height: 100vh;
     display: flex;

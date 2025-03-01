@@ -4,6 +4,7 @@
 
   let showOptions = false;
   let isOpen = false;
+  const siteUrl = import.meta.env.VITE_SITE_URL;
 
   const menuItems = [
     { label: 'Home', href: '/' },
@@ -88,11 +89,15 @@
     <div transition:slide={{ duration: 300 }}>
       <h2 class="circle-no-interact">Options</h2>
       <div class="option">
-        <label for="testing-toggle">Testing Option</label>
+        <label for="testing-toggle">Option (Does Nothing)</label>
         <input id="testing-option" type="checkbox" />
       </div>
       <div class="option">
-        <a href="https://testing.electris.net">Switch to Testing</a>
+        {#if siteUrl === 'https://electris.net'}
+          <a href="https://testing.electris.net">Switch to Testing</a>
+        {:else}
+          <a href="https://electris.net">Switch to Main</a>
+        {/if}
       </div>
     </div>
   </div>

@@ -1,25 +1,18 @@
 <script>
     const socialCards = [
       {
-        title: 'ELECTRIS',
-        description: 'Heart like a pen, On paper it bleeds',
+        title: 'YouTube',
+        description: 'Cheap learning & Lazy programming',
         platformLogo: '/icons/yt.svg',
-        profilePicture: '/icons/elts-v1.png',
-        url: '/socials/ELTS'
+        profilePicture: '/icons/VArrow.png',
+        url: 'https://youtube.com/@V4rrow'
       },
       {
-        title: 'ELECTRO',
-        description: 'Dancing with the Lightning',
-        platformLogo: '/icons/yt.svg',
-        profilePicture: '/icons/eltr-v10.png',
-        url: '/socials/ELTR'
-      },
-      {
-        title: 'Varrow',
+        title: 'GitHub',
         description: 'Free code is best code',
         platformLogo: '/icons/github.svg',
         profilePicture: '/icons/VArrow.png',
-        url: '/socials/VRRW'
+        url: 'https://github.com/Varrow1'
       }
     ];
   </script>
@@ -32,7 +25,7 @@
   
     <div class="hero">
       {#each socialCards as card}
-        <a class="social-card" href={card.url} target="_self">
+        <a class="social-card" href={card.url} target="_blank">
           <div class="icons">
             <img src={card.platformLogo} alt="Platform Logo" class="platform-logo" />
             <img src={card.profilePicture} alt="Profile Picture" class="profile-picture" />

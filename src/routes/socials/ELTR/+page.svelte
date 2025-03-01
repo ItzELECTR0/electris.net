@@ -1,38 +1,31 @@
 <script>
     const socialCards = [
       {
-        title: 'ELECTRIS',
-        description: 'Heart like a pen, On paper it bleeds',
-        platformLogo: '/icons/yt.svg',
-        profilePicture: '/icons/elts-v1.png',
-        url: '/socials/ELTS'
-      },
-      {
-        title: 'ELECTRO',
+        title: 'YouTube',
         description: 'Dancing with the Lightning',
         platformLogo: '/icons/yt.svg',
         profilePicture: '/icons/eltr-v10.png',
-        url: '/socials/ELTR'
+        url: 'https://youtube.com/@ELEC7RO'
       },
       {
-        title: 'Varrow',
-        description: 'Free code is best code',
+        title: 'GitHub',
+        description: 'Free as in Freedom',
         platformLogo: '/icons/github.svg',
-        profilePicture: '/icons/VArrow.png',
-        url: '/socials/VRRW'
+        profilePicture: '/icons/eltr-v10.png',
+        url: 'https://github.com/ItzELECTR0'
       }
     ];
   </script>
   
   <div class="socials-page">
     <div class="hero">
-      <h1>Social Media</h1>
+      <h1>ELECTRO</h1>
       <p>Follow the changes all around</p>
     </div>
   
     <div class="hero">
       {#each socialCards as card}
-        <a class="social-card" href={card.url} target="_self">
+        <a class="social-card" href={card.url} target="_blank">
           <div class="icons">
             <img src={card.platformLogo} alt="Platform Logo" class="platform-logo" />
             <img src={card.profilePicture} alt="Profile Picture" class="profile-picture" />
