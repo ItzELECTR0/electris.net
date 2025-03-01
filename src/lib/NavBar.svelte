@@ -5,6 +5,7 @@
   let showOptions = false;
   let isOpen = false;
   const siteUrl = import.meta.env.VITE_SITE_URL;
+  const siteVer = import.meta.env.VITE_SITE_VER;
 
   const menuItems = [
     { label: 'Home', href: '/' },
@@ -79,7 +80,8 @@
     </div>
     <div class="hamburger-footer">
       <p><u>ELECTRIS &#169;2025</u></p>
-      <a href="https://github.com/ItzELECTR0/electris.net"><u>v0.0.1</u></a>
+      <a href="https://github.com/ItzELECTR0/electris.net"><u>{siteVer}</u></a>
+
     </div>
   </div>
 </nav>

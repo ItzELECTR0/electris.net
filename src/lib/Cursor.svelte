@@ -46,13 +46,13 @@
           mouse.x = e.clientX;
           mouse.y = e.clientY;
         });
-        break;
+      break;
     }
 
     const speed = 0.16;
 
     const tick = () => {
-      if (circleElement?.classList.contains("hovered-sip")) {
+      if (circleElement?.classList.contains("hovered-lock")) {
         circle.x += (lockedPos.x - circle.x) * speed;
         circle.y += (lockedPos.y - circle.y) * speed;
       } else {
@@ -78,7 +78,7 @@
         finalScaleX *= touchVisibility;
         finalScaleY *= touchVisibility;
       }
-      const scaleTransform = circleElement?.classList.contains("hovered-sip")
+      const scaleTransform = circleElement?.classList.contains("hovered-lock")
         ? ``
         : `scale(${finalScaleX}, ${finalScaleY})`;
 
@@ -88,7 +88,7 @@
         currentAngle = angle;
       }
 
-      const rotateTransform = circleElement?.classList.contains("hovered-sip")
+      const rotateTransform = circleElement?.classList.contains("hovered-lock")
         ? ``
         : `rotate(${currentAngle}deg)`;
 
@@ -122,14 +122,37 @@
             lockedPos.x = rect.left + rect.width / 2 - 20;
             lockedPos.y = rect.top + rect.height / 2 -5;
           }
+          circleElement?.classList.add("hovered-lock");
           circleElement?.classList.add("hovered-sip");
         });
+
         sipIcon.addEventListener('mouseleave', () => {
           circleElement?.classList.remove("hovered-sip");
+          circleElement?.classList.remove("hovered-lock");
         });
       }
     }
 
+    const footer = document.querySelector('.hamburger-footer') as HTMLElement;
+    {
+      if (footer) {
+        footer.addEventListener('mouseenter', () => {
+          const burgerFooter = document.querySelector('.hamburger-footer') as HTMLElement;
+          if (burgerFooter) {
+            const rect = burgerFooter.getBoundingClientRect();
+            lockedPos.x = rect.left + rect.width / 2;
+            lockedPos.y = rect.top + rect.height / 2;
+          }
+          circleElement?.classList.add("hovered-footer");
+          circleElement?.classList.add("hovered-lock");
+        });
+
+        footer.addEventListener('mouseleave', () => {
+          circleElement?.classList.remove("hovered-footer");
+          circleElement?.classList.remove("hovered-lock");
+        });
+      }
+    }
     
     const addHoverClasses = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -141,9 +164,6 @@
         if (target.closest(".circle-no-interact")) return;
         circleElement?.classList.add("hovered-button-grow");
       }
-      if (target.closest(".hamburger-footer")) {
-        circleElement?.classList.add("hovered-footer");
-      }
     };
 
     const removeHoverClasses = (event: MouseEvent) => {
@@ -153,9 +173,6 @@
       }
       if (target.closest(".option, .social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
         circleElement?.classList.remove("hovered-button-grow");
-      }
-      if (target.closest(".hamburger-footer")) {
-        circleElement?.classList.remove("hovered-footer");
       }
     };
 
