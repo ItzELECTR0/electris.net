@@ -37,7 +37,7 @@
 
 <div class="hero">
   <video class="hero-video" autoplay muted loop playsinline>
-    <source src="/media/TWAOS-Background.mp4" type="video/mp4" />
+    <source src="/media/TWAOS-BG.mp4" type="video/mp4" />
   </video>
   <div class="video-overlay"></div>
   <div class="hero-text">
