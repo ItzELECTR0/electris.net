@@ -1,12 +1,13 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { slide, fade } from 'svelte/transition';
+  import { afterNavigate } from '$app/navigation';
 
   let showOptions = false;
   let isOpen = false;
   const siteUrl = import.meta.env.VITE_SITE_URL;
   const siteVer = import.meta.env.VITE_SITE_VER || "v0.0.1";
-
+  let siteHref = "";
 
   const menuItems = [
     { label: 'Home', href: '/' },
@@ -16,7 +17,19 @@
     { label: 'Social Media', href: '/socials' }
   ];
 
+  function updateSiteHref() {
+    const path = window.location.pathname;
+    const search = window.location.search;
+    siteHref = siteUrl === 'https://electris.net'
+      ? 'https://testing.electris.net' + path + search
+      : 'https://electris.net' + path + search;
+  }
+
   onMount(() => {
+    updateSiteHref();
+    afterNavigate(() => {
+      updateSiteHref();
+    });
     if (typeof document !== 'undefined') {
       document.addEventListener('click', handleClickOutside);
     }
@@ -107,9 +120,9 @@
       </div>
       <div class="option">
         {#if siteUrl === 'https://electris.net'}
-          <a href="https://testing.electris.net">Switch to Testing</a>
+          <button type="button" on:mouseenter={updateSiteHref}><a href={siteHref}>Switch to Testing</a></button>
         {:else}
-          <a href="https://electris.net">Switch to Main</a>
+          <button type="button" on:mouseenter={updateSiteHref}><a href={siteHref}>Switch to Main</a></button>
         {/if}
       </div>
     </div>
