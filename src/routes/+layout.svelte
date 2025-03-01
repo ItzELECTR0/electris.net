@@ -7,7 +7,7 @@
 
 <main>
   <TopNav />
-  <Cursor />
   <HamburgerMenu />
+  <Cursor />
   <slot />
 </main>

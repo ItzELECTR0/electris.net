@@ -5,7 +5,8 @@
   let showOptions = false;
   let isOpen = false;
   const siteUrl = import.meta.env.VITE_SITE_URL;
-  const siteVer = import.meta.env.VITE_SITE_VER;
+  const siteVer = import.meta.env.VITE_SITE_VER || "v0.0.1";
+
 
   const menuItems = [
     { label: 'Home', href: '/' },
@@ -78,11 +79,21 @@
         </div>
       {/each}
     </div>
-    <div class="hamburger-footer">
-      <p><u>ELECTRIS &#169;2025</u></p>
-      <a href="https://github.com/ItzELECTR0/electris.net"><u>{siteVer}</u></a>
-
-    </div>
+      <div class="hamburger-footer" role="region"
+        on:mouseenter={(e: MouseEvent) => {
+          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          window.dispatchEvent(new CustomEvent('footerHovered', { detail: { x: centerX, y: centerY } }));
+        }}
+        on:mouseleave={() => {
+          window.dispatchEvent(new CustomEvent('footerUnhovered'));
+        }}>
+        <div class="footer">
+          <p><u>ELECTRIS &#169;2025</u></p>
+          <a href="https://github.com/ItzELECTR0/electris.net"><u>{siteVer}</u></a>
+        </div>
+      </div>
   </div>
 </nav>
 

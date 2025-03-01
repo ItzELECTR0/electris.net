@@ -82,6 +82,21 @@
     height: 3vh;
   }
 
+  .circle.hovered-card {
+  --circle-size: 2vh;
+  position: fixed;
+  height: var(--circle-size);
+  width: var(--circle-size);
+  border: 0.2vh solid #f65901;
+  border-radius: 50%;
+  top: calc(var(--circle-size) / 2.2 * -1);
+  left: calc(var(--circle-size) / 2.2 * -1);
+  pointer-events: none;
+  will-change: transform;
+  transition: width 0.1s ease-out, height 0.1s ease-out, top 0.1s ease-out, left 0.1s ease-out, border 0.2s ease-in-out;
+  z-index: 500;
+}
+
   .sip-icon {
     display: grid;
     place-items: center;

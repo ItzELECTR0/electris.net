@@ -137,13 +137,13 @@ a {
 }
 
 .circle.hovered-footer {
-  --circle-size: 5.5vh;
+  --circle-size: 5vh;
   height: var(--circle-size);
-  width: var(--circle-size);
+  width: 13vh;
   top: calc(var(--circle-size) / 2 * -1);
-  left: calc(var(--circle-size) / 2 * -1);
+  left: calc(var(--circle-size) - 11.55vh);
   border: 0.2vh solid #ffae66;
-  border-radius: 50%;
+  border-radius: 1vh;
 }
 
 .circle.hovered-sip {
