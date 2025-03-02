@@ -31,8 +31,8 @@
       {#each socialCards as card}
         <a class="social-card" href={card.url} target="_blank">
           <div class="icons">
-            <img src={card.platformLogo} alt="Platform Logo" class="platform-logo" />
-            <img src={card.profilePicture} alt="Profile Picture" class="profile-picture" />
+            <img src={card.platformLogo} alt="Platform Logo" class="platform-logo"/>
+            <img src={card.profilePicture} alt="Profile Picture" class="profile-picture"/>
           </div>
           <div class="card-text">
             <h2>{card.title}</h2>
