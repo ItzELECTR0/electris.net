@@ -13,9 +13,16 @@
         platformLogo: '/icons/github.svg',
         profilePicture: '/icons/VArrow.png',
         url: 'https://github.com/Varrow1'
+      },
+      {
+        title: 'Twitter',
+        description: 'I tweet sometimes',
+        platformLogo: '/icons/twitter.svg',
+        profilePicture: '/icons/VArrow.png',
+        url: 'https://x.com/0xVarrow'
       }
     ];
-  </script>
+</script>
 
 <svelte:head>
   <title>Socials | VARROW</title>
