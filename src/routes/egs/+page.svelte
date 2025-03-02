@@ -2,6 +2,10 @@
   <h1>ELECTRIS Game Studios</h1>
   <p>Life like a game, Playing in it's reverse</p>
 </div>
+
+<svelte:head>
+  <title>ELECTRIS Game Studios</title>
+</svelte:head>
   
 <style>
   .hero {

@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Reincarnated Creativity | ELECTRIS</title>
-  <meta name="description" content="Reincarnated Creativity: The process in which a creator brings to life an idea based on previous work(s), whether their own or someone else's, whether new or old, with a unique spin, combined with their own idea(s) to create something entirely new. Therefore, the idea(s), of which new creation came from, are reincarnated." />
+  <title>Reincarnated Creativity</title>
+  <meta name="description" content="The process in which a creator brings to life an idea based on previous work(s), whether their own or someone else's, whether new or old, with a unique spin, combined with their own idea(s) to create something entirely new. Therefore, the idea(s), of which new creation came from, are reincarnated." />
 </svelte:head>
 
 <div class="dictionary-page">

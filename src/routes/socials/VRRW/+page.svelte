@@ -18,7 +18,7 @@
   </script>
 
 <svelte:head>
-  <title>Socials | VRRW</title>
+  <title>Socials | VARROW</title>
 </svelte:head>
   
   <div class="socials-page">

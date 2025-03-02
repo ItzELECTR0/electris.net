@@ -2,6 +2,10 @@
     <h1><u>About Us</u></h1>
     <p>[More info here coming soon]</p>
   </div>
+
+  <svelte:head>
+  <title>About Us | ELECTRIS</title>
+</svelte:head>
   
   <style>
     .hero {

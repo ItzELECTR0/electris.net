@@ -18,7 +18,7 @@
   </script>
 
 <svelte:head>
-  <title>Socials | ELTS</title>
+  <title>Socials | ELECTRIS</title>
 </svelte:head>
   
   <div class="socials-page">
