@@ -30,7 +30,7 @@
   
   <div class="socials-page">
     <div class="hero">
-      <h1>Social Media</h1>
+      <h1>Varrow</h1>
       <p>Follow the changes all around</p>
     </div>
   
@@ -74,6 +74,12 @@
       font-family: 'Letric';
       font-size: 3rem;
       margin: 0;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin: 10px 0 0;
+      font-family: sans-serif;
     }
   
     .hero p {
