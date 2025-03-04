@@ -1,7 +1,7 @@
 <script>
   const songs = [
     {
-      cover: 'https://i1.sndcdn.com/artworks-iyeUOVQg9HUl30Pc-GIg5eg-t500x500.png',
+      cover: 'https://i1.sndcdn.com/artworks-PpLyHdUlYokl1XBf-DcMRmA-t500x500.jpg',
       title: 'Farewell, Apolcalypse',
       artist: 'ELECTRO',
       link: 'https://soundcloud.com/electro_dev/farewell-apocalypse'
