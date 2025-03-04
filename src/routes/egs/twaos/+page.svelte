@@ -100,6 +100,7 @@
 
       eyes.forEach((eye) => {
         eye.style.transform = `rotate(${90 + angleDeg}deg)`;
+
       });
     });
 

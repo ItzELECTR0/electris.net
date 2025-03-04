@@ -1,16 +1,22 @@
 <script>
   const songs = [
     {
-      cover: 'https://i1.sndcdn.com/artworks-DEJ2oIyB3AEYbg18-PNhitw-t500x500.jpg',
-      title: 'Zero',
+      cover: 'https://i1.sndcdn.com/artworks-iyeUOVQg9HUl30Pc-GIg5eg-t500x500.png',
+      title: 'Farewell, Apolcalypse',
       artist: 'ELECTRO',
-      link: 'https://youtu.be/xVaTP_cPid0'
+      link: 'https://soundcloud.com/electro_dev/farewell-apocalypse'
     },
     {
       cover: 'https://i1.sndcdn.com/artworks-fJpDbkU3cXMIkGPm-tkSQWg-t500x500.png',
       title: 'shame on u',
       artist: 'ELECTRO',
       link: 'https://youtu.be/rlKIZdmGC4o'
+    },
+    {
+      cover: 'https://i1.sndcdn.com/artworks-DEJ2oIyB3AEYbg18-PNhitw-t500x500.jpg',
+      title: 'Zero',
+      artist: 'ELECTRO',
+      link: 'https://youtu.be/xVaTP_cPid0'
     }
   ];
 </script>
@@ -59,7 +65,6 @@
     transform: scale(1.03);
   }
   
-  /* Container for the cover image with a circular mask */
   .cover-container {
     width: 150px;
     height: 150px;
