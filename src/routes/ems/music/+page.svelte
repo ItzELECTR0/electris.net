@@ -2,7 +2,7 @@
   const songs = [
     {
       cover: 'https://i1.sndcdn.com/artworks-PpLyHdUlYokl1XBf-DcMRmA-t500x500.jpg',
-      title: 'Farewell, Apolcalypse',
+      title: 'Farewell, Apocalypse',
       artist: 'ELECTRO',
       link: 'https://soundcloud.com/electro_dev/farewell-apocalypse'
     },
