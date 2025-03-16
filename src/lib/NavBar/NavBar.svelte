@@ -2,6 +2,8 @@
   import { onMount, onDestroy } from 'svelte';
   import { slide, fade } from 'svelte/transition';
   import { afterNavigate } from '$app/navigation';
+  import Hover from './Hover.svelte';
+  
 
   let showOptions = false;
   let isOpen = false;
@@ -11,10 +13,9 @@
 
   const menuItems = [
     { label: 'Home', href: '/' },
+    { label: 'Socials', href: '/socials' },
     { label: 'Game Studios', href: '/egs' },
-    { label: 'Media Studios', href: '/ems' },
-    { label: 'Source Code', href: 'https://github.com/ItzELECTR0/electris.net', newTab: true },
-    { label: 'Social Media', href: '/socials' }
+    { label: 'Media Studios', href: '/ems' }
   ];
 
   function updateSiteHref() {
@@ -83,8 +84,8 @@
     <div class="hamburger-content">
       {#each menuItems as item}
         <div class="menu-item">
-          <a 
-            href={item.href} 
+          <a
+            href={item.href}
             target={item.newTab ? "_blank" : null}
             on:click={() => isOpen = false}>
             {item.label}
@@ -109,6 +110,8 @@
       </div>
   </div>
 </nav>
+
+<Hover />
 
 {#if showOptions}
   <div class="options-menu" transition:fade={{ duration: 200 }}>
@@ -186,6 +189,8 @@
   }
 
   .menu-item a {
+    display: inline-block;
+    line-height: 1.5;
     font-family: sans-serif;
     text-decoration: none;
     color: #f65901;

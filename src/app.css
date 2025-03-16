@@ -2,20 +2,24 @@
 @import '../static/fonts/fonts.css';
 
 html {
-    font-size: clamp(1vh, 1.2vw, 1.36vh);
+  font-size: clamp(1vh, 1.2vw, 1.36vh);
 }
 
 body {
-    font-family: 'sans-sherif';
-    font-size: 1rem;
-    margin: 0;
-    padding: 0;
-    background-color: #131615;
-    color: #f65901;
+  font-family: 'sans-sherif';
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  background-color: #131615;
+  color: #f65901;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
+}
+
+.twaos-logo {
+  font-family: 'Nightcore';
 }
 
 .navbar {
@@ -87,6 +91,10 @@ a {
   border: none;
 }
 
+.hamburger-content {
+  display: inline-block;
+}
+
 .hamburger-footer {
   text-align: center;
   font-family: sans-serif;
@@ -116,7 +124,7 @@ a {
   left: calc(var(--circle-size) / 2.2 * -1);
   pointer-events: none;
   will-change: transform;
-  transition: width 0.1s ease-out, height 0.1s ease-out, top 0.1s ease-out, left 0.1s ease-out, border 0.2s ease-in-out;
+  transition: rotation 1s, width 0.1s ease-out, height 0.1s ease-out, top 0.1s ease-out, left 0.1s ease-out, border 0.2s ease-in-out;
   z-index: 500;
 }
 
@@ -137,16 +145,25 @@ a {
 }
 
 .circle.hovered-footer {
-  --circle-size: 5vh;
-  height: var(--circle-size);
+  height: 5vh;
   width: 13vh;
-  top: calc(var(--circle-size) / 2 * -1);
-  left: calc(var(--circle-size) - 11.55vh);
+  top: -2vh;
+  left: -6.5vh;
   border: 0.2vh solid #ffae66;
-  border-radius: 1vh;
+  border-radius: 1.2vh;
+  transition: rotation 1s, width 0.1s ease-in-out, height 0.1s ease-in-out, top 0.1s ease-in-out, left 0.1s ease-in-out, border 0.1s ease-in-out, border-radius 0.2s ease-in-out;
 }
 
 .circle.hovered-sip {
   --circle-size: 37vh;
   border: 0.2vh solid #5eff00;
+}
+
+.circle.hovered-menu-item {
+  height: 4vh;
+  width: 18vh;
+  top: -2vh;
+  left: -9.3vh;
+  border-radius: 1vh;
+  transition: rotation 1s, width 0.01s ease-in-out, height 0.01s ease-in-out, top 0.1s ease-in-out, left 0.1s ease-out, border 0.1s ease-in-out, border-radius 0.2s ease-in-out;
 }

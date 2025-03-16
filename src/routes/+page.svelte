@@ -1,11 +1,17 @@
-<div class="hero">
-  <h1>ELECTRIS</h1>
-  <p>Heart like a pen, On paper it bleeds</p>
-</div>
+<script lang="ts">
+  
+</script>
 
 <svelte:head>
   <title>ELECTRIS</title>
 </svelte:head>
+
+<div>
+  <div class="hero">
+    <h1>ELECTRIS</h1>
+    <p>Heart like a pen, On paper it bleeds</p>
+  </div>
+</div>
   
 <style>
   .hero {
@@ -30,5 +36,16 @@
     font-size: 1.5rem;
     margin-top: 10px;
     max-width: 80%;
+  }
+  
+  .rhinestones {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 3vh;
+    pointer-events: auto;
   }
 </style>

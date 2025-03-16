@@ -166,8 +166,8 @@
     <div class="video-overlay"></div>
   </div>
   <div class="hero-text">
-    <span class="text-container"><h2>The Wonderful</h2></span>
-    <span class="text-container"><h3>Adventures Of</h3></span>
+    <span class="text-container"><h2 class="tw">The Wonderful</h2></span>
+    <span class="text-container"><h3 class="ao">Adventures Of</h3></span>
     <span class="text-container"><h1 class="sip">SIP</h1></span>
     <span class="text-container"><h5>An open-source Indie Game created by a Solo Developer</h5></span>
   </div>
@@ -235,6 +235,10 @@
     padding-top: 0;
     padding-bottom: 10px;
     margin: -1.7vh;
+    color: #ff9933;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 1vh rgba(255, 123, 0, 0.7));
   }
 
   .hero h2 {
@@ -243,10 +247,26 @@
     margin: -0.8vh;
   }
 
+  .hero h2.tw {
+    font-family: 'Nightcore';
+    font-size: 4rem;
+    margin: -0.8vh;
+    color: #f65901;
+    text-shadow: 0 0 10px rgba(246, 89, 1, 0.3), 0 0 20px rgba(246, 89, 1, 0.2), 0 0 30px rgba(246, 89, 1, 0.05);
+  }
+
   .hero h3 {
     font-family: 'Nightcore';
     font-size: 3.5rem;
     margin: -0.5vh;
+  }
+
+  .hero h3.ao {
+    font-family: 'Nightcore';
+    font-size: 3.5rem;
+    margin: -0.5vh;
+    color: #f65901;
+    text-shadow: 0 0 10px rgba(246, 89, 1, 0.3), 0 0 20px rgba(246, 89, 1, 0.2), 0 0 30px rgba(246, 89, 1, 0.05);
   }
 
   .hero h5 {

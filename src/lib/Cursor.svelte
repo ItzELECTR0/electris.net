@@ -4,15 +4,20 @@
 
   let circleElement: HTMLElement | null = null;
 
+  // Cursor Specific
   const mouse = { x: 0, y: 0 };
   const previousMouse = { x: 0, y: 0 };
   const circle = { x: 0, y: 0 };
   let currentScale = 0;
   let currentAngle = 0;
 
+  // Mobile Specific
   let isTouchActive = false;
   let touchVisibility = 1;
   let isTouchDevice = false;
+
+  // Iframe Specific
+  let isOverIframe = false;
 
   const lockedPos = { x: 0, y: 0 };
 
@@ -51,7 +56,7 @@
     }
 
     const speed = 0.3;
-    const hoverSpeed = 0.16;
+    const hoverSpeed = 0.15;
 
     const tick = () => {
       if (circleElement?.classList.contains("hovered-lock")) {
@@ -120,15 +125,22 @@
           "hovered-text-grow",
           "hovered-button-grow",
           "hovered-footer",
-          "hovered-sip"
+          "hovered-sip",
+          "hovered-menu-item"
         );
+
+        const menuItemClasses = Array.from(circleElement.classList)
+          .filter(cls => cls.startsWith('hovered-menu-item-'));
+        menuItemClasses.forEach(cls => {
+          circleElement?.classList.remove(cls);
+        });
       }
     });
 
     window.addEventListener('footerHovered', (e: Event) => {
       const ce = e as CustomEvent;
       lockedPos.x = ce.detail.x;
-      lockedPos.y = ce.detail.y + 6;
+      lockedPos.y = ce.detail.y;
       circleElement?.classList.add("hovered-lock");
     });
     window.addEventListener('footerUnhovered', (e: Event) => {
@@ -145,6 +157,19 @@
     window.addEventListener('sipUnhovered', (e: Event) => {
       circleElement?.classList.remove("hovered-lock");
       circleElement?.classList.remove("hovered-sip");
+    });
+
+    window.addEventListener('menuItemHovered', (e: Event) => {
+      const ce = e as CustomEvent;
+      lockedPos.x = ce.detail.x;
+      lockedPos.y = ce.detail.y;
+      circleElement?.classList.add("hovered-lock");
+      circleElement?.classList.add("hovered-menu-item");
+    });
+
+    window.addEventListener('menuItemUnhovered', (e: Event) => {
+      circleElement?.classList.remove("hovered-lock");
+      circleElement?.classList.remove("hovered-menu-item");
     });
     
     const addHoverClasses = (event: MouseEvent) => {
