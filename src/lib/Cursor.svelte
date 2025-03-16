@@ -50,12 +50,13 @@
       break;
     }
 
-    const speed = 0.16;
+    const speed = 0.3;
+    const hoverSpeed = 0.16;
 
     const tick = () => {
       if (circleElement?.classList.contains("hovered-lock")) {
-        circle.x += (lockedPos.x - circle.x) * speed;
-        circle.y += (lockedPos.y - circle.y) * speed;
+        circle.x += (lockedPos.x - circle.x) * hoverSpeed;
+        circle.y += (lockedPos.y - circle.y) * hoverSpeed;
       } else {
         circle.x += (mouse.x - circle.x) * speed;
         circle.y += (mouse.y - circle.y) * speed;
@@ -134,6 +135,18 @@
       circleElement?.classList.remove("hovered-lock");
     });
     
+    window.addEventListener('sipHovered', (e: Event) => {
+      const ce = e as CustomEvent;
+      lockedPos.x = ce.detail.x;
+      lockedPos.y = ce.detail.y;
+      circleElement?.classList.add("hovered-lock");
+      circleElement?.classList.add("hovered-sip");
+    });
+    window.addEventListener('sipUnhovered', (e: Event) => {
+      circleElement?.classList.remove("hovered-lock");
+      circleElement?.classList.remove("hovered-sip");
+    });
+    
     const addHoverClasses = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (target.closest("a, h1, h2, h3, h4, h5, p")) {
@@ -143,20 +156,6 @@
       if (target.closest(".option, .social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
         if (target.closest(".circle-no-interact")) return;
         circleElement?.classList.add("hovered-button-grow");
-      }
-      if (target.closest(".sip-icon")) {
-        if (target.closest(".circle-no-interact")) return;
-        circleElement?.classList.add("hovered-sip");
-      }
-      if (target.closest(".sip-icon")) {
-        const styledSip = document.querySelector('.styled-sip') as HTMLElement;
-          if (styledSip) {
-            const rect = styledSip.getBoundingClientRect();
-            lockedPos.x = rect.left + rect.width / 2 - 20;
-            lockedPos.y = rect.top + rect.height / 2 - 5;
-          }
-          circleElement?.classList.add("hovered-lock");
-          circleElement?.classList.add("hovered-sip");
       }
       if (target.closest(".hamburger-footer")) {
         if (target.closest(".circle-no-interact")) return;
@@ -171,11 +170,6 @@
       }
       if (target.closest(".option, .social-card, .logo-button, .nav-button, .hamburger-button, .menu-item, .twaos")) {
         circleElement?.classList.remove("hovered-button-grow");
-      }
-      if (target.closest(".sip-icon")) {
-        if (target.closest(".circle-no-interact")) return;
-        circleElement?.classList.remove("hovered-lock");
-        circleElement?.classList.remove("hovered-sip");
       }
       if (target.closest(".hamburger-footer")) {
         if (target.closest(".circle-no-interact")) return;
