@@ -7,8 +7,9 @@
 
   let showOptions = false;
   let isOpen = false;
-  const siteUrl = import.meta.env.VITE_SITE_URL;
-  const siteVer = import.meta.env.VITE_SITE_VER || "v0.0.1";
+  let siteUrl = "";
+  let siteVer = "";
+  let siteEnvironment = "";
   let siteHref = "";
 
   const menuItems = [
@@ -21,19 +22,23 @@
   function updateSiteHref() {
     const path = window.location.pathname;
     const search = window.location.search;
-    siteHref = siteUrl === 'https://electris.net'
-      ? 'https://testing.electris.net' + path + search
-      : 'https://electris.net' + path + search;
+  
+    if (siteEnvironment === "testing" || siteEnvironment === "development") {
+      siteHref = 'https://electris.net' + path + search;
+    } else {
+      siteHref = 'https://testing.electris.net' + path + search;
+    }
   }
 
   onMount(() => {
-    updateSiteHref();
-    afterNavigate(() => {
-      updateSiteHref();
-    });
+    determineEnvironment();
     if (typeof document !== 'undefined') {
       document.addEventListener('click', handleClickOutside);
     }
+  });
+
+  afterNavigate(() => {
+    updateSiteHref();
   });
 
   onDestroy(() => {
@@ -56,6 +61,22 @@
         showOptions = false;
       }
     }
+  }
+
+  function determineEnvironment() {
+    siteUrl = import.meta.env.VITE_SITE_URL || "";
+    siteVer = import.meta.env.VITE_SITE_VER || "v0.0.1";
+  
+    const hostname = window.location.hostname;
+    if (hostname === "testing.electris.net") {
+      siteEnvironment = "testing";
+    } else if (hostname === "electris.net") {
+      siteEnvironment = "production";
+    } else {
+      siteEnvironment = "development";
+    }
+  
+    updateSiteHref();
   }
 </script>
 
@@ -106,6 +127,7 @@
         <div class="footer">
           <p><u>ELECTRIS &#169;2025</u></p>
           <a href="https://github.com/ItzELECTR0/electris.net"><u>{siteVer}</u></a>
+          <span class="env-indicator">{siteEnvironment}</span>
         </div>
       </div>
   </div>
@@ -118,8 +140,15 @@
     <div transition:slide={{ duration: 300 }}>
       <h2 class="circle-no-interact">Options</h2>
       <div class="option">
-        <label for="testing-toggle">Option (Does Nothing)</label>
-        <input id="testing-option" type="checkbox" />
+        <button type="button">
+          <a href={siteHref}>
+            {#if siteEnvironment === "production"}
+              Switch to Testing
+            {:else}
+              Switch to Main
+            {/if}
+          </a>
+        </button>
       </div>
       <div class="option">
         {#if siteUrl === 'https://electris.net'}
@@ -169,17 +198,6 @@
     justify-content: space-between;
   }
 
-  .option label {
-    font-family: 'sans-sherif';
-    font-size: 1rem;
-    margin-bottom: 0.1vh;
-  }
-
-  .option input[type="checkbox"] {
-    width: 1.5vh;
-    height: 1.5vh;
-  }
-
   .menu-item {
     margin-top: 1vh;
     margin-bottom: 1vh;
@@ -195,5 +213,15 @@
     text-decoration: none;
     color: #f65901;
     font-size: 1.2rem;
+  }
+
+  .env-indicator {
+    margin-left: 0.5rem;
+    color: #f65901;
+    font-size: 0.8rem;
+    background-color: rgba(246, 89, 1, 0.2);
+    padding: 0.1rem 0.3rem;
+    border-radius: 4px;
+    font-family: monospace;
   }
 </style>
