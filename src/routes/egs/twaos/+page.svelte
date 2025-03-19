@@ -107,9 +107,14 @@
   }
 
   onMount(() => {
-    if ((window as any).resetCursor) {
-      setTimeout((window as any).resetCursor, 1);
-    }
+    const cursorReset = () => {
+      const cursor = document.querySelector('.circle');
+      if (cursor) {
+        cursor.className = "circle";
+      }
+    };
+
+    setTimeout(cursorReset, 10);
 
     currentVideo.src = '/media/TWAOS/BG/1.mp4';
     currentVideo.load();

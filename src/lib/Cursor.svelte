@@ -160,53 +160,19 @@
     tick();
 
     afterNavigate(() => {
-      isNavigating = true;
-  
-      // Force remove all classes immediately
-      if (circleElement) {
-        circleElement.classList.remove(
-          "hovered-lock",
-          "hovered-text-grow",
-          "hovered-button-grow",
-          "hovered-footer",
-          "hovered-sip",
-          "hovered-menu-item"
-        );
-    
-        // Hide the cursor-follower during navigation
-        circleElement.style.opacity = "0";
-    
-        // Reset internal state
-        currentScale = 0;
-        currentAngle = 0;
-      }
-  
-      // Clear any existing reset timer
-      if (resetTimer !== null) {
-        clearTimeout(resetTimer);
-      }
-  
-      // Completely reset the cursor-follower with a delay
-      resetTimer = setTimeout(() => {
+      setTimeout(() => {
         if (circleElement) {
-          // Forcefully reset all styles
-          circleElement.style.transform = `translate(${mouse.x}px, ${mouse.y}px)`;
-          circleElement.style.transition = "opacity 0.3s ease";
+          // Reset to default class (Removes all hover classes)
+          circleElement.className = "circle";
       
-          // Reset circle position to current mouse position
+          // Reset the transform to current mouse position
           circle.x = mouse.x;
           circle.y = mouse.y;
+          circleElement.style.transform = `translate(${mouse.x}px, ${mouse.y}px)`;
       
-          // Double-check to ensure all classes are removed
-          circleElement.setAttribute("class", "circle");
-      
-          // Re-enable the cursor-follower with a slight delay
-          setTimeout(() => {
-            if (circleElement) {
-              circleElement.style.opacity = "1";
-              isNavigating = false;
-            }
-          }, 100);
+          // Reset any other stuff
+          currentScale = 0;
+          currentAngle = 0;
         }
       }, 100);
     });
