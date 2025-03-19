@@ -107,6 +107,10 @@
   }
 
   onMount(() => {
+    if ((window as any).resetCursor) {
+      setTimeout((window as any).resetCursor, 1);
+    }
+
     currentVideo.src = '/media/TWAOS/BG/1.mp4';
     currentVideo.load();
     

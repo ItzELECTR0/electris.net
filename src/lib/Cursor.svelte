@@ -2,6 +2,8 @@
   import { onMount } from "svelte";
   import { afterNavigate } from '$app/navigation';
 
+  let resetCursorFunction: () => void;
+
   let circleElement: HTMLElement | null = null;
 
   // Cursor Specific
@@ -16,10 +18,12 @@
   let touchVisibility = 1;
   let isTouchDevice = false;
 
-  // Iframe Specific
-  let isOverIframe = false;
-
+  // Hover lock Specific
   const lockedPos = { x: 0, y: 0 };
+
+  // Navigation Specific
+  let isNavigating = false;
+  let resetTimer: number | null = null;
 
   function handleTouchStart(e: TouchEvent) {
     isTouchActive = true;
@@ -55,10 +59,47 @@
       break;
     }
 
+    resetCursorFunction = () => {
+      if (circleElement) {
+        circleElement.classList.remove(
+          "hovered-lock",
+          "hovered-text-grow",
+          "hovered-button-grow",
+          "hovered-footer",
+          "hovered-sip",
+          "hovered-menu-item"
+        );
+    
+        currentScale = 0;
+        currentAngle = 0;
+    
+        // Reset position to current mouse
+        circle.x = mouse.x;
+        circle.y = mouse.y;
+    
+        // Apply the reset immediately
+        circleElement.style.transform = `translate(${mouse.x}px, ${mouse.y}px)`;
+      }
+    };
+
     const speed = 0.3;
     const hoverSpeed = 0.15;
 
+    const handleNavigationStart = () => {
+      isNavigating = true;
+      if (circleElement) {
+        circleElement.style.opacity = "0";
+      }
+    };
+
+    document.addEventListener('sveltekit:navigation-start', handleNavigationStart);
+
     const tick = () => {
+      if (isNavigating) {
+        requestAnimationFrame(tick);
+        return;
+      }
+
       if (circleElement?.classList.contains("hovered-lock")) {
         circle.x += (lockedPos.x - circle.x) * hoverSpeed;
         circle.y += (lockedPos.y - circle.y) * hoverSpeed;
@@ -119,8 +160,11 @@
     tick();
 
     afterNavigate(() => {
+      isNavigating = true;
+  
+      // Force remove all classes immediately
       if (circleElement) {
-        circleElement.classList.remove (
+        circleElement.classList.remove(
           "hovered-lock",
           "hovered-text-grow",
           "hovered-button-grow",
@@ -128,13 +172,43 @@
           "hovered-sip",
           "hovered-menu-item"
         );
-
-        const menuItemClasses = Array.from(circleElement.classList)
-          .filter(cls => cls.startsWith('hovered-menu-item-'));
-        menuItemClasses.forEach(cls => {
-          circleElement?.classList.remove(cls);
-        });
+    
+        // Hide the cursor-follower during navigation
+        circleElement.style.opacity = "0";
+    
+        // Reset internal state
+        currentScale = 0;
+        currentAngle = 0;
       }
+  
+      // Clear any existing reset timer
+      if (resetTimer !== null) {
+        clearTimeout(resetTimer);
+      }
+  
+      // Completely reset the cursor-follower with a delay
+      resetTimer = setTimeout(() => {
+        if (circleElement) {
+          // Forcefully reset all styles
+          circleElement.style.transform = `translate(${mouse.x}px, ${mouse.y}px)`;
+          circleElement.style.transition = "opacity 0.3s ease";
+      
+          // Reset circle position to current mouse position
+          circle.x = mouse.x;
+          circle.y = mouse.y;
+      
+          // Double-check to ensure all classes are removed
+          circleElement.setAttribute("class", "circle");
+      
+          // Re-enable the cursor-follower with a slight delay
+          setTimeout(() => {
+            if (circleElement) {
+              circleElement.style.opacity = "1";
+              isNavigating = false;
+            }
+          }, 100);
+        }
+      }, 100);
     });
 
     window.addEventListener('footerHovered', (e: Event) => {
@@ -204,6 +278,10 @@
 
     document.addEventListener("mouseover", addHoverClasses);
     document.addEventListener("mouseout", removeHoverClasses);
+
+    return () => {
+      document.removeEventListener('sveltekit:navigation-start', handleNavigationStart);
+    };
   });
 </script>
 

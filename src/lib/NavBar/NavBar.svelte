@@ -140,6 +140,9 @@
     <div transition:slide={{ duration: 300 }}>
       <h2 class="circle-no-interact">Options</h2>
       <div class="option">
+        
+      </div>
+      <div class="option">
         <button type="button">
           <a href={siteHref}>
             {#if siteEnvironment === "production"}
@@ -149,13 +152,6 @@
             {/if}
           </a>
         </button>
-      </div>
-      <div class="option">
-        {#if siteUrl === 'https://electris.net'}
-          <button type="button" on:mouseenter={updateSiteHref}><a href={siteHref}>Switch to Testing</a></button>
-        {:else}
-          <button type="button" on:mouseenter={updateSiteHref}><a href={siteHref}>Switch to Main</a></button>
-        {/if}
       </div>
     </div>
   </div>

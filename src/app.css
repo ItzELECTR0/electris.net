@@ -124,7 +124,7 @@ a {
   left: calc(var(--circle-size) / 2.2 * -1);
   pointer-events: none;
   will-change: transform;
-  transition: rotation 1s, width 0.1s ease-out, height 0.1s ease-out, top 0.1s ease-out, left 0.1s ease-out, border 0.2s ease-in-out;
+  transition: opacity 0.3s ease, rotation 1s, width 0.1s ease-out, height 0.1s ease-out, top 0.1s ease-out, left 0.1s ease-out, border 0.2s ease-in-out;
   z-index: 500;
 }
 
