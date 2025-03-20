@@ -6,9 +6,9 @@
   const projects = [
     {
       title: 'TWAOS',
-      description:
-        'An adventure-action-rpg with a sci-fi setting and a fantasy inspired super-powered, heart wrenching narrative.',
-      icon: 'https://raw.githubusercontent.com/ItzELECTR0/ItzELECTR0/605355a69b8d7bbf3427bc851deb29be519b01ae/assets/TWAOS.svg',
+      description: 'An adventure-action-rpg with a sci-fi setting and a fantasy inspired super-powered, heart wrenching narrative.',
+      icon: '/icons/twaos.svg',
+      width: 8,
       link: '/egs/twaos'
     }
   ];
@@ -40,7 +40,7 @@
         <img
           src={project.icon}
           alt="{project.title} icon"
-          style="width: {iconSize}px; height: {iconSize}px; object-fit: contain;"
+          style="width: {project.width}vh; object-fit: contain; margin-right: {Math.min(iconSize * 0.5, 10)}px; margin-left: {Math.min(iconSize * 0.5, 5)}px;"
         />
       </div>
       <div class="card-content-twaos">
