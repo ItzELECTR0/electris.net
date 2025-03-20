@@ -2,6 +2,7 @@
   import TopNav from '$lib/NavBar/NavBar.svelte';
   import Cursor from '$lib/Cursor.svelte';
   import HamburgerMenu from '$lib/NavBar/NavBar.svelte';
+  import Popup from '$lib/Mobile/Popup.svelte';
   import '/src/app.css';
 </script>
 
@@ -9,5 +10,6 @@
   <TopNav />
   <HamburgerMenu />
   <Cursor />
+  <Popup />
   <slot />
 </main>
