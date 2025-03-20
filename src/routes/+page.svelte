@@ -34,17 +34,23 @@
     <div class="boxes-container">
       <a href="/projects" class="box box-1">
         <h2>PROJECTS</h2>
-        <p>Our own creations. Projects that we ourselves create, as part of our mission to deepen our connection with the creators we want to help push forward, which will help push us forward as well.</p>
+        <p>Our own creations. <br> Projects that we ourselves create, as part of our mission to deepen our connection with the creators we want to help push forward, which will help push us forward as well.</p>
         <div class="box-image">
           <img src="/media/TWAOS/Cover/4K.png" alt="Projects" />
+        </div>
+        <div class="hover-overlay">
+          <img src="/icons/elts-v1-transparent.png" alt="Logo" class="overlay-logo" width="350" />
         </div>
       </a>
       
       <a href="/divisions" class="box box-2">
         <h2>DIVISIONS</h2>
-        <p>The parts of us that are for everyone to join. The ones where you decide which direction you want your art to go through with us. <br> The parts of us that are here to help. <br> The parts of us that won't change for anyone.</p>
+        <p>The parts of us that are for everyone to join. <br> The parts of us that were designed to help. <br> The parts divided, yet connected to the future. <br> The parts of us that won't change for anyone.</p>
         <div class="box-image">
           <img src="/media/TWAOS/Cover/4K.png" alt="Divisions" />
+        </div>
+        <div class="hover-overlay">
+          <img src="/icons/elts-v1-transparent.png" alt="Logo" class="overlay-logo" width="350" />
         </div>
       </a>
     </div>
@@ -120,6 +126,8 @@
   }
   
   .box {
+    position: relative;
+    overflow: hidden;
     width: 35%;
     max-width: 35vh;
     border-radius: 15px;
@@ -133,6 +141,38 @@
   
   .box:hover {
     transform: scale(1.03);
+  }
+
+  .box:hover .hover-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 1;
+  }
+
+  .box:hover .overlay-logo {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    transition: background 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .overlay-logo {
+    padding-left: 1vh;
+    transform: scale(0.8);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
   
   .box-1 {

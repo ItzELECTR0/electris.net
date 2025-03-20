@@ -19,7 +19,7 @@
   
   <div class="hero">
     <h1>ELECTRIS Media Studios</h1>
-    <p>Room with a microphone, a phone and some chairs</p>
+    <p>Creation and freedom, They complement each other well.</p>
   </div>
   
   <div class="discography">
