@@ -1,28 +1,38 @@
-<script>
-    const socialCards = [
-      {
-        title: 'ELECTRIS',
-        description: 'Heart like a pen, On paper it bleeds',
-        platformLogo: '/icons/yt.svg',
-        profilePicture: '/icons/elts-v1.png',
-        url: '/socials/ELTS'
-      },
-      {
-        title: 'ELECTRO',
-        description: 'Dancing with the Lightning',
-        platformLogo: '/icons/yt.svg',
-        profilePicture: '/icons/eltr-v10.png',
-        url: '/socials/ELTR'
-      },
-      {
-        title: 'Varrow',
-        description: 'Free code is best code',
-        platformLogo: '/icons/github.svg',
-        profilePicture: '/icons/VArrow.png',
-        url: '/socials/VRRW'
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    const cursorReset = () => {
+      const cursor = document.querySelector('.circle');
+      if (cursor) {
+        cursor.className = "circle";
       }
-    ];
-  </script>
+    };
+
+    setTimeout(cursorReset, 10);
+  });
+
+  const socialCards = [
+    {
+      title: 'ELECTRIS',
+      description: 'Heart like a pen, On paper it bleeds',
+      platformLogo: '/icons/elts-v1.png',
+      url: '/socials/ELTS'
+    },
+    {
+      title: 'ELECTRO',
+      description: 'A Creator, Dancing with The Lightning',
+      platformLogo: '/icons/eltr-v10.png',
+      url: '/socials/ELTR'
+    },
+    {
+      title: 'Varrow',
+      description: 'A Liberator, Learning the way to Freedom',
+      platformLogo: '/icons/VArrow.png',
+      url: '/socials/VRRW'
+    }
+  ];
+</script>
 
 <svelte:head>
   <title>Socials | ELECTRIS</title>
@@ -39,7 +49,6 @@
         <a class="social-card" href={card.url} target="_self">
           <div class="icons">
             <img src={card.platformLogo} alt="Platform Logo" class="platform-logo" />
-            <img src={card.profilePicture} alt="Profile Picture" class="profile-picture" />
           </div>
           <div class="card-text">
             <h2>{card.title}</h2>

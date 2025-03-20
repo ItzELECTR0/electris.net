@@ -1,5 +1,16 @@
 <script lang="ts">
-  
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    const cursorReset = () => {
+      const cursor = document.querySelector('.circle');
+      if (cursor) {
+        cursor.className = "circle";
+      }
+    };
+
+    setTimeout(cursorReset, 10);
+  });
 </script>
 
 <svelte:head>
@@ -36,16 +47,5 @@
     font-size: 1.5rem;
     margin-top: 10px;
     max-width: 80%;
-  }
-  
-  .rhinestones {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin-bottom: 3vh;
-    pointer-events: auto;
   }
 </style>

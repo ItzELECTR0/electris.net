@@ -1,6 +1,21 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    const cursorReset = () => {
+      const cursor = document.querySelector('.circle');
+      if (cursor) {
+        cursor.className = "circle";
+      }
+    };
+
+    setTimeout(cursorReset, 10);
+  });
+</script>
+
 <div class="hero">
   <h1>ELECTRIS Game Studios</h1>
-  <p>Life like a game, Playing in it's reverse</p>
+  <p>Life is like a game, Let's play the reverse</p>
 </div>
 
 <svelte:head>

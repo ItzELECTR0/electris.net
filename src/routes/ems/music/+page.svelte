@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+  import { onMount } from 'svelte';
+
   const songs = [
     {
       cover: 'https://i1.sndcdn.com/artworks-PpLyHdUlYokl1XBf-DcMRmA-t500x500.jpg',
@@ -19,6 +21,17 @@
       link: 'https://youtu.be/xVaTP_cPid0'
     }
   ];
+
+  onMount(() => {
+    const cursorReset = () => {
+      const cursor = document.querySelector('.circle');
+      if (cursor) {
+        cursor.className = "circle";
+      }
+    };
+
+    setTimeout(cursorReset, 10);
+  });
 </script>
 
 <svelte:head>

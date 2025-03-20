@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  import { onMount } from 'svelte';
 
   let iconSize = 150;
 
@@ -11,6 +12,17 @@
       link: '/egs/twaos'
     }
   ];
+
+  onMount(() => {
+    const cursorReset = () => {
+      const cursor = document.querySelector('.circle');
+      if (cursor) {
+        cursor.className = "circle";
+      }
+    };
+
+    setTimeout(cursorReset, 10);
+  });
 </script>
 
 <svelte:head>

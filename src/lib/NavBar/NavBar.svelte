@@ -25,8 +25,10 @@
   
     if (siteEnvironment === "testing" || siteEnvironment === "development") {
       siteHref = 'https://electris.net' + path + search;
-    } else {
+    } else if (siteEnvironment === "production") {
       siteHref = 'https://testing.electris.net' + path + search;
+    } else {
+      siteHref = 'https://localhost:5173' + path + search;
     }
   }
 
@@ -72,8 +74,10 @@
       siteEnvironment = "testing";
     } else if (hostname === "electris.net") {
       siteEnvironment = "production";
-    } else {
+    } else if (hostname === "localhost") {
       siteEnvironment = "development";
+    } else {
+      siteEnvironment = "unknown";
     }
   
     updateSiteHref();
@@ -147,8 +151,10 @@
           <a href={siteHref}>
             {#if siteEnvironment === "production"}
               Switch to Testing
-            {:else}
+            {:else if siteEnvironment === "testing" || siteEnvironment === "development"}
               Switch to Main
+            {:else}
+              Switch to Development
             {/if}
           </a>
         </button>

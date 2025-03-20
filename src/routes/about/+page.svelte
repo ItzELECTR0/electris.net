@@ -1,11 +1,26 @@
-  <div class="hero">
-    <h1><u>About Us</u></h1>
-    <p>[More info coming here soon]</p>
-  </div>
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    const cursorReset = () => {
+      const cursor = document.querySelector('.circle');
+      if (cursor) {
+        cursor.className = "circle";
+      }
+    };
+
+    setTimeout(cursorReset, 10);
+  });
+</script>
 
 <svelte:head>
   <title>About Us | ELECTRIS</title>
 </svelte:head>
+
+<div class="hero">
+  <h1><u>About Us</u></h1>
+  <p>[More info coming here soon]</p>
+</div>
   
 <style>
   .hero {
