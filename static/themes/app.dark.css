@@ -13,7 +13,16 @@ body {
 }
 
 .overlay {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.hover-overlay {
+  background: rgba(0, 0, 0, 0);
+}
+
+.box:hover .hover-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 1;
 }
 
 .hamburger {
@@ -50,19 +59,16 @@ body {
   color: #f65901;
 }
 
-.hover-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-  transition: background 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
+.video-overlay {
+  background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.8));
+}
+
+.box-1 {
+  background-color: #151e22;
+}
+
+.box-2 {
+  background-color: #1e2215;
 }
 
 .main-card-1 {
@@ -71,4 +77,16 @@ body {
 
 .main-card-2 {
   background-color: #151e22;
+}
+
+.social-card {
+  background-color: #222;
+}
+
+.twaos-card {
+  background-color: #222;
+}
+
+.game-card {
+  background-color: rgba(33, 79, 20, 0.1);
 }

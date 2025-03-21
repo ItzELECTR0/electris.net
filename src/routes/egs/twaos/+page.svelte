@@ -7,6 +7,15 @@
   let recentlyPlayed: number[] = []; // Track recently played clips to enforce cooldown
   let hasMetShadow = false; // Track if the rare encounter (6.mp4) has been played
 
+  const pages = [
+    {
+      title: 'Wishlist on Steam',
+      description: 'The largest game distribution platform.',
+      icon: '/icons/steam.svg',
+      href: 'https://store.steampowered.com/app/2231750/The_Wonderful_Adventures_Of_Sip/'
+    }
+  ];
+
   function getNextClip(currentClip: number): number {
     const availableClips = [2, 3, 4, 5, 7];
     
@@ -185,6 +194,21 @@
     <span class="text-container"><h1 class="sip">SIP</h1></span>
     <span class="text-container"><h5>An open-source Indie Game created by a Solo Developer</h5></span>
   </div>
+  <div class="cards-wrapper">
+    {#each pages as page}
+      <div class="card-container">
+        <a class="game-card" href={page.href} target="_blank">
+          <div class="game-card-icon">
+            <img src={page.icon} alt="{page.title} - icon" style="width: 8vh; object-fit: contain;"/>
+          </div>
+          <div class="game-card-content">
+            <h2>{page.title}</h2>
+            <p>{page.description}</p>
+          </div>
+        </a>
+      </div>
+    {/each}
+  </div>
   <div class="sip-icon">
     <a href="https://github.com/ItzELECTR0/TWAOS" target="_blank" class="styled-sip-link">
       <img class="styled-sip" src="/media/TWAOS/Styled/Sip.svg" alt="SIP" />
@@ -305,7 +329,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.8));
     z-index: -1;
   }
 
@@ -330,5 +353,67 @@
   .sip-icon {
     display: grid;
     place-items: center;
+  }
+
+  .cards-wrapper {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    z-index: 2;
+  }
+
+  .card-container {
+    gap: 1vh;
+  }
+
+  .game-card {
+    font-family: 'sans-serif';
+    display: flex;
+    flex-direction: line;
+    align-items: left;
+    padding: 1vh;
+    border-radius: 1.8vh;
+    text-decoration: none;
+    color: #f65901;
+    width: 35vh;
+    transition: transform 0.2s;
+    justify-content: left;
+    text-align: left;
+    gap: 1vh;
+  }
+
+  .game-card:hover {
+    transform: scale(1.02);
+  }
+
+  .game-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .game-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .game-card-content h2 {
+    margin: 0;
+    font-family: 'Nightcore';
+    font-size: 2rem;
+    color: #01f619;
+  }
+
+  .game-card-content p {
+    font-family: 'Redwing Light';
+    font-size: 1.2rem;
+    margin: 5px 0 0;
+    color: #01f619;
   }
 </style>

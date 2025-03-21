@@ -149,7 +149,6 @@
   }
 
   .box:hover .hover-overlay {
-    background: rgba(0, 0, 0, 0.6);
     opacity: 1;
   }
 

@@ -67,7 +67,6 @@
   <style>
     .socials-page {
       padding: 80px 20px 20px;
-      background-color: #131615;
       color: #f65901;
       min-height: 100vh;
     }
@@ -99,7 +98,6 @@
     .social-card {
       display: flex;
       align-items: center;
-      background-color: #222;
       padding: 15px;
       border-radius: 8px;
       width: 100%;
@@ -127,25 +125,17 @@
       background-color: #fff;
     }
   
-    .profile-picture {
-      width: 3vh;
-      height: 3vh;
-      border-radius: 50%;
-      position: absolute;
-      right: -10px;
-      bottom: -10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    }
-  
     .card-text h2 {
       margin: 0;
+      font-family: 'Letric';
       font-size: 1.8rem;
       text-align: left;
     }
   
     .card-text p {
-      margin: 5px 0 0;
-      font-size: 1rem;
+      margin: 0 0 0;
+      font-family: 'Redwing Medium';
+      font-size: 1.2rem;
       text-align: left;
     }
   </style>

@@ -243,7 +243,6 @@
     position: fixed;
     top: 5vh;
     right: 1vh;
-    background-color: #222;
     padding: 1.5vh;
     border-radius: 8px;
     z-index: 200;

@@ -155,29 +155,9 @@
       transform: scale(1.03);
     }
   
-    .box:hover .hover-overlay {
-      background: rgba(0, 0, 0, 0.6);
-      opacity: 1;
-    }
-  
     .box:hover .overlay-logo {
       transform: scale(1);
       opacity: 1;
-    }
-  
-    .hover-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      pointer-events: none;
-      transition: background 0.3s ease, opacity 0.3s ease;
-      opacity: 0;
     }
   
     .overlay-logo {
@@ -185,14 +165,6 @@
       transform: scale(0.8);
       opacity: 0;
       transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    
-    .box-1 {
-      background-color: #151e22;
-    }
-  
-    .box-2 {
-      background-color: #1e2215;
     }
     
     .box h2 {

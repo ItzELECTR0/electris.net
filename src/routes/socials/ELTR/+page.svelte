@@ -10,7 +10,7 @@
     {
       title: 'GitHub',
       description: 'Free as in Freedom',
-      platformLogo: '/icons/github.svg',
+      platformLogo: '/icons/github-nobg.svg',
       profilePicture: '/icons/eltr-v10.png',
       url: 'https://github.com/ItzELECTR0'
     }

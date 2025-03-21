@@ -87,7 +87,6 @@
     display: flex;
     flex-direction: line;
     align-items: left;
-    background-color: #222;
     padding: 10px;
     border-radius: 8px;
     text-decoration: none;
