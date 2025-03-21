@@ -16,4 +16,4 @@ The official in-house built website for ELECTRIS.
 ## Submitting Improvements
 
 Pull requests are welcome and encouraged.
-<br> If additions are nice and fit the Creator Standard, they will be merged and you will be credited as an official developer on the website
+<br> If additions are nice and fit the [Creator Standard](https://github.com/ItzELECTR0/TWAOS/blob/Testing/Documentation/CREATE.md), they will be merged and you will be credited as an official developer on the website
