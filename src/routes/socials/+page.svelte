@@ -32,6 +32,11 @@
       url: '/socials/VRRW'
     }
   ];
+
+  export const search = {
+    name: "Socials",
+    description: "The place to find our social medias."
+  };
 </script>
 
 <svelte:head>

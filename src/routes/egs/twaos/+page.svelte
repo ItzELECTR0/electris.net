@@ -160,6 +160,11 @@
       nextVideo.removeEventListener('ended', handleVideoEnded);
     };
   });
+
+  export const search = {
+    name: "TWAOS",
+    description: "Project 001, The Wondeful Adventures Of Sip."
+  };
 </script>
 
 <svelte:head>

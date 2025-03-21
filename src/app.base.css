@@ -21,7 +21,7 @@ a {
 }
 
 .navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
   padding: 1.5vh 1vh;
@@ -36,7 +36,7 @@ a {
   justify-content: center;
   gap: 1.5vh;
   flex-grow: 1;
-  margin-left: 3vh;
+  margin-left: 20vh;
 }
 
 .nav-button {

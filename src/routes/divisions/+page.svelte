@@ -11,10 +11,15 @@
   
       setTimeout(cursorReset, 10);
     });
+
+    export const search = {
+    name: "Divisions",
+    description: "The place to see what makes our gears spin."
+  };
   </script>
   
   <svelte:head>
-    <title>ELECTRIS</title>
+    <title>Divisions | ELECTRIS</title>
   </svelte:head>
   
   <div>

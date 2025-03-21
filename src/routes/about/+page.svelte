@@ -11,6 +11,11 @@
 
     setTimeout(cursorReset, 10);
   });
+
+  export const search = {
+    name: "About Us",
+    description: "The place to find out more about us."
+  };
 </script>
 
 <svelte:head>

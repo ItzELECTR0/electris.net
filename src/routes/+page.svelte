@@ -11,6 +11,11 @@
 
     setTimeout(cursorReset, 10);
   });
+
+  export const search = {
+    name: "Main Page",
+    description: "Welcome to ELECTRIS, the main page."
+  };
 </script>
 
 <svelte:head>

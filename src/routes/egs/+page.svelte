@@ -11,6 +11,11 @@
 
     setTimeout(cursorReset, 10);
   });
+
+  export const search = {
+    name: "Game Studios",
+    description: "The place to experience our minds."
+  };
 </script>
 
 <div class="hero">

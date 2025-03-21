@@ -11,6 +11,11 @@
 
     setTimeout(cursorReset, 10);
   });
+
+  export const search = {
+    name: "Media Studios",
+    description: "The place to express creativity, the greatest human feature."
+  };
 </script>
 
 <svelte:head>
