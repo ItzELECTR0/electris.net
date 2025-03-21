@@ -12,6 +12,10 @@ body {
   color: #e04800;
 }
 
+.overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 .hover-overlay {
   background: rgb(255, 255, 255);
   opacity: 0;
@@ -20,10 +24,6 @@ body {
 .box:hover .hover-overlay {
   background: rgba(255, 255, 255, 0.6);
   opacity: 1;
-}
-
-.overlay {
-  background: rgba(0, 0, 0, 0.2);
 }
 
 .hamburger {
