@@ -103,7 +103,7 @@
   }
 
   .horizontal-line {
-    width: 46vh;
+    width: 51vh;
     height: 0.6vh; 
     background-color: #f65901;
     border-radius: 2px; 
@@ -112,7 +112,7 @@
   .pointers {
     display: flex;
     justify-content: space-between;
-    width: 46vh;
+    width: 51vh;
   }
   
   .left-pointer, .right-pointer {
@@ -133,8 +133,8 @@
   .box {
     position: relative;
     overflow: hidden;
-    width: 35%;
-    max-width: 35vh;
+    max-width: 40vh;
+    max-height: 50vh;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -167,7 +167,7 @@
   
   .box h2 {
     font-family: 'Letric';
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin: 0;
     margin-bottom: 1vh;
     color: #f65901;
@@ -179,10 +179,9 @@
   .box p {
     font-family: 'Redwing', sans-serif;
     text-align: left;
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-align: center;
     line-height: 1.5;
-    margin-bottom: 2vh;
     color: #f65901;
     padding-left: 0.1vh;
     padding-right: 0.1vh;
