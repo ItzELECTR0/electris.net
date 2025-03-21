@@ -32,7 +32,7 @@
     </div>
     
     <div class="boxes-container">
-      <a href="/projects" class="box box-1">
+      <a href="/projects" class="box main-card-1">
         <h2>PROJECTS</h2>
         <p>Our own creations. <br> Projects that we ourselves create, as part of our mission to deepen our connection with the creators we want to help push forward, which will help push us forward as well.</p>
         <div class="box-image">
@@ -43,7 +43,7 @@
         </div>
       </a>
       
-      <a href="/divisions" class="box box-2">
+      <a href="/divisions" class="box main-card-2">
         <h2>DIVISIONS</h2>
         <p>The parts of us that are for everyone to join. <br> The parts of us that were designed to help. <br> The parts divided, yet connected to the future. <br> The parts of us that won't change for anyone.</p>
         <div class="box-image">
@@ -153,34 +153,11 @@
     opacity: 1;
   }
 
-  .hover-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-    transition: background 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
-  }
-
   .overlay-logo {
     padding-left: 1vh;
     transform: scale(0.8);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-  
-  .box-1 {
-    background-color: #25211f;
-  }
-  
-  .box-2 {
-    background-color: #151e22;
   }
   
   .box h2 {

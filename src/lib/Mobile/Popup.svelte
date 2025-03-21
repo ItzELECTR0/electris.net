@@ -15,14 +15,13 @@
       showPopup = false;
     }
     onMount(() => {
-      if (window.location.pathname !== "/") return;
       if (getCookie("mobilePopupDismissed") === "true") return;
       if ("ontouchstart" in window) showPopup = true;
     });
   </script>
   
   {#if showPopup}
-    <div class="mobile-popup-backdrop" on:click|self={dismissPopup}>
+    <div class="mobile-popup-backdrop">
       <div class="mobile-popup">
         <h2>Mobile Notice</h2>
         <p>This site works on mobile, but things may look out of place or be hard to read. Please check us out on a laptop or desktop with a mouse or trackpad.</p>
@@ -52,12 +51,37 @@
     .mobile-popup {
       background-color: #131615;
       color: #f65901;
-      padding: 2rem;
-      border-radius: 8px;
+      padding: 3rem;
+      border-radius: 3vh;
       max-width: 90%;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       animation: fadeInGrow 0.3s ease;
     }
+
+    .mobile-popup h2 {
+      user-select: none;
+      font-size: 5rem;
+      font-family: 'Letric';
+    }
+
+    .mobile-popup p {
+      user-select: none;
+      font-size: 2rem;
+      font-family: 'Redwing Light';
+      padding-bottom: 2vh;
+      padding-top: 1.5vh;
+    }
+
+    .mobile-popup label {
+      user-select: none;
+      font-size: 1.5rem;
+    }
+
+    .mobile-popup button {
+      user-select: none;
+      font-size: 2rem;
+    }
+
     .popup-controls {
       display: flex;
       justify-content: space-between;

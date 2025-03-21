@@ -3,14 +3,19 @@
   import { slide, fade } from 'svelte/transition';
   import { afterNavigate } from '$app/navigation';
   import Hover from './Hover.svelte';
+  import { theme, toggleTheme, applyTheme } from '$lib/stores/theme';
   
-
   let showOptions = false;
   let isOpen = false;
   let siteUrl = "";
   let siteVer = "";
   let siteEnvironment = "";
   let siteHref = "";
+  let currentTheme: string;
+
+  theme.subscribe(value => {
+    currentTheme = value;
+  });
 
   const menuItems = [
     { label: 'Home', href: '/' },
@@ -36,6 +41,7 @@
     determineEnvironment();
     if (typeof document !== 'undefined') {
       document.addEventListener('click', handleClickOutside);
+      applyTheme(currentTheme);
     }
   });
 
@@ -81,6 +87,10 @@
     }
   
     updateSiteHref();
+  }
+
+  function handleThemeToggle() {
+    toggleTheme();
   }
 </script>
 
@@ -144,7 +154,14 @@
     <div transition:slide={{ duration: 300 }}>
       <h2 class="circle-no-interact">Options</h2>
       <div class="option">
-        
+        <span>Theme</span>
+        <button type="button" class="theme-toggle" on:click={handleThemeToggle}>
+          {#if currentTheme === 'dark'}
+            <span class="theme-icon">🌙</span> Dark
+          {:else}
+            <span class="theme-icon">☀️</span> Light
+          {/if}
+        </button>
       </div>
       <div class="option">
         <button type="button">
@@ -198,6 +215,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 1vh;
+  }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid #f65901;
+    color: #f65901;
+    padding: 0.5vh 1vh;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5vh;
+    transition: background-color 0.2s;
+  }
+
+  .theme-toggle:hover {
+    background-color: rgba(246, 89, 1, 0.1);
+  }
+
+  .theme-icon {
+    display: inline-block;
+    font-size: 1rem;
   }
 
   .menu-item {

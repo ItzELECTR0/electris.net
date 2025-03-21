@@ -1,0 +1,74 @@
+body {
+  background-color: #f5f1f8;
+  color: #e04800;
+}
+
+.navbar {
+  background-color: #f8f9fa;
+  color: #e04800;
+}
+
+.nav-button {
+  color: #e04800;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.hamburger {
+  background-color: #f0f0f0;
+}
+
+.hamburger-button {
+  color: #e04800;
+}
+
+.hamburger-footer {
+  color: #e04800;
+  border-top: 0.1vh solid #e04800;
+}
+
+.hamburger-footer a {
+  color: #ff6811;
+}
+
+.circle {
+  border: 0.2vh solid #e04800;
+}
+
+.circle.hovered-footer {
+  border: 0.2vh solid #ffa366;
+}
+
+.circle.hovered-sip {
+  border: 0.2vh solid #4cc200;
+}
+
+.options-menu {
+  background-color: #f0f0f0;
+  color: #e04800;
+}
+
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  transition: background 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.main-card-1 {
+  background-color: #f4d8ca;
+}
+
+.main-card-2 {
+  background-color: #afdff4;
+}
