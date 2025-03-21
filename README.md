@@ -1,8 +1,19 @@
 <img src=".github/Assets/ELECTRIS.png" width=150>
 
 # [ELECTRIS.net](https://electris.net)
+The official in-house built website for ELECTRIS.
+<br> Built from the ground up by our own members.
 
-Very unprofessional website for God knows what.
-It was made as a joke for some contest but I'm not going anymore.
-It's pretty cool though, so I guess I'll keep it.
-Feel free to use if's code you want.
+## How to set up dev?
+
+#### First, clone the project
+    git clone https://github.com/ItzELECTR0/electris.net.git
+#### Then navigate into the directory
+    cd electris.net
+#### Lastly, install dependencies and run the development environment
+    npm install && npm run dev
+
+## Submitting Improvements
+
+Pull requests are welcome and encouraged.
+<br> If additions are nice and fit the Creator Standard, they will be merged and you will be credited as an official developer on the website
