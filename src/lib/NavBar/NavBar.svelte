@@ -5,9 +5,8 @@
   import Hover from './Hover.svelte';
   import { theme, toggleTheme, applyTheme } from '$lib/stores/theme';
 
-  type Theme = "dark" | "light";
+  type Theme = 'dark' | 'light';
 
-  
   let showOptions = false;
   let isOpen = false;
   let siteUrl = "";
