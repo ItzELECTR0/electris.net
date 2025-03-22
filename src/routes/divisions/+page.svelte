@@ -41,7 +41,7 @@
           <h2>Game Studios</h2>
           <p>
             The division that creates interactive experiences.<br>
-            Life is like a game, Let's the reverse.
+            Life is like a game, Let's play the reverse.
           </p>
           <div class="box-image">
             <img src="/media/EGS.png" alt="EGS" />
