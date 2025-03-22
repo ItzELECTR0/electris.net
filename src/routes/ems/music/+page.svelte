@@ -6,7 +6,7 @@
       cover: 'https://i1.sndcdn.com/artworks-PpLyHdUlYokl1XBf-DcMRmA-t500x500.jpg',
       title: 'Farewell, Apocalypse',
       artist: 'ELECTRO',
-      link: 'https://soundcloud.com/electro_dev/farewell-apocalypse'
+      link: 'https://youtu.be/zzrLzNRdY6o'
     },
     {
       cover: 'https://i1.sndcdn.com/artworks-fJpDbkU3cXMIkGPm-tkSQWg-t500x500.png',
@@ -57,15 +57,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    padding: 80px 20px 20px;
+    gap: 2vh;
+    padding: 10vh 2vh 2vh;
   }
   
   .music-card {
-    background-color: #222;
-    border-radius: 8px;
-    width: 250px;
-    padding: 15px;
+    border-radius: 1.5vh;
+    width: 25vh;
+    padding: 1.5vh;
     text-decoration: none;
     color: #f65901;
     display: flex;
@@ -79,11 +78,11 @@
   }
   
   .cover-container {
-    width: 150px;
-    height: 150px;
+    width: 13vh;
+    height: 13vh;
     border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 15px;
+    margin-bottom: 1.5vh;
   }
   
   .cover-image {

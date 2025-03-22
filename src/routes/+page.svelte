@@ -41,7 +41,7 @@
         <h2>PROJECTS</h2>
         <p>Our own creations. <br> Projects that we ourselves create, as part of our mission to deepen our connection with the creators we want to help push forward, which will help push us forward as well.</p>
         <div class="box-image">
-          <img src="/media/TWAOS/Cover/4K.png" alt="Projects" />
+          <img src="/media/Projects.png" alt="Projects" />
         </div>
         <div class="hover-overlay">
           <img src="/icons/elts-v1-transparent.png" alt="Logo" class="overlay-logo" width="350" />
@@ -52,7 +52,7 @@
         <h2>DIVISIONS</h2>
         <p>The parts of us that are for everyone to join. <br> The parts of us that were designed to help. <br> The parts divided, yet connected to the future. <br> The parts of us that won't change for anyone.</p>
         <div class="box-image">
-          <img src="/media/TWAOS/Cover/4K.png" alt="Divisions" />
+          <img src="/media/Divisions.png" alt="Divisions" />
         </div>
         <div class="hover-overlay">
           <img src="/icons/elts-v1-transparent.png" alt="Logo" class="overlay-logo" width="350" />

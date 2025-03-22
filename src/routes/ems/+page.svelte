@@ -72,7 +72,6 @@
   .disc-card {
     display: flex;
     align-items: center;
-    background-color: #222;
     padding: 20px;
     border-radius: 8px;
     text-decoration: none;

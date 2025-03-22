@@ -44,7 +44,7 @@
             Life is like a game, Let's the reverse.
           </p>
           <div class="box-image">
-            <img src="/media/TWAOS/Cover/4K.png" alt="EGS" />
+            <img src="/media/EGS.png" alt="EGS" />
           </div>
           <div class="hover-overlay">
             <img src="/icons/elts-v1-transparent.png" alt="Logo" class="overlay-logo" width="350" />
@@ -58,7 +58,7 @@
             They complement each other well.
           </p>
           <div class="box-image">
-            <img src="/media/TWAOS/Cover/4K.png" alt="EMS" />
+            <img src="/media/EMS.png" alt="EMS" />
           </div>
           <div class="hover-overlay">
             <img src="/icons/elts-v1-transparent.png" alt="Logo" class="overlay-logo" width="350" />

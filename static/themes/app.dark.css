@@ -91,3 +91,11 @@ body {
 .game-card {
   background-color: rgba(33, 79, 20, 0.1);
 }
+
+.disc-card {
+  background-color: #222;
+}
+
+.music-card {
+  background-color: #222;
+}
