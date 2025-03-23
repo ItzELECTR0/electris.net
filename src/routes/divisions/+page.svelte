@@ -88,7 +88,7 @@
     }
   
     .hero p {
-      font-family: sans-serif;
+      font-family: 'sans-serif';
       font-size: 1.5rem;
       margin-top: 10px;
       max-width: 80%;
@@ -179,9 +179,10 @@
     }
     
     .box p {
-      font-family: sans-serif;
+      font-family: 'Redwing';
+      font-weight: 400;
       text-align: left;
-      font-size: 1rem;
+      font-size: 1.1rem;
       text-align: center;
       line-height: 1.5;
       margin-bottom: 2vh;

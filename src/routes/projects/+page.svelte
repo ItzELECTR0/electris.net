@@ -117,7 +117,8 @@
     font-size: 2rem;
   }
   .card-content-twaos p {
-    font-family: 'Redwing Light';
+    font-family: 'Redwing';
+    font-weight: 300;
     font-size: 1.2rem;
     margin: 5px 0 0;
   }

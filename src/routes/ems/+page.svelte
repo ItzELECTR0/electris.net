@@ -89,11 +89,16 @@
   }
 
   .disc-card h2 {
+    font-family: 'Redwing';
+    font-weight: 700;
     margin: 0;
     font-size: 1.8rem;
   }
 
   .disc-card p {
+    font-family: 'Redwing';
+    font-weight: 300;
+    letter-spacing: 0.07rem;
     margin: 5px 0 0;
   }
 </style>

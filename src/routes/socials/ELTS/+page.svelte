@@ -24,7 +24,7 @@
   <div class="socials-page">
     <div class="hero">
       <h1>ELECTRIS</h1>
-      <p>Follow the changes all around</p>
+      <p>Heart like a pen, On Paper it bleeds</p>
     </div>
   
     <div class="hero">

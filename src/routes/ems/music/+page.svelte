@@ -6,19 +6,23 @@
       cover: 'https://i1.sndcdn.com/artworks-PpLyHdUlYokl1XBf-DcMRmA-t500x500.jpg',
       title: 'Farewell, Apocalypse',
       artist: 'ELECTRO',
-      link: 'https://youtu.be/zzrLzNRdY6o'
+      link: 'https://youtu.be/zzrLzNRdY6o',
+      artist_font: 'Letric'
     },
     {
       cover: 'https://i1.sndcdn.com/artworks-fJpDbkU3cXMIkGPm-tkSQWg-t500x500.png',
       title: 'shame on u',
       artist: 'ELECTRO',
-      link: 'https://youtu.be/rlKIZdmGC4o'
+      link: 'https://youtu.be/rlKIZdmGC4o',
+      artist_font: 'Letric'
     },
     {
       cover: 'https://i1.sndcdn.com/artworks-DEJ2oIyB3AEYbg18-PNhitw-t500x500.jpg',
       title: 'Zero',
       artist: 'ELECTRO',
-      link: 'https://youtu.be/xVaTP_cPid0'
+      link: 'https://youtu.be/xVaTP_cPid0',
+      title_font: 'sans-serif',
+      artist_font: 'Letric'
     }
   ];
 
@@ -45,8 +49,8 @@
         <img src={song.cover} alt="{song.title} cover" class="cover-image" />
       </div>
       <div class="song-info">
-        <h3>{song.title}</h3>
-        <p>{song.artist}</p>
+        <h3 style="font-family: {song.title_font}">{song.title}</h3>
+        <p style="font-family: {song.artist_font}">{song.artist}</p>
       </div>
     </a>
   {/each}

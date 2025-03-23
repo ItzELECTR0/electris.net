@@ -308,7 +308,8 @@
   }
 
   .hero h5 {
-    font-family: 'Redwing Medium';
+    font-family: 'Redwing';
+    font-weight: 500;
     font-size: 1.5rem;
     margin: 2vh;
   }
@@ -411,7 +412,8 @@
   }
 
   .game-card-content p {
-    font-family: 'Redwing Light';
+    font-family: 'Redwing';
+    font-weight: 300;
     font-size: 1.2rem;
     margin: 5px 0 0;
     color: #01f619;

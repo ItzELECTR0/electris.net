@@ -176,7 +176,8 @@
   }
   
   .box p {
-    font-family: 'Redwing', sans-serif;
+    font-family: 'Redwing';
+    font-weight: 400;
     text-align: left;
     font-size: 1.1rem;
     text-align: center;

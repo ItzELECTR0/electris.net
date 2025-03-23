@@ -24,7 +24,7 @@
   <div class="socials-page">
     <div class="hero">
       <h1>ELECTRO</h1>
-      <p>Follow the changes all around</p>
+      <p>A Creator, Dancing with The Lightning</p>
     </div>
   
     <div class="hero">

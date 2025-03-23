@@ -134,7 +134,8 @@
   
     .card-text p {
       margin: 0 0 0;
-      font-family: 'Redwing Medium';
+      font-family: 'Redwing';
+      font-weight: 500;
       font-size: 1.2rem;
       text-align: left;
     }

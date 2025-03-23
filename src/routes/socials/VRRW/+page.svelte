@@ -31,15 +31,15 @@
   <div class="socials-page">
     <div class="hero">
       <h1>Varrow</h1>
-      <p>Follow the changes all around</p>
+      <p>Follows the changes all around</p>
     </div>
   
     <div class="hero">
       {#each socialCards as card}
         <a class="social-card" href={card.url} target="_blank">
           <div class="icons">
-            <img src={card.platformLogo} alt="Platform Logo" class="platform-logo" />
-            <img src={card.profilePicture} alt="Profile Picture" class="profile-picture" />
+            <img src={card.platformLogo} alt="Platform Logo" class="platform-logo"/>
+            <img src={card.profilePicture} alt="Profile Picture" class="profile-picture"/>
           </div>
           <div class="card-text">
             <h2>{card.title}</h2>
