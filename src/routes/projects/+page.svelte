@@ -41,7 +41,7 @@
 <div class="twaos">
   {#each projects as project}
     <a class="twaos-card" href={project.link}>
-      <div class="card-icon-twaos" style="margin-right: {Math.min(iconSize * 0.2, 5)}px;">
+      <div class="card-icon-twaos" style="margin-right: {Math.min(iconSize * 0.02, 0.44)}vh;">
         <img
           src={project.icon}
           alt="{project.title} icon"
@@ -67,12 +67,14 @@
     justify-content: center;
     align-items: center;
   }
+  
   .hero h1 {
     padding-top: 1vh;
     font-family: 'Letric';
     font-size: 4rem;
     margin: 0;
   }
+
   .twaos {
     display: flex;
     flex-direction: line;
@@ -82,6 +84,7 @@
     justify-content: center;
     align-items: center;
   }
+
   .twaos-card {
     font-family: 'sans-serif';
     display: flex;
@@ -97,15 +100,18 @@
     justify-content: left;
     text-align: left;
   }
+  
   .twaos-card:hover {
     transform: scale(1.02);
   }
+
   .card-icon-twaos {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
+  
   .card-content-twaos {
     display: flex;
     flex-direction: column;
@@ -116,6 +122,7 @@
     font-family: 'Nightcore';
     font-size: 2rem;
   }
+  
   .card-content-twaos p {
     font-family: 'Redwing';
     font-weight: 300;

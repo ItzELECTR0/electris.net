@@ -27,7 +27,7 @@
     },
     {
       title: 'Varrow',
-      description: 'A Liberator, Learning the way to Freedom',
+      description: 'A Lazy Programmer',
       platformLogo: '/icons/VArrow.png',
       url: '/socials/VRRW'
     }

@@ -88,6 +88,7 @@ a {
 }
 
 .hamburger-footer {
+  user-select: none;
   text-align: center;
   font-family: sans-serif;
   font-size: 0.9rem;
