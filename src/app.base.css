@@ -31,20 +31,6 @@ a {
   z-index: 100;
 }
 
-.nav-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1.5vh;
-  flex-grow: 1;
-  margin-left: 20vh;
-}
-
-.nav-button {
-  font-family: sans-serif;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
 .overlay {
   position: fixed;
   top: 0;
