@@ -2,7 +2,7 @@
     const socialCards = [
       {
         title: 'YouTube',
-        description: 'Cheap learning & Lazy programming',
+        description: 'Straight to the point',
         platformLogo: '/icons/yt.svg',
         profilePicture: '/icons/VArrow.png',
         url: 'https://youtube.com/@V4rrow'

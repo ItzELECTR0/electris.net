@@ -23,11 +23,6 @@
 
     setTimeout(cursorReset, 10);
   });
-
-  export const search = {
-    name: "Projects",
-    description: "The place to see all of our projects."
-  };
 </script>
 
 <svelte:head>

@@ -26,37 +26,6 @@
     { label: 'Media Studios', href: '/ems' }
   ];
 
-  const pages = import.meta.glob('/src/routes/**/+page.svelte', { eager: true });
-
-  interface SearchData {
-    name: string;
-    description: string;
-    url: string;
-  }
-
-  function pathToUrl(path: string): string {
-    let url = path.replace(/^\/src\/routes/, '').replace(/\/\+page\.svelte$/, '');
-    if (url === '') url = '/';
-    return url;
-  }
-
-  let searchData: SearchData[] = [];
-  for (const [path, module] of Object.entries(pages)) {
-    if ((module as any).search) {
-      searchData.push({ ...((module as any).search), url: pathToUrl(path) });
-    }
-  }
-
-  let searchQuery = "";
-  let filteredResults = [];
-  $: filteredResults = searchData.filter(page =>
-    page.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    page.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-  function clearSearch() {
-    searchQuery = "";
-  }
-
   function updateSiteHref() {
     const path = window.location.pathname;
     const search = window.location.search;
@@ -132,19 +101,6 @@
     <a class="nav-button" href="/about">About Us</a>
     <a class="nav-button" href="/">ELECTRIS</a>
     <a class="nav-button" href="/projects">Projects</a>
-  </div>
-  <div class="search-container">
-    <input type="search" placeholder="Search pages..." bind:value={searchQuery} />
-    {#if searchQuery && filteredResults.length > 0}
-      <div class="search-results" transition:fade>
-        {#each filteredResults as result}
-          <a href={result.url} on:click={clearSearch}>
-            <strong>{result.name}</strong>
-            <span>{result.description}</span>
-          </a>
-        {/each}
-      </div>
-    {/if}
   </div>
   <button type="button" class="hamburger-button" on:click={() => isOpen = !isOpen}>
     &#9776;
@@ -227,6 +183,20 @@
 {/if}
 
 <style>
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5vh;
+    flex-grow: 1;
+    margin-left: 3vh;
+  }
+
+  .nav-button {
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+
   .logo-button {
     user-select: none;
     background: none;

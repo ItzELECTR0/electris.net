@@ -9,7 +9,7 @@
     },
     {
       title: 'GitHub',
-      description: 'Free as in Freedom',
+      description: 'Helping oneself means helping others',
       platformLogo: '/icons/github-nobg.svg',
       profilePicture: '/icons/eltr-v10.png',
       url: 'https://github.com/ItzELECTR0'
