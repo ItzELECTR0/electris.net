@@ -53,8 +53,6 @@
   <style>
     .socials-page {
       padding: 80px 20px 20px;
-      background-color: #131615;
-      color: #f65901;
       min-height: 100vh;
     }
   
@@ -90,13 +88,11 @@
     .social-card {
       display: flex;
       align-items: center;
-      background-color: #222;
       padding: 15px;
       border-radius: 8px;
       width: 100%;
       max-width: 600px;
       text-decoration: none;
-      color: #f65901;
       transition: transform 0.2s ease;
     }
   
