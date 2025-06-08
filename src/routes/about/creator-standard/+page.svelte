@@ -71,8 +71,8 @@
             let corruptionLevel = 0;
             
             const corruptInterval = setInterval(() => {
-              corruptionLevel += 0.02;
-              p.textContent = corruptText(originalText, Math.min(corruptionLevel, 0.03));
+              corruptionLevel += 0.01;
+              p.textContent = corruptText(originalText, Math.min(corruptionLevel, 0.01));
               
               if (corruptionLevel >= 0.15) {
                 setTimeout(() => {
