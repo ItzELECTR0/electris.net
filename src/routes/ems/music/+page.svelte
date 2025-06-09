@@ -26,6 +26,62 @@
     }
   ];
 
+  let crownCanvas: HTMLCanvasElement;
+  let crownImage: HTMLImageElement;
+  let isHovered = false;
+
+  const handleCrownClick = () => {
+    window.location.href = '/ems/music/GEE';
+  };
+
+  const checkPixelHit = (event: MouseEvent) => {
+    if (!crownCanvas || !crownImage) return false;
+    
+    const rect = crownCanvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    
+    // Scale coordinates to canvas size
+    const scaleX = crownCanvas.width / rect.width;
+    const scaleY = crownCanvas.height / rect.height;
+    const canvasX = Math.floor(x * scaleX);
+    const canvasY = Math.floor(y * scaleY);
+    
+    const ctx = crownCanvas.getContext('2d');
+    if (!ctx) return false;
+    
+    try {
+      const imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
+      // Check alpha channel (transparency)
+      return imageData.data[3] > 0;
+    } catch {
+      return false;
+    }
+  };
+
+  const handleMouseMove = (event: MouseEvent) => {
+    const wasHovered = isHovered;
+    isHovered = checkPixelHit(event);
+    
+    if (wasHovered !== isHovered) {
+      // Update cursor style
+      const canvas = event.target as HTMLCanvasElement;
+      canvas.style.cursor = isHovered ? 'pointer' : 'default';
+    }
+  };
+
+  const handleCanvasClick = (event: MouseEvent) => {
+    if (checkPixelHit(event)) {
+      handleCrownClick();
+    }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleCrownClick();
+    }
+  };
+
   onMount(() => {
     const cursorReset = () => {
       const cursor = document.querySelector('.circle');
@@ -35,6 +91,23 @@
     };
 
     setTimeout(cursorReset, 10);
+
+    if (crownCanvas && crownImage) {
+      const ctx = crownCanvas.getContext('2d');
+      if (ctx) {
+        crownImage.onload = () => {
+          crownCanvas.width = crownImage.naturalWidth;
+          crownCanvas.height = crownImage.naturalHeight;
+          ctx.drawImage(crownImage, 0, 0);
+        };
+        
+        if (crownImage.complete) {
+          crownCanvas.width = crownImage.naturalWidth;
+          crownCanvas.height = crownImage.naturalHeight;
+          ctx.drawImage(crownImage, 0, 0);
+        }
+      }
+    }
   });
 </script>
 
@@ -56,7 +129,68 @@
   {/each}
 </div>
 
+<div class="crown">
+  <div class="crown-container">
+    <img 
+      bind:this={crownImage}
+      src="/icons/crown.png" 
+      alt="Crown of Thorns - GEE Album Teaser" 
+      class="crown-image"
+      class:hovered={isHovered}
+    />
+    <canvas 
+      bind:this={crownCanvas}
+      class="crown-canvas"
+      on:mousemove={handleMouseMove}
+      on:mouseleave={() => { isHovered = false; }}
+      on:click={handleCanvasClick}
+      role="button"
+      tabindex="0"
+      on:keydown={handleKeyDown}
+      aria-label="Crown of Thorns - GEE Album Teaser"
+    ></canvas>
+  </div>
+</div>
+
 <style>
+  .crown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    margin-top: 5vh;
+  }
+
+  .crown-container {
+    position: relative;
+    max-width: 30vh;
+    max-height: 30vh;
+  }
+  
+  .crown-image {
+    max-width: 30vh;
+    max-height: 30vh;
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .crown-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: default;
+  }
+  
+  .crown-canvas:focus {
+    outline: 2px solid rgba(246, 89, 1, 0.6);
+    outline-offset: 2px;
+  }
+  
   .music-container {
     display: flex;
     flex-wrap: wrap;

@@ -143,3 +143,15 @@ body {
 .examples-box {
   background: rgba(0, 0, 0, 0.2);
 }
+
+.crown-image {
+  filter: drop-shadow(0 0.5vh 1vh rgba(255, 255, 255, 0.15));
+}
+
+.crown-image:hover {
+  filter: drop-shadow(0 0.5vh 1vh rgba(0, 0, 0, 0.3)) drop-shadow(0 0 2vh rgba(255, 255, 255, 0.8));
+}
+
+.crown-image.hovered {
+  filter: drop-shadow(0 0.5vh 1vh rgba(0, 0, 0, 0.3)) drop-shadow(0 0 2vh rgba(255, 255, 255, 0.8));
+}
