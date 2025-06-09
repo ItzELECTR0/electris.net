@@ -183,9 +183,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 30%, rgba(255, 134, 17, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(255, 134, 17, 0.02) 0%, transparent 50%);
     animation: electrical-pulse 4s ease-in-out infinite;
     pointer-events: none;
   }
@@ -313,7 +310,6 @@
     border-left: 0.3vh solid;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(255, 134, 17, 0.03), rgba(255, 134, 17, 0.01));
   }
 
   .notice-glow {
@@ -322,7 +318,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(255, 134, 17, 0.05) 50%, transparent 70%);
     transform: translateX(-100%);
     animation: notice-sweep 6s ease-in-out infinite;
     pointer-events: none;
@@ -350,7 +345,6 @@
     z-index: 2;
   }
 
-  /* Subtle screen distortion effect */
   @keyframes screen-distort {
     0%, 100% { transform: translate(0, 0) scale(1); }
     33% { transform: translate(0.5px, -0.5px) scale(1.001); }
@@ -361,7 +355,6 @@
     animation: screen-distort 8s ease-in-out infinite;
   }
 
-  /* Electrical interference lines */
   .hero::before {
     content: '';
     position: absolute;
@@ -386,7 +379,6 @@
     100% { transform: translateY(4px); }
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     .hero h1 {
       font-size: 3rem;

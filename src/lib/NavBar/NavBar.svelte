@@ -23,7 +23,8 @@
     { label: 'Home', href: '/' },
     { label: 'Socials', href: '/socials' },
     { label: 'Game Studios', href: '/egs' },
-    { label: 'Media Studios', href: '/ems' }
+    { label: 'Media Studios', href: '/ems' },
+    { label: 'Code of Conduct', href: '/about/code-of-conduct' }
   ];
 
   function updateSiteHref() {

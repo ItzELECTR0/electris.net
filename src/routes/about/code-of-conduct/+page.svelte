@@ -40,7 +40,7 @@
       
       <div class="standards-grid">
         <div class="standard-card encouraged">
-          <h3>Behavior We Encourage</h3>
+          <h3>Encouraged Behaviour</h3>
           <ul>
             <li>Being respectful of differing opinions, viewpoints, and experiences</li>
             <li>Being kind regardless of attacking responses</li>
@@ -50,7 +50,9 @@
         </div>
 
         <div class="standard-card unacceptable">
-          <h3>Unacceptable Behavior</h3>
+          <h3>
+            <a href="/media/gif/wearetheexception.gif"> Unacceptable Behaviour</a>
+          </h3>
           <ul>
             <li>Trolling, insulting or derogatory comments, and personal or political attacks</li>
             <li>Public or private harassment</li>
@@ -267,12 +269,10 @@
   }
 
   .encouraged {
-    background: rgba(90, 210, 57, 0.05);
     border-color: rgba(90, 210, 57, 0.3);
   }
 
   .unacceptable {
-    background: rgba(255, 51, 51, 0.05);
     border-color: rgba(255, 51, 51, 0.3);
   }
 
@@ -283,13 +283,11 @@
   }
 
   .scope-content {
-    background: rgba(246, 89, 1, 0.05);
     padding: 3vh;
     border-radius: 1vh;
   }
 
   .examples-box {
-    background: rgba(0, 0, 0, 0.2);
     padding: 2vh;
     border-radius: 0.5vh;
     margin-top: 2vh;
@@ -322,10 +320,10 @@
     background: rgba(246, 89, 1, 0.03);
   }
 
-  .level-1 { border-color: rgba(255, 255, 0, 0.4); }
-  .level-2 { border-color: rgba(255, 165, 0, 0.4); }
-  .level-3 { border-color: rgba(255, 69, 0, 0.4); }
-  .level-4 { border-color: rgba(255, 0, 0, 0.4); }
+  .level-1 { border-color: rgba(157, 255, 0, 0.699); }
+  .level-2 { border-color: rgba(255, 166, 0, 0.596); }
+  .level-3 { border-color: rgba(255, 92, 51, 0.623); }
+  .level-4 { border-color: rgba(255, 0, 0, 0.795); }
 
   .level-header {
     display: flex;

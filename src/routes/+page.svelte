@@ -94,7 +94,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(246, 89, 1, 0.05) 50%, transparent 70%);
     animation: sweep 4s ease-in-out infinite;
     pointer-events: none;
   }
@@ -108,7 +107,6 @@
 
   .gear {
     position: absolute;
-    border: 0.3vh solid #f65901;
     border-radius: 50%;
     animation: rotate 3s linear infinite;
   }
@@ -121,7 +119,6 @@
     transform: translate(-50%, -50%);
     width: 60%;
     height: 60%;
-    background: radial-gradient(circle, transparent 40%, #f65901 42%, #f65901 58%, transparent 60%);
     border-radius: 50%;
   }
 
