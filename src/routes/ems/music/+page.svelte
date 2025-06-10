@@ -26,12 +26,59 @@
     }
   ];
 
+  let bleedingStarted = false;
   let crownCanvas: HTMLCanvasElement;
   let crownImage: HTMLImageElement;
   let isHovered = false;
+  const maskImage = new Image();
+  maskImage.src = '/icons/crown-HoverArea.png';
+  maskImage.crossOrigin = 'anonymous';
+
+  interface Drip {
+    x: number;
+    y: number;
+    speed: number;
+    length: number;
+    width?: number;
+    alpha?: number;
+  }
+
+  let drips: Drip[] = [];
+
+  function startBleeding() {
+    const ctx = crownCanvas.getContext('2d');
+    const numDrips = 5;
+    drips = Array.from({ length: numDrips }, () => ({
+      x: Math.random() * crownCanvas.width,
+      y: 0,
+      speed: 1 + Math.random() * 2,
+      length: 10 + Math.random() * 10
+    }));
+
+    function animate() {
+      if (!isHovered || !ctx) return;
+      ctx.clearRect(0, 0, crownCanvas.width, crownCanvas.height);
+      ctx.drawImage(maskImage, 0, 0);
+      ctx.fillStyle = 'rgba(160, 0, 0, 0.8)';
+
+      drips.forEach((drip) => {
+        ctx.beginPath();
+        ctx.moveTo(drip.x, drip.y);
+        ctx.lineTo(drip.x, drip.y + drip.length);
+        ctx.stroke();
+        drip.y += drip.speed;
+        if (drip.y > crownCanvas.height) drip.y = 0;
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
 
   const handleCrownClick = () => {
     window.location.href = '/ems/music/GEE';
+    console.log('Heavy is the head that chose to wear the crown.');
   };
 
   const checkPixelHit = (event: MouseEvent) => {
@@ -41,7 +88,6 @@
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
     
-    // Scale coordinates to canvas size
     const scaleX = crownCanvas.width / rect.width;
     const scaleY = crownCanvas.height / rect.height;
     const canvasX = Math.floor(x * scaleX);
@@ -52,7 +98,6 @@
     
     try {
       const imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
-      // Check alpha channel (transparency)
       return imageData.data[3] > 0;
     } catch {
       return false;
@@ -64,20 +109,18 @@
     isHovered = checkPixelHit(event);
     
     if (wasHovered !== isHovered) {
-      // Update cursor style
       const canvas = event.target as HTMLCanvasElement;
       canvas.style.cursor = isHovered ? 'pointer' : 'default';
+    }
+
+    if (isHovered && !bleedingStarted) {
+      startBleeding();
+      bleedingStarted = true;
     }
   };
 
   const handleCanvasClick = (event: MouseEvent) => {
     if (checkPixelHit(event)) {
-      handleCrownClick();
-    }
-  };
-
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter') {
       handleCrownClick();
     }
   };
@@ -91,6 +134,16 @@
     };
 
     setTimeout(cursorReset, 10);
+
+    maskImage.onload = () => {
+      crownCanvas.width = maskImage.width;
+      crownCanvas.height = maskImage.height;
+      const ctx = crownCanvas.getContext('2d');
+      if (ctx) {
+        ctx.clearRect(0, 0, maskImage.width, maskImage.height);
+        ctx.drawImage(maskImage, 0, 0);
+      }
+    };
 
     if (crownCanvas && crownImage) {
       const ctx = crownCanvas.getContext('2d');
@@ -134,7 +187,7 @@
     <img 
       bind:this={crownImage}
       src="/icons/crown.png" 
-      alt="Crown of Thorns - GEE Album Teaser" 
+      alt="Crown of Thorns" 
       class="crown-image"
       class:hovered={isHovered}
     />
@@ -146,8 +199,7 @@
       on:click={handleCanvasClick}
       role="button"
       tabindex="0"
-      on:keydown={handleKeyDown}
-      aria-label="Crown of Thorns - GEE Album Teaser"
+      aria-label="Crown of Thorns"
     ></canvas>
   </div>
 </div>
@@ -184,11 +236,26 @@
     height: 100%;
     opacity: 0;
     cursor: default;
+    background: none;
   }
   
   .crown-canvas:focus {
     outline: 2px solid rgba(246, 89, 1, 0.6);
     outline-offset: 2px;
+  }
+
+  .blood-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .blood-overlay.hovered {
+    opacity: 1;
   }
   
   .music-container {
