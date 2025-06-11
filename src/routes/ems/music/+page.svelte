@@ -243,20 +243,6 @@
     outline: 2px solid rgba(246, 89, 1, 0.6);
     outline-offset: 2px;
   }
-
-  .blood-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s;
-  }
-  .blood-overlay.hovered {
-    opacity: 1;
-  }
   
   .music-container {
     display: flex;

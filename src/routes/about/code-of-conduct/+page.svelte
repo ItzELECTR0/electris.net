@@ -10,6 +10,18 @@
     };
 
     setTimeout(cursorReset, 10);
+
+    const scrollingText = document.querySelector('.scrolling-text') as HTMLElement;
+    
+    if (scrollingText) {
+      scrollingText.addEventListener('mouseenter', () => {
+        scrollingText.style.animationPlayState = 'paused';
+      });
+      
+      scrollingText.addEventListener('mouseleave', () => {
+        scrollingText.style.animationPlayState = 'running';
+      });
+    }
   });
 </script>
 
@@ -18,6 +30,14 @@
 </svelte:head>
 
 <div class="conduct-page">
+  <div class="notice-banner">
+    <div class="banner-content">
+      <div class="scrolling-text">
+         • This page currently does not meet the <a href="/about/creator-standard">Creator Standard</a>. However, it is important enough to currently remain unchanged until a better one is provided. • 
+      </div>
+    </div>
+  </div>
+  
   <div class="hero">
     <h1>Community<br><span class="highlight">Code of Conduct</span></h1>
   </div>
@@ -165,6 +185,121 @@
   .conduct-page {
     min-height: 100vh;
     padding-top: 8vh;
+  }
+
+  .notice-banner {
+    position: absolute;
+    top: 7vh;
+    left: 0;
+    width: 100%;
+    height: 2.5vh;
+    background: linear-gradient(90deg, 
+      rgba(246, 89, 1, 0.1) 0%, 
+      rgba(246, 89, 1, 0.15) 50%, 
+      rgba(246, 89, 1, 0.1) 100%);
+    border-top: 1px solid rgba(246, 89, 1, 0.2);
+    border-bottom: 1px solid rgba(246, 89, 1, 0.2);
+    overflow: hidden;
+    z-index: 90;
+  }
+
+  .banner-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .banner-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+    rgba(246, 89, 1, 0.1) 50%, 
+      transparent 100%);
+    animation: electric-sweep 4s ease-in-out infinite;
+    }
+
+  .scrolling-text {
+    white-space: nowrap;
+    font-family: 'Redwing';
+    font-size: 0.9rem;
+    color: rgba(246, 89, 1, 0.8);
+    text-shadow: 0 0 3px rgba(246, 89, 1, 0.3);
+    animation: scroll-infinite 25s linear infinite;
+    display: inline-block;
+    transform: translateX(100vw);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .scrolling-text::after {
+    padding-left: 4rem;
+  }
+
+  .scrolling-text:hover {
+    color: rgba(246, 89, 1, 1);
+    text-shadow: 0 0 5px rgba(246, 89, 1, 0.4);
+  }
+
+  .scrolling-text a {
+    color: #ff6811;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 104, 17, 0.5);
+    transition: all 0.2s ease;
+  }
+
+  .scrolling-text a:hover {
+    color: #ff8844;
+    text-shadow: 0 0 5px rgba(255, 104, 17, 0.6);
+    text-decoration-color: #ff6811;
+  }
+
+  @keyframes scroll-infinite {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes electric-sweep {
+  0%, 100% {
+    left: -100%;
+    opacity: 0;
+  }
+  50% {
+    left: 100%;
+    opacity: 1;
+  }
+}
+
+  @keyframes glitch-flicker {
+    0%, 98% {
+      opacity: 0.8;
+      filter: none;
+    }
+    99% {
+      opacity: 0.6;
+      filter: blur(0.5px) hue-rotate(10deg);
+      transform: translateX(calc(-100% + 100vw)) translateY(0.5px);
+    }
+    99.5% {
+      opacity: 0.9;
+      filter: blur(0.3px) hue-rotate(-5deg);
+      transform: translateX(calc(-100% + 100vw)) translateY(-0.3px);
+    }
+    100% {
+      opacity: 0.8;
+      filter: none;
+      transform: translateX(calc(-100% + 100vw));
+    }
   }
 
   .hero {
@@ -357,7 +492,6 @@
     font-weight: 600;
   }
 
-  /* Mobile responsiveness */
   @media (max-width: 768px) {
     .hero h1 {
       font-size: 2.5rem;
