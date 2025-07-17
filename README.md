@@ -1,7 +1,7 @@
 <img src=".github/Assets/ELECTRIS.png" width=150>
 
 # [ELECTRIS.net](https://electris.net)
-#### The official in-house built website for ELECTRIS.<br> Built from the ground up by our own members.
+#### The official website for the ELECTRIS Project.<br>Built with Svelte and Typescript.
 
 ## Subdomains:
 
