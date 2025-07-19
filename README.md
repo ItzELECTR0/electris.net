@@ -12,6 +12,9 @@
 
 ### Everything else
 
+#### [ai.electris.net](https://ai.electris.net)
+##### Only exists so I can remotely connect.<br>It's my self-hosted LLM interface.
+
 #### [jellyfin.electris.net](https://jellyfin.electris.net)
 ##### Only exists so I can remotely connect.<br>It's my self-hosted media server.
 
