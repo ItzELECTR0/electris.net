@@ -4,9 +4,8 @@
   import { goto } from '$app/navigation';
   import { browser } from '$app/environment';
   import { isNewHomeMode, isRegularMode } from '$lib/utils/buildMode';
-  import TopNav from '$lib/NavBar/NavBar.svelte';
+  import NavBar from '$lib/NavBar/NavBar.svelte';
   import Cursor from '$lib/UI/Cursor.svelte';
-  import HamburgerMenu from '$lib/NavBar/NavBar.svelte';
   import Popup from '$lib/Mobile/Popup.svelte';
   import { theme, applyTheme } from '$lib/stores/theme';
   import '/src/app.base.css';
@@ -16,7 +15,7 @@
       applyTheme(currentTheme);
     });
 
-    // Route protection for build mode
+    // Route conditions for build mode
     if (browser) {
       const currentPath = $page.url.pathname;
       
@@ -37,8 +36,7 @@
 </script>
 
 <main data-theme={$theme}>
-  <TopNav />
-  <HamburgerMenu />
+  <NavBar />
   <Cursor />
   <Popup />
   <slot />
