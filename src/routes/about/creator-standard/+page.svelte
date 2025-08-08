@@ -1,6 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { t, currentLocale } from '$lib/stores/i18n';
 
+  $: isPageArabic = $currentLocale === 'ar';
+  $: isPageJapanese = $currentLocale === 'ja-JP';
+  
   onMount(() => {
     const cursorReset = () => {
       const cursor = document.querySelector('.circle');
@@ -50,9 +54,8 @@
 
     const setupTextCorruption = () => {
       const paragraphs = document.querySelectorAll('.explanation p, .definition');
-      
+
       paragraphs.forEach(p => {
-        let originalText = p.textContent || '';
         let isCorrupted = false;
         
         const corruptText = (text: string, intensity = 0.1): string => {
@@ -68,15 +71,16 @@
         p.addEventListener('mouseenter', () => {
           if (!isCorrupted) {
             isCorrupted = true;
+            const originalHtml = p.innerHTML;
             let corruptionLevel = 0;
-            
+
             const corruptInterval = setInterval(() => {
               corruptionLevel += 0.01;
-              p.textContent = corruptText(originalText, Math.min(corruptionLevel, 0.01));
-              
+              p.innerHTML = corruptText(originalHtml, Math.min(corruptionLevel, 0.01));
+
               if (corruptionLevel >= 0.15) {
                 setTimeout(() => {
-                  p.textContent = originalText;
+                  p.innerHTML = originalHtml;
                   isCorrupted = false;
                 }, 100);
                 clearInterval(corruptInterval);
@@ -101,28 +105,36 @@
 </svelte:head>
 
 <div class="hero">
-  <h1>The <span class="highlight">"Creator Standard"</span></h1>
+  <h1>
+    {#if isPageArabic}
+      <span class="highlight">"{$t('creator.standard.hero.highlight', 'Creator Standard')}"</span> {$t('creator.standard.hero.title', 'The')}
+    {:else if isPageJapanese}
+      {$t('creator.standard.hero.title', 'The')} <span class="highlight">「{$t('creator.standard.hero.highlight', 'Creator Standard')}」</span>
+    {:else}
+      {$t('creator.standard.hero.title', 'The')} <span class="highlight">"{$t('creator.standard.hero.highlight', 'Creator Standard')}"</span>
+    {/if}
+  </h1>
   <div class="electrical-bg"></div>
 </div>
 
 <div class="content">
   <div class="main-section">
-    <h2 class="section-header">Meaning:</h2>
-    <p class="definition">Works that live up to ELECTRO's Vision</p>
+    <h2 class="section-header">{$t('creator.standard.meaning.header', 'Meaning:')}</h2>
+    <p class="definition">{$t('creator.standard.definition', 'Works that live up to ELECTRO\'s Vision')}</p>
     
     <div class="explanation">
       <p>
-        ELECTRO keeps a personal standard for all his works, code, assets and projects under ELECTRIS.<br>This standard ensures that everything aligns with the current vision and direction.
+        {@html $t('creator.standard.explanation.p1', 'ELECTRO keeps a personal standard for all his works, code, assets and projects under ELECTRIS.<br>This standard ensures that everything aligns with the current vision and direction.')}
       </p>
       
       <p>
-        Only works that meet this standard and support the intended goals will be utilized.<br>This applies to both original creations as well as third party ones.
+        {@html $t('creator.standard.explanation.p2', 'Only works that meet this standard and support the intended goals will be utilized.<br>This applies to both original creations as well as third party ones.')}
       </p>
       
       <div class="important-notice">
-        <h3>Vision Evolution</h3>
+        <h3>{$t('creator.standard.vision.title', 'Vision Evolution')}</h3>
         <p>
-          As creative vision naturally evolves over time, ELECTRO reserves the right to remove, modify, or completely recreate any creative work, whether originally created by him or not. This can happen at any time and for any reason. This makes sure that all remains consistent with the current plans and quality standards.
+          {$t('creator.standard.vision.desc', 'As creative vision naturally evolves over time, ELECTRO reserves the right to remove, modify, or completely recreate any creative work, whether originally created by him or not. This can happen at any time and for any reason. This makes sure that all remains consistent with the current plans and quality standards.')}
         </p>
         <div class="notice-glow"></div>
       </div>

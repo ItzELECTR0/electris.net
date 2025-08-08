@@ -1,5 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { t, currentLocale } from '$lib/stores/i18n';
+
+  $: isPageArabic = $currentLocale === 'ar';
 
   onMount(() => {
     const cursorReset = () => {
@@ -19,8 +22,8 @@
 
 <div>
   <div class="hero">
-    <h1>ELECTRIS</h1>
-    <p>Heart like a pen, On paper it bleeds</p>
+    <h1>{$t('site.title', 'ELECTRIS')}</h1>
+    <p>{$t('site.slogan', 'Heart like a pen, On paper it bleeds')}</p>
   </div>
 
   <div class="TCS">
@@ -34,10 +37,10 @@
       </div>
     </div>
     <div class="tcs-content">
-      <h1><span class="glitch" data-text="WEBSITE UNDER RESTRUCTURE">WEBSITE UNDER RESTRUCTURE</span></h1>
-      <p>Due to not meeting the <a href="/about/creator-standard" class="creator-link"><u>Creator Standard</u></a></p>
+      <h1><span class="glitch" data-text="{$t('update.title', 'WEBSITE UNDER RESTRUCTURE')}">{$t('update.title', 'WEBSITE UNDER RESTRUCTURE')}</span></h1>
+      <p>{$t('update.progress.title', 'Due to not meeting the')} <a href="/about/creator-standard" class="creator-link" class:arabic={isPageArabic}><u>{$t('update.progress.title.link', 'Creator Standard')}</u></a></p>
       <div class="progress-container">
-        <div class="progress-text">Update in Progress...</div>
+        <div class="progress-text">{$t('update.progress.undertitle', 'Update in Progress...')}</div>
         <div class="progress-bar">
           <div class="progress-fill"></div>
           <div class="electric-spark electric-1"></div>
@@ -57,7 +60,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 80px;
+    padding-top: 6vh;
     text-align: center;
   }
 
@@ -183,12 +186,15 @@
     font-size: 2.8rem;
     margin: 0 0 2vh 0;
     position: relative;
+    word-break: keep-all;
+    overflow-wrap: normal;
   }
 
   .glitch {
     position: relative;
     animation: glitch 3s ease-in-out infinite;
     text-shadow: 0.1vh 0.1vh 0.2vh rgba(246, 89, 1, 0.3);
+    display: inline-block;
   }
 
   .glitch::before,
@@ -236,6 +242,11 @@
     height: 0.2vh;
     background: linear-gradient(90deg, #f65901, #ff6811);
     transition: width 0.3s ease;
+  }
+
+  .creator-link.arabic::after {
+    left: auto;
+    right: 0;
   }
 
   .creator-link:hover::after {

@@ -155,3 +155,8 @@ body {
 .crown-image.hovered {
   filter: drop-shadow(0 0.5vh 1vh rgba(0, 0, 0, 0.3)) drop-shadow(0 0 2vh rgba(0, 0, 0, 0.6));
 }
+
+.spark {
+  background: #4cc200;
+  box-shadow: 0 0 8px #4cc200, 0 0 16px #4cc200;
+}

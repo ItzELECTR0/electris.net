@@ -1,17 +1,19 @@
 <script>
+    import { t } from "$lib/stores/i18n";
+
   const socialCards = [
     {
-      title: 'YouTube',
-      description: 'Dancing with the Lightning',
-      platformLogo: '/icons/yt.svg',
-      profilePicture: '/icons/eltr-v10.png',
+      title: $t('site.platform.yt', 'YouTube'),
+      description: $t('social.etlr.yt.desc', 'Dancing with the Lightning'),
+      platformLogo: '/icons/Logos/ThirdParty/yt.svg',
+      profilePicture: '/icons/Logos/FirstParty/eltr-v10.png',
       url: 'https://youtube.com/@ELEC7RO'
     },
     {
-      title: 'GitHub',
-      description: 'Helping oneself means helping others',
-      platformLogo: '/icons/github-nobg.svg',
-      profilePicture: '/icons/eltr-v10.png',
+      title: $t('site.platform.gh', 'GitHub'),
+      description: $t('social.eltr.gh.desc', 'Giving to the World'),
+      platformLogo: '/icons/Logos/ThirdParty/github-nobg.svg',
+      profilePicture: '/icons/Logos/FirstParty/eltr-v10.png',
       url: 'https://github.com/ItzELECTR0'
     }
   ];
@@ -23,8 +25,8 @@
   
   <div class="socials-page">
     <div class="hero">
-      <h1>ELECTRO</h1>
-      <p>A Creator, Dancing with The Lightning</p>
+      <h1>{$t('site.author.eltr', 'ELECTRO')}</h1>
+      <p>{$t('site.author.eltr.slogan', 'A Creator, Dancing with The Lightning')}</p>
     </div>
   
     <div class="hero">

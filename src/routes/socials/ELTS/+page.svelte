@@ -1,17 +1,19 @@
 <script>
+    import { t } from "$lib/stores/i18n";
+
     const socialCards = [
       {
-        title: 'YouTube',
-        description: 'Heart like a pen, On paper it bleeds',
-        platformLogo: '/icons/yt.svg',
-        profilePicture: '/icons/elts-v1.png',
+        title: $t('site.platform.yt', 'YouTube'),
+        description: $t('site.slogan', 'Heart like a pen, On paper it bleeds'),
+        platformLogo: '/icons/Logos/ThirdParty/yt.svg',
+        profilePicture: '/icons/Logos/FirstParty/elts-v1.png',
         url: 'https://youtube.com/@ELECTRIS'
       },
       {
-        title: 'Discord',
-        description: 'Legends of Lightning',
-        platformLogo: '/icons/discord.svg',
-        profilePicture: '/icons/elts-v1.png',
+        title: $t('site.platform.ds', 'Discord'),
+        description: $t('social.elts.ds.desc', 'Legends of Lightning'),
+        platformLogo: '/icons/Logos/ThirdParty/discord.svg',
+        profilePicture: '/icons/Logos/FirstParty/elts-v1.png',
         url: 'https://discord.gg/TgtCGKxbZr'
       }
     ];
@@ -23,8 +25,8 @@
   
   <div class="socials-page">
     <div class="hero">
-      <h1>ELECTRIS</h1>
-      <p>Heart like a pen, On Paper it bleeds</p>
+      <h1>{$t('site.title', 'ELECTRIS')}</h1>
+      <p>{$t('site.slogan', 'Heart like a pen, On Paper it bleeds')}</p>
     </div>
   
     <div class="hero">

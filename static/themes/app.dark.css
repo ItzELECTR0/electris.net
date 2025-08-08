@@ -1,15 +1,15 @@
 body {
-  background-color: #131615;
-  color: #f65901;
+  background-color: hsl(160, 7%, 8%);
+  color: hsl(22, 99%, 48%);
 }
 
 .navbar {
   background-color: #0f1010;
-  color: #f65901;
+  color: hsl(22, 99%, 48%);
 }
 
 .nav-button {
-  color: #f65901;
+  color: hsl(22, 99%, 48%);
 }
 
 .overlay {
@@ -27,37 +27,37 @@ body {
 }
 
 .hamburger {
-  background-color: #131615;
+  background-color: hsl(160, 7%, 8%);
 }
 
 .hamburger-button {
-  color: #f65901;
+  color: hsl(22, 99%, 48%);
 }
 
 .hamburger-footer {
-  color: #f65901;
-  border-top-color: #f65901;
+  color: hsl(22, 99%, 48%);
+  border-top-color: hsl(22, 99%, 48%);
 }
 
 .hamburger-footer a {
-  color: #ff6811;
+  color: hsl(22, 100%, 53%);
 }
 
 .circle {
-  border: 0.2vh solid #f65901;
+  border: 0.2vh solid hsl(22, 99%, 48%);
 }
 
 .circle.hovered-footer {
-  border: 0.2vh solid #ffae66;
+  border: 0.2vh solid hsl(28, 100%, 70%);
 }
 
 .circle.hovered-sip {
-  border: 0.2vh solid #5eff00;
+  border: 0.2vh solid hsl(98, 100%, 50%);
 }
 
 .options-menu {
-  background-color: #222;
-  color: #f65901;
+  background-color: hsl(0, 0%, 13%);
+  color: hsl(22, 99%, 48%);
 }
 
 .video-overlay {
@@ -154,4 +154,9 @@ body {
 
 .crown-image.hovered {
   filter: drop-shadow(0 0.5vh 1vh rgba(0, 0, 0, 0.3)) drop-shadow(0 0 2vh rgba(255, 255, 255, 0.8));
+}
+
+.spark {
+  background: #5eff00;
+  box-shadow: 0 0 10px #5eff00, 0 0 20px #5eff00;
 }

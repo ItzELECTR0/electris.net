@@ -1,24 +1,25 @@
 <script>
+  import { t } from '$lib/stores/i18n';
     const socialCards = [
       {
-        title: 'YouTube',
-        description: 'Straight to the point',
-        platformLogo: '/icons/yt.svg',
-        profilePicture: '/icons/VArrow.png',
+        title: $t('site.platform.yt', 'YouTube'),
+        description: $t('social.vrrw.yt.desc', 'Straight to the point'),
+        platformLogo: '/icons/Logos/ThirdParty/yt.svg',
+        profilePicture: '/icons/Logos/FirstParty/VArrow.png',
         url: 'https://youtube.com/@V4rrow'
       },
       {
-        title: 'GitHub',
-        description: 'Free code is best code',
-        platformLogo: '/icons/github-nobg.svg',
-        profilePicture: '/icons/VArrow.png',
+        title: $t('site.platform.gh', 'GitHub'),
+        description: $t('social.vrrw.gh.desc', 'Free code is best code'),
+        platformLogo: '/icons/Logos/ThirdParty/github-nobg.svg',
+        profilePicture: '/icons/Logos/FirstParty/VArrow.png',
         url: 'https://github.com/Varrow1'
       },
       {
-        title: 'Twitter',
-        description: 'I tweet sometimes',
-        platformLogo: '/icons/twitter.svg',
-        profilePicture: '/icons/VArrow.png',
+        title: $t('site.platform.x', 'Twitter'),
+        description: $t('social.vrrw.x.desc', 'I tweet sometimes'),
+        platformLogo: '/icons/Logos/ThirdParty/twitter.svg',
+        profilePicture: '/icons/Logos/FirstParty/VArrow.png',
         url: 'https://x.com/0xVarrow'
       }
     ];
@@ -30,8 +31,8 @@
   
   <div class="socials-page">
     <div class="hero">
-      <h1>Varrow</h1>
-      <p>Follows the changes all around</p>
+      <h1>{$t('site.author.vrrw', 'Varrow')}</h1>
+      <p>{$t('social.undertitle', 'Follows the changes all around')}</p>
     </div>
   
     <div class="hero">

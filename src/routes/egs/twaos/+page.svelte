@@ -1,17 +1,18 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Hover from './lib/Hover.svelte';
+  import { t } from '$lib/stores/i18n';
 
   let currentVideo: HTMLVideoElement;
   let nextVideo: HTMLVideoElement;
   let recentlyPlayed: number[] = []; // Track recently played clips to enforce cooldown
   let hasMetShadow = false; // Track if the rare encounter (6.mp4) has been played
 
-  const pages = [
+  $: pages = [
     {
-      title: 'Wishlist on Steam',
-      description: 'The largest game distribution platform.',
-      icon: '/icons/steam.svg',
+      title: $t('proj.twaos.st', 'Wishlist on Steam'),
+      description: $t('proj.twaos.st.desc', 'The largest game distribution platform.'),
+      icon: '/icons/Logos/ThirdParty/steam.svg',
       href: 'https://store.steampowered.com/app/2231750/The_Wonderful_Adventures_Of_Sip/'
     }
   ];
@@ -189,10 +190,10 @@
     <div class="video-overlay"></div>
   </div>
   <div class="hero-text">
-    <span class="text-container"><h2 class="tw">The Wonderful</h2></span>
-    <span class="text-container"><h3 class="ao">Adventures Of</h3></span>
-    <span class="text-container"><h1 class="sip">SIP</h1></span>
-    <span class="text-container"><h5>An open-source Indie Game created by a Solo Developer</h5></span>
+    <span class="text-container"><h2 class="tw">{$t('proj.twaos.title.tw', 'The Wonderful')}</h2></span>
+    <span class="text-container"><h3 class="ao">{$t('proj.twaos.title.ao', 'Adventures Of')}</h3></span>
+    <span class="text-container"><h1 class="sip">{$t('proj.twaos.title.sip', 'SIP')}</h1></span>
+    <span class="text-container"><h5>{$t('proj.twaos.desc.short', 'An open-source Indie Game created by a Solo Developer')}</h5></span>
   </div>
   <div class="cards-wrapper">
     {#each pages as page}

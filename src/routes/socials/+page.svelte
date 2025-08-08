@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { t } from '$lib/stores/i18n';
   import { onMount } from 'svelte';
 
   onMount(() => {
@@ -12,31 +13,26 @@
     setTimeout(cursorReset, 10);
   });
 
-  const socialCards = [
+  $: socialCards = [
     {
-      title: 'ELECTRIS',
-      description: 'Heart like a pen, On paper it bleeds',
-      platformLogo: '/icons/elts-v1.png',
+      title: $t('site.title', 'ELECTRIS', 'en-US'),
+      description: $t('site.slogan', 'Heart like a pen, On paper it bleeds'),
+      profilePicture: '/icons/Logos/FirstParty/elts-v1.png',
       url: '/socials/ELTS'
     },
     {
-      title: 'ELECTRO',
-      description: 'A Creator, Dancing with The Lightning',
-      platformLogo: '/icons/eltr-v10.png',
+      title: $t('site.author.eltr', 'ELECTRO', 'en-US'),
+      description: $t('site.author.eltr.slogan', 'A Creator, Dancing with The Lightning'),
+      profilePicture: '/icons/Logos/FirstParty/eltr-v10.png',
       url: '/socials/ELTR'
     },
     {
-      title: 'Varrow',
-      description: 'A Lazy Programmer',
-      platformLogo: '/icons/VArrow.png',
+      title: $t('site.author.vrrw', 'Varrow', 'en-US'),
+      description: $t('site.author.vrrw.slogan', 'A Lazy Programmer'),
+      profilePicture: '/icons/Logos/FirstParty/VArrow.png',
       url: '/socials/VRRW'
     }
   ];
-
-  export const search = {
-    name: "Socials",
-    description: "The place to find our social medias."
-  };
 </script>
 
 <svelte:head>
@@ -45,15 +41,15 @@
   
   <div class="socials-page">
     <div class="hero">
-      <h1>Social Media</h1>
-      <p>Follow the changes all around</p>
+      <h1>{$t('social.title', 'Social Media')}</h1>
+      <p>{$t('social.undertitle', 'Follow the changes all around')}</p>
     </div>
   
     <div class="hero">
       {#each socialCards as card}
         <a class="social-card" href={card.url} target="_self">
           <div class="icons">
-            <img src={card.platformLogo} alt="Platform Logo" class="platform-logo" />
+            <img src={card.profilePicture} alt="Person Logo" class="profile-picture" />
           </div>
           <div class="card-text">
             <h2>{card.title}</h2>
@@ -117,7 +113,7 @@
       flex-shrink: 0;
     }
   
-    .platform-logo {
+    .profile-picture {
       width: 4vh;
       height: 4vh;
       image-resolution: 80px;

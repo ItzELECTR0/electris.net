@@ -1,141 +1,84 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { goto } from '$app/navigation';
+  import { t, currentLocale } from '$lib/stores/i18n';
 
-  const songs = [
+  $: isPageArabic = $currentLocale === 'ar';
+
+  $: cardLinks = [
     {
-      cover: 'https://i1.sndcdn.com/artworks-PpLyHdUlYokl1XBf-DcMRmA-t500x500.jpg',
-      title: 'Farewell, Apocalypse',
-      artist: 'ELECTRO',
-      link: 'https://youtu.be/zzrLzNRdY6o',
-      artist_font: 'Letric'
+      icon: '/icons/vinyl.svg',
+      title: $t('ems.music.card.vinyl', 'Albums'),
+      link: '/ems/music/albums'
     },
     {
-      cover: 'https://i1.sndcdn.com/artworks-fJpDbkU3cXMIkGPm-tkSQWg-t500x500.png',
-      title: 'shame on u',
-      artist: 'ELECTRO',
-      link: 'https://youtu.be/rlKIZdmGC4o',
-      artist_font: 'Letric'
-    },
-    {
-      cover: 'https://i1.sndcdn.com/artworks-DEJ2oIyB3AEYbg18-PNhitw-t500x500.jpg',
-      title: 'Zero',
-      artist: 'ELECTRO',
-      link: 'https://youtu.be/xVaTP_cPid0',
-      title_font: 'sans-serif',
-      artist_font: 'Letric'
+      icon: '/icons/cd.svg',
+      title: $t('ems.music.card.disc', 'Singles'),
+      link: '/ems/music/singles'
     }
   ];
 
-  let bleedingStarted = false;
   let crownCanvas: HTMLCanvasElement;
   let crownImage: HTMLImageElement;
   let isHovered = false;
-  const maskImage = new Image();
-  maskImage.src = '/icons/crown-HoverArea.png';
-  maskImage.crossOrigin = 'anonymous';
 
-  interface Drip {
-    x: number;
-    y: number;
-    speed: number;
-    length: number;
-    width?: number;
-    alpha?: number;
-  }
+  let maskImage: HTMLImageElement;
 
-  let drips: Drip[] = [];
-
-  function startBleeding() {
+  function drawMask() {
+    if (!crownCanvas || !maskImage) return;
     const ctx = crownCanvas.getContext('2d');
-    const numDrips = 5;
-    drips = Array.from({ length: numDrips }, () => ({
-      x: Math.random() * crownCanvas.width,
-      y: 0,
-      speed: 1 + Math.random() * 2,
-      length: 10 + Math.random() * 10
-    }));
-
-    function animate() {
-      if (!isHovered || !ctx) return;
+    if (ctx) {
       ctx.clearRect(0, 0, crownCanvas.width, crownCanvas.height);
       ctx.drawImage(maskImage, 0, 0);
-      ctx.fillStyle = 'rgba(160, 0, 0, 0.8)';
-
-      drips.forEach((drip) => {
-        ctx.beginPath();
-        ctx.moveTo(drip.x, drip.y);
-        ctx.lineTo(drip.x, drip.y + drip.length);
-        ctx.stroke();
-        drip.y += drip.speed;
-        if (drip.y > crownCanvas.height) drip.y = 0;
-      });
-
-      requestAnimationFrame(animate);
     }
-
-    animate();
   }
 
-  const handleCrownClick = () => {
-    window.location.href = '/ems/music/GEE';
+  const handleCrownClick = async () => {
+    await goto('/ems/music/GEE');
     console.log('Heavy is the head that chose to wear the crown.');
   };
 
-  const checkPixelHit = (event: MouseEvent) => {
-    if (!crownCanvas || !crownImage) return false;
-    
+  function checkPixelHit(event: MouseEvent) {
+    if (!crownCanvas) return false;
     const rect = crownCanvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    
     const scaleX = crownCanvas.width / rect.width;
     const scaleY = crownCanvas.height / rect.height;
     const canvasX = Math.floor(x * scaleX);
     const canvasY = Math.floor(y * scaleY);
-    
+
     const ctx = crownCanvas.getContext('2d');
     if (!ctx) return false;
-    
     try {
-      const imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
-      return imageData.data[3] > 0;
+      const pixel = ctx.getImageData(canvasX, canvasY, 1, 1);
+      return pixel.data[3] > 0;
     } catch {
       return false;
     }
-  };
+  }
 
-  const handleMouseMove = (event: MouseEvent) => {
-    const wasHovered = isHovered;
+  function handleMouseMove(event: MouseEvent) {
+    const prev = isHovered;
     isHovered = checkPixelHit(event);
-    
-    if (wasHovered !== isHovered) {
-      const canvas = event.target as HTMLCanvasElement;
-      canvas.style.cursor = isHovered ? 'pointer' : 'default';
+    if (prev !== isHovered) {
+      (event.currentTarget as HTMLCanvasElement).style.cursor = isHovered ? 'pointer' : 'default';
     }
+    if (isHovered) {
+      drawMask();
+    }
+  }
 
-    if (isHovered && !bleedingStarted) {
-      startBleeding();
-      bleedingStarted = true;
-    }
-  };
-
-  const handleCanvasClick = (event: MouseEvent) => {
-    if (checkPixelHit(event)) {
-      handleCrownClick();
-    }
-  };
+  function handleCanvasClick(event: MouseEvent) {
+    if (checkPixelHit(event)) handleCrownClick();
+  }
 
   onMount(() => {
-    const cursorReset = () => {
-      const cursor = document.querySelector('.circle');
-      if (cursor) {
-        cursor.className = "circle";
-      }
-    };
-
-    setTimeout(cursorReset, 10);
-
+    maskImage = new Image();
+    maskImage.src = '/icons/GEE/crown-HoverArea.png';
+    maskImage.crossOrigin = 'anonymous';
     maskImage.onload = () => {
+      if (!crownCanvas) return;
       crownCanvas.width = maskImage.width;
       crownCanvas.height = maskImage.height;
       const ctx = crownCanvas.getContext('2d');
@@ -147,20 +90,25 @@
 
     if (crownCanvas && crownImage) {
       const ctx = crownCanvas.getContext('2d');
-      if (ctx) {
-        crownImage.onload = () => {
-          crownCanvas.width = crownImage.naturalWidth;
-          crownCanvas.height = crownImage.naturalHeight;
-          ctx.drawImage(crownImage, 0, 0);
-        };
-        
-        if (crownImage.complete) {
-          crownCanvas.width = crownImage.naturalWidth;
-          crownCanvas.height = crownImage.naturalHeight;
-          ctx.drawImage(crownImage, 0, 0);
-        }
+      crownImage.onload = () => {
+        if (!ctx) return;
+        crownCanvas.width = crownImage.naturalWidth;
+        crownCanvas.height = crownImage.naturalHeight;
+        ctx.clearRect(0, 0, crownCanvas.width, crownCanvas.height);
+        ctx.drawImage(crownImage, 0, 0);
+      };
+      if (crownImage.complete && ctx) {
+        crownCanvas.width = crownImage.naturalWidth;
+        crownCanvas.height = crownImage.naturalHeight;
+        ctx.clearRect(0, 0, crownCanvas.width, crownCanvas.height);
+        ctx.drawImage(crownImage, 0, 0);
       }
     }
+
+    setTimeout(() => {
+      const c = document.querySelector('.circle');
+      if (c) c.className = 'circle';
+    }, 10);
   });
 </script>
 
@@ -168,15 +116,18 @@
   <title>Music | ELECTRIS</title>
 </svelte:head>
 
+<div class="hero">
+    <h1>{$t('ems.music.hero.title', 'MUSIC')}</h1>
+  </div>
+
 <div class="music-container">
-  {#each songs as song}
-    <a class="music-card" href={song.link} target="_blank">
+  {#each cardLinks as card}
+    <a class="music-card" class:arabic={isPageArabic} href={card.link}>
       <div class="cover-container">
-        <img src={song.cover} alt="{song.title} cover" class="cover-image" />
+        <img src={card.icon} alt="{card.title} icon" class="cover-image" />
       </div>
       <div class="song-info">
-        <h3 style="font-family: {song.title_font}">{song.title}</h3>
-        <p style="font-family: {song.artist_font}">{song.artist}</p>
+        <h3>{card.title}</h3>
       </div>
     </a>
   {/each}
@@ -186,7 +137,7 @@
   <div class="crown-container">
     <img 
       bind:this={crownImage}
-      src="/icons/crown.png" 
+      src="/icons/GEE/crown.png" 
       alt="Crown of Thorns" 
       class="crown-image"
       class:hovered={isHovered}
@@ -205,12 +156,101 @@
 </div>
 
 <style>
+  .hero {
+    min-height: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6vh;
+    text-align: center;
+  }
+
+  .hero h1 {
+    padding-top: 1vh;
+    padding-bottom: -5vh;
+    font-family: 'Letric';
+    font-size: 4rem;
+    margin: 0;
+  }
+
+  .music-container {
+    display: flex;
+    justify-content: center;
+    gap: 2vh;
+    padding: 5vh;
+  }
+  
+  .music-card {
+    border-radius: 1.5vh;
+    width: 20vw;
+    height: 40vh;
+    padding: 1.5vh;
+    text-decoration: none;
+    color: #f65901;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+  }
+  
+  .music-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .cover-container {
+    width: 24vh;
+    height: 25vh;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1vh;
+  }
+  
+  .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .song-info h3 {
+    margin: 0;
+    font-size: 3.2rem;
+    text-align: center;
+  }
+
+  .music-card .song-info h3 {
+    position: relative;
+    overflow: visible;
+  }
+
+  .music-card .song-info h3::after {
+    content: "";
+    position: absolute;
+    bottom: 0.25em;                
+    left: 0;
+    width: 0;
+    height: 0.2vh;
+    background-color: currentColor;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .music-card:hover .song-info h3::after {
+    width: 100%;
+  }
+
+  .music-card.arabic .song-info h3::after {
+    left: auto;
+    right: 0;
+  }
+
+  .music-card.arabic:hover .song-info h3::after {
+    width: 100%;
+  }
+
   .crown {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60vh;
-    margin-top: 5vh;
   }
 
   .crown-container {
@@ -242,54 +282,5 @@
   .crown-canvas:focus {
     outline: 2px solid rgba(246, 89, 1, 0.6);
     outline-offset: 2px;
-  }
-  
-  .music-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2vh;
-    padding: 10vh 2vh 2vh;
-  }
-  
-  .music-card {
-    border-radius: 1.5vh;
-    width: 25vh;
-    padding: 1.5vh;
-    text-decoration: none;
-    color: #f65901;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s;
-  }
-  
-  .music-card:hover {
-    transform: scale(1.03);
-  }
-  
-  .cover-container {
-    width: 13vh;
-    height: 13vh;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 1.5vh;
-  }
-  
-  .cover-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .song-info h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    text-align: center;
-  }
-  
-  .song-info p {
-    margin: 5px 0 0;
-    text-align: center;
   }
 </style>

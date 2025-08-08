@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { t } from '$lib/stores/i18n';
 
   onMount(() => {
     const cursorReset = () => {

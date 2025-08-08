@@ -1,0 +1,28 @@
+<svg
+  width="300"
+  height="300"
+  viewBox="0 0 300 300"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <mask id="spindle-hole-mask">
+    <rect x="0" y="0" width="300" height="300" fill="white" />
+    <circle cx="150" cy="150" r="8" fill="black" />
+  </mask>
+
+  <g mask="url(#spindle-hole-mask)">
+    <circle cx="150" cy="150" r="140" fill="#111" />
+
+    <g stroke="#222" stroke-width="1" fill="none" opacity="0.6">
+      <circle cx="150" cy="150" r="130" />
+      <circle cx="150" cy="150" r="120" />
+      <circle cx="150" cy="150" r="110" />
+      <circle cx="150" cy="150" r="100" />
+      <circle cx="150" cy="150" r="90" />
+      <circle cx="150" cy="150" r="80" />
+      <circle cx="150" cy="150" r="70" />
+    </g>
+
+    <circle cx="150" cy="150" r="50" fill="#414141ff" />
+    <circle cx="150" cy="150" r="40" fill="hsl(22, 99%, 48%)" />
+  </g>
+</svg>

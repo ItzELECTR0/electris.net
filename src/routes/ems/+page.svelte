@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { t } from '$lib/stores/i18n';
 
   onMount(() => {
     const cursorReset = () => {
@@ -23,23 +24,23 @@
 </svelte:head>
   
   <div class="hero">
-    <h1>ELECTRIS Media Studios</h1>
-    <p>Creation and freedom, They complement each other well.</p>
+    <h1>{$t('ems.hero.title', 'ELECTRIS Media Studios')}</h1>
+    <p>{$t('ems.hero.slogan', 'An artist makes, A fool creates')}</p>
   </div>
   
   <div class="discography">
     <a href="/ems/music" class="disc-card">
       <div class="icon">🎵</div>
       <div class="card-content">
-        <h2>Music</h2>
-        <p>Explore our tunes</p>
+        <h2>{$t('ems.card.music.title', 'Music')}</h2>
+        <p>{$t('ems.card.music.desc', 'Explore our tunes')}</p>
       </div>
     </a>
   </div>
   
 <style>
   .hero {
-    min-height: calc(20vh - 25vh);
+    min-height: 5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,13 +1,14 @@
 <script lang="ts">
+  import { t } from '$lib/stores/i18n';
   import { onMount } from 'svelte';
 
   let iconSize = 150;
 
-  const projects = [
+  $: projects = [
     {
-      title: 'TWAOS',
-      description: 'An adventure-action-rpg with a sci-fi setting and a fantasy inspired super-powered, heart wrenching narrative.',
-      icon: '/icons/twaos.svg',
+      title: $t('proj.twaos.title.short', 'TWAOS'),
+      description: $t('proj.twaos.desc.long', 'An adventure-action-rpg with a sci-fi setting and a fantasy inspired super-powered, heart wrenching narrative.'),
+      icon: '/media/TWAOS/Logo/twaos.svg',
       width: 8,
       link: '/egs/twaos'
     }
@@ -30,7 +31,7 @@
 </svelte:head>
 
 <div class="hero">
-  <h1>Projects</h1>
+  <h1>{$t('proj.title', 'Projects')}</h1>
 </div>
 
 <div class="twaos">
