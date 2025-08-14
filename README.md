@@ -3,24 +3,6 @@
 # [ELECTRIS.net](https://electris.net)
 #### The official website for the ELECTRIS Project.<br>Built with Svelte and Typescript.
 
-## Subdomains:
-
-### For the Public
-
-#### [testing.electris.net](https://testing.electris.net) (will be replaced by canary.electris.net)
-##### The early-access version of the site.<br>I more often push here before main to make sure everything is fine.
-
-### Everything else
-
-#### [ai.electris.net](https://ai.electris.net)
-##### Only exists so I can remotely connect.<br>It's my self-hosted LLM interface.
-
-#### [jellyfin.electris.net](https://jellyfin.electris.net)
-##### Only exists so I can remotely connect.<br>It's my self-hosted media server.
-
-#### [searxng.electris.net](https://searxng.electris.net)
-##### Only exists so I can remotely connect.<br>My self-hosted instance of the SearXNG search engine.<br>You can use it if you want, just don't abuse it or I'll take it down.
-
 ## How to set up dev environment?
 
 #### First, clone the project
@@ -37,3 +19,23 @@
 ## Submitting Improvements
 
 #### Pull requests are welcome and encouraged.<br> If additions are nice and fit the [Creator Standard](https://electris.net/about/creator-standard), they will be merged and you will be credited as an official developer on the website
+
+## Subdomains:
+### For the Public
+
+#### [testing.electris.net](https://testing.electris.net) (will be replaced by canary.electris.net)
+##### The early-access version of the site.<br>I more often push here before main to make sure everything is fine.
+
+#### [canary.electris.net](https://canary.electris.net) (will be replaced by testing.electris.net)
+##### It's only up when I am testing the website on my machine.<br>Updates in real time as I make changes to the code.
+
+### Everything else (My self hosted stuff)
+#### These only exist so I can remotely connect.
+
+#### [update.electris.net](https://update.electris.net)
+##### My CustOTA update server for my Pixel 7 Pro with GrapheneOS<br>(Self-signed OTA updates patched with Magisk)
+
+#### [searxng.electris.net](https://searxng.electris.net)
+##### My instance of the SearXNG search engine.<br>You can use it if you want, just don't abuse it or I'll take it down.
+
+###### There are others, but they are private.
