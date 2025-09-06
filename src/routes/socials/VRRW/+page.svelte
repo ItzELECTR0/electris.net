@@ -4,22 +4,22 @@
       {
         title: $t('site.platform.yt', 'YouTube'),
         description: $t('social.vrrw.yt.desc', 'Straight to the point'),
-        platformLogo: '/icons/Logos/ThirdParty/yt.svg',
-        profilePicture: '/icons/Logos/FirstParty/VArrow.png',
+        platformLogo: '/icons/logos/ThirdParty/yt.svg',
+        profilePicture: '/icons/logos/FirstParty/VArrow.png',
         url: 'https://youtube.com/@V4rrow'
       },
       {
         title: $t('site.platform.gh', 'GitHub'),
         description: $t('social.vrrw.gh.desc', 'Free code is best code'),
-        platformLogo: '/icons/Logos/ThirdParty/github-nobg.svg',
-        profilePicture: '/icons/Logos/FirstParty/VArrow.png',
+        platformLogo: '/icons/logos/ThirdParty/github-nobg.svg',
+        profilePicture: '/icons/logos/FirstParty/VArrow.png',
         url: 'https://github.com/Varrow1'
       },
       {
         title: $t('site.platform.x', 'Twitter'),
         description: $t('social.vrrw.x.desc', 'I tweet sometimes'),
-        platformLogo: '/icons/Logos/ThirdParty/twitter.svg',
-        profilePicture: '/icons/Logos/FirstParty/VArrow.png',
+        platformLogo: '/icons/logos/ThirdParty/twitter.svg',
+        profilePicture: '/icons/logos/FirstParty/VArrow.png',
         url: 'https://x.com/0xVarrow'
       }
     ];
@@ -37,7 +37,7 @@
   
     <div class="hero">
       {#each socialCards as card}
-        <a class="social-card" href={card.url} target="_blank">
+        <a class="card" href={card.url} target="_blank">
           <div class="icons">
             <img src={card.platformLogo} alt="Platform Logo" class="platform-logo"/>
             <img src={card.profilePicture} alt="Profile Picture" class="profile-picture"/>
@@ -86,7 +86,7 @@
       margin: 10px 0 0;
     }
   
-    .social-card {
+    .card {
       display: flex;
       align-items: center;
       padding: 15px;
@@ -97,7 +97,7 @@
       transition: transform 0.2s ease;
     }
   
-    .social-card:hover {
+    .card:hover {
       transform: scale(1.02);
     }
   

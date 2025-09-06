@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
 		},
 		server: {
 			host: '0.0.0.0',
-		},
+			allowedHosts: ['canary.electris.net']
+		}
 	};
 });

@@ -5,15 +5,15 @@
     {
       title: $t('site.platform.yt', 'YouTube'),
       description: $t('social.etlr.yt.desc', 'Dancing with the Lightning'),
-      platformLogo: '/icons/Logos/ThirdParty/yt.svg',
-      profilePicture: '/icons/Logos/FirstParty/eltr-v10.png',
+      platformLogo: '/icons/logos/ThirdParty/yt.svg',
+      profilePicture: '/icons/logos/FirstParty/eltr-v10.png',
       url: 'https://youtube.com/@ELEC7RO'
     },
     {
       title: $t('site.platform.gh', 'GitHub'),
       description: $t('social.eltr.gh.desc', 'Giving to the World'),
-      platformLogo: '/icons/Logos/ThirdParty/github-nobg.svg',
-      profilePicture: '/icons/Logos/FirstParty/eltr-v10.png',
+      platformLogo: '/icons/logos/ThirdParty/github-nobg.svg',
+      profilePicture: '/icons/logos/FirstParty/eltr-v10.png',
       url: 'https://github.com/ItzELECTR0'
     }
   ];

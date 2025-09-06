@@ -1,5 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { t } from '$lib/stores/i18n';
+
     let showPopup = false;
     let dontShowAgain = false;
     function setCookie(name: string, value: string, days: number) {
@@ -23,13 +25,13 @@
   {#if showPopup}
     <div class="mobile-popup-backdrop">
       <div class="mobile-popup">
-        <h2>Mobile Notice</h2>
-        <p>This site works on mobile, but things may look out of place or be hard to read. Please check us out on a laptop or desktop with a mouse or trackpad.</p>
+        <h2 class="mobile-popup-title">{$t('notice.mobile.title', 'Mobile Notice!')}</h2>
+        <p class="mobile-popup-body">{$t('notice.mobile.body', 'This site works on mobile, but things may look out of place or be hard to read. Please check us out on a laptop or desktop with a mouse or trackpad.')}</p>
         <div class="popup-controls">
           <label>
-            <input type="checkbox" bind:checked={dontShowAgain}> Don't show again
+            <input type="checkbox" bind:checked={dontShowAgain}> {$t ('notice.mobile.never', "Don't show again")}
           </label>
-          <button on:click={dismissPopup}>Got it!</button>
+          <button on:click={dismissPopup}>{$t('notice.mobile.ok', 'Got it!')}</button>
         </div>
       </div>
     </div>
@@ -48,26 +50,28 @@
       justify-content: center;
       z-index: 1000;
     }
+
     .mobile-popup {
       background-color: #131615;
       color: #f65901;
-      padding: 3rem;
-      border-radius: 3vh;
+      padding: 2rem;
+      border-radius: 5vw;
       max-width: 90%;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       animation: fadeInGrow 0.3s ease;
     }
 
-    .mobile-popup h2 {
+    .mobile-popup-title {
       user-select: none;
-      font-size: 5rem;
+      font-size: 4.5rem;
       font-family: 'Letric';
     }
 
-    .mobile-popup p {
+    .mobile-popup-body {
       user-select: none;
       font-size: 2rem;
-      font-family: 'Redwing Light';
+      font-family: 'Redwing';
+      font-weight: 300;
       padding-bottom: 2vh;
       padding-top: 1.5vh;
     }
@@ -88,6 +92,7 @@
       align-items: center;
       margin-top: 1rem;
     }
+
     button {
       background-color: #0f1010;
       color: #f65901;
@@ -96,6 +101,7 @@
       border-radius: 4px;
       cursor: pointer;
     }
+    
     @keyframes fadeInGrow {
       from { opacity: 0; transform: scale(0.8); }
       to { opacity: 1; transform: scale(1); }

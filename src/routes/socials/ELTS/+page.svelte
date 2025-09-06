@@ -5,15 +5,15 @@
       {
         title: $t('site.platform.yt', 'YouTube'),
         description: $t('site.slogan', 'Heart like a pen, On paper it bleeds'),
-        platformLogo: '/icons/Logos/ThirdParty/yt.svg',
-        profilePicture: '/icons/Logos/FirstParty/elts-v1.png',
+        platformLogo: '/icons/logos/ThirdParty/yt.svg',
+        profilePicture: '/icons/logos/FirstParty/elts-v1.png',
         url: 'https://youtube.com/@ELECTRIS'
       },
       {
         title: $t('site.platform.ds', 'Discord'),
         description: $t('social.elts.ds.desc', 'Legends of Lightning'),
-        platformLogo: '/icons/Logos/ThirdParty/discord.svg',
-        profilePicture: '/icons/Logos/FirstParty/elts-v1.png',
+        platformLogo: '/icons/logos/ThirdParty/discord.svg',
+        profilePicture: '/icons/logos/FirstParty/elts-v1.png',
         url: 'https://discord.gg/TgtCGKxbZr'
       }
     ];

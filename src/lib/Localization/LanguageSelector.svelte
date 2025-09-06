@@ -1,7 +1,7 @@
 <script lang="ts">
   import { currentLocale, currentLocaleInfo, availableLocales, setLocale, type AvailableLocale } from '$lib/stores/i18n';
   import { slide } from 'svelte/transition';
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   
   let isOpen = false;
   let currentInfo: AvailableLocale;
@@ -18,12 +18,26 @@
       }
     }
   }
+
+  function handleCloseLanguageDropdown() {
+    isOpen = false;
+  }
   
   onMount(() => {
     document.addEventListener('click', handleClickOutside);
+    window.addEventListener('closeLanguageDropdown', handleCloseLanguageDropdown);
+    
     return () => {
       document.removeEventListener('click', handleClickOutside);
+      window.removeEventListener('closeLanguageDropdown', handleCloseLanguageDropdown);
     };
+  });
+
+  onDestroy(() => {
+    if (typeof document !== 'undefined') {
+      document.removeEventListener('click', handleClickOutside);
+      window.removeEventListener('closeLanguageDropdown', handleCloseLanguageDropdown);
+    }
   });
   
   async function handleLocaleChange(locale: string) {

@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import { theme, applyTheme } from '$lib/stores/theme';
   import { initializeI18n } from '$lib/stores/i18n';
-  import Cursor from '$lib/UI/Cursor.svelte';
   import '/src/app.base.css';
 
   onMount(async () => {
@@ -19,7 +18,7 @@
   <title>ELECTRIS NewHome</title>
   <meta property="og:title" content="ELECTRIS NewHome" />
   <meta property="og:description" content="ELECTRIS NewHome | A New Home for your browser"/>
-  <meta property="og:url" content="https://newhome.electris.net/" />
+  <meta property="og:url" content="https://new.electris.net/" />
   <meta name="twitter:title" content="ELECTRIS NewHome"/>
   <meta name="twitter:description" content="ELECTRIS NewHome | A New Home for your browser"/>
   <meta name="viewport" content="width=device-width, initial-scale=1" />

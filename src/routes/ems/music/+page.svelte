@@ -7,12 +7,12 @@
 
   $: cardLinks = [
     {
-      icon: '/icons/vinyl.svg',
+      icon: '/icons/buttons/vinyl.svg',
       title: $t('ems.music.card.vinyl', 'Albums'),
       link: '/ems/music/albums'
     },
     {
-      icon: '/icons/cd.svg',
+      icon: '/icons/buttons/cd.svg',
       title: $t('ems.music.card.disc', 'Singles'),
       link: '/ems/music/singles'
     }
@@ -122,7 +122,7 @@
 
 <div class="music-container">
   {#each cardLinks as card}
-    <a class="music-card" class:arabic={isPageArabic} href={card.link}>
+    <a class="card" class:arabic={isPageArabic} href={card.link}>
       <div class="cover-container">
         <img src={card.icon} alt="{card.title} icon" class="cover-image" />
       </div>
@@ -181,7 +181,7 @@
     padding: 5vh;
   }
   
-  .music-card {
+  .card {
     border-radius: 1.5vh;
     width: 20vw;
     height: 40vh;
@@ -194,7 +194,7 @@
     transition: transform 0.2s;
   }
   
-  .music-card:hover {
+  .card:hover {
     transform: scale(1.05);
   }
   
@@ -218,12 +218,12 @@
     text-align: center;
   }
 
-  .music-card .song-info h3 {
+  .card .song-info h3 {
     position: relative;
     overflow: visible;
   }
 
-  .music-card .song-info h3::after {
+  .card .song-info h3::after {
     content: "";
     position: absolute;
     bottom: 0.25em;                
@@ -234,16 +234,16 @@
     transition: width 0.3s ease-in-out;
   }
 
-  .music-card:hover .song-info h3::after {
+  .card:hover .song-info h3::after {
     width: 100%;
   }
 
-  .music-card.arabic .song-info h3::after {
+  .card.arabic .song-info h3::after {
     left: auto;
     right: 0;
   }
 
-  .music-card.arabic:hover .song-info h3::after {
+  .card.arabic:hover .song-info h3::after {
     width: 100%;
   }
 

@@ -17,19 +17,19 @@
     {
       title: $t('site.title', 'ELECTRIS', 'en-US'),
       description: $t('site.slogan', 'Heart like a pen, On paper it bleeds'),
-      profilePicture: '/icons/Logos/FirstParty/elts-v1.png',
+      profilePicture: '/icons/logos/FirstParty/elts-v1.png',
       url: '/socials/ELTS'
     },
     {
       title: $t('site.author.eltr', 'ELECTRO', 'en-US'),
       description: $t('site.author.eltr.slogan', 'A Creator, Dancing with The Lightning'),
-      profilePicture: '/icons/Logos/FirstParty/eltr-v10.png',
+      profilePicture: '/icons/logos/FirstParty/eltr-v10.png',
       url: '/socials/ELTR'
     },
     {
       title: $t('site.author.vrrw', 'Varrow', 'en-US'),
       description: $t('site.author.vrrw.slogan', 'A Lazy Programmer'),
-      profilePicture: '/icons/Logos/FirstParty/VArrow.png',
+      profilePicture: '/icons/logos/FirstParty/VArrow.png',
       url: '/socials/VRRW'
     }
   ];
@@ -47,7 +47,7 @@
   
     <div class="hero">
       {#each socialCards as card}
-        <a class="social-card" href={card.url} target="_self">
+        <a class="card" href={card.url} target="_self">
           <div class="icons">
             <img src={card.profilePicture} alt="Person Logo" class="profile-picture" />
           </div>
@@ -91,7 +91,7 @@
       font-family: sans-serif;
     }
   
-    .social-card {
+    .card {
       display: flex;
       align-items: center;
       padding: 15px;
@@ -103,7 +103,7 @@
       transition: transform 0.2s ease;
     }
   
-    .social-card:hover {
+    .card:hover {
       transform: scale(1.02);
     }
   

@@ -47,6 +47,10 @@ body {
   border: 0.2vh solid hsl(22, 99%, 48%);
 }
 
+.circle.hovered-search {
+  border: 0.2vh solid hsl(28, 97%, 55%);
+}
+
 .circle.hovered-footer {
   border: 0.2vh solid hsl(28, 100%, 70%);
 }
@@ -80,24 +84,12 @@ body {
   background-color: #151e22;
 }
 
-.social-card {
-  background-color: #222;
-}
-
-.twaos-card {
+.card {
   background-color: #222;
 }
 
 .game-card {
-  background-color: rgba(33, 79, 20, 0.1);
-}
-
-.disc-card {
-  background-color: #222;
-}
-
-.music-card {
-  background-color: #222;
+  background-color: #214f141a;
 }
 
 .electrical-bg {

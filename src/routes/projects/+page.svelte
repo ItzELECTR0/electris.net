@@ -7,10 +7,19 @@
   $: projects = [
     {
       title: $t('proj.twaos.title.short', 'TWAOS'),
+      font: $t('Nightcore'),
       description: $t('proj.twaos.desc.long', 'An adventure-action-rpg with a sci-fi setting and a fantasy inspired super-powered, heart wrenching narrative.'),
       icon: '/media/TWAOS/Logo/twaos.svg',
       width: 8,
       link: '/egs/twaos'
+    },
+    {
+      title: $t('site.newhome.version', 'NewHome'),
+      font: $t('Letric'),
+      description: $t('site.newhome.slogan', 'A New Home for your browser'),
+      icon: '/icons/logos/FirstParty/NewHome/newhome.svg',
+      width: 8,
+      link: 'https://new.electris.net/newhome'
     }
   ];
 
@@ -34,17 +43,17 @@
   <h1>{$t('proj.title', 'Projects')}</h1>
 </div>
 
-<div class="twaos">
+<div class="cards">
   {#each projects as project}
-    <a class="twaos-card" href={project.link}>
-      <div class="card-icon-twaos" style="margin-right: {Math.min(iconSize * 0.02, 0.44)}vh;">
+    <a class="card" href={project.link}>
+      <div class="card-icon" style="margin-right: {Math.min(iconSize * 0.02, 0.44)}vh;">
         <img
           src={project.icon}
           alt="{project.title} icon"
           style="width: {project.width}vh; object-fit: contain; margin-right: {Math.min(iconSize * 0.5, 10)}px; margin-left: {Math.min(iconSize * 0.5, 5)}px;"
         />
       </div>
-      <div class="card-content-twaos">
+      <div class="card-content" style="font-family: {project.font};">
         <h2>{project.title}</h2>
         <p>{project.description}</p>
       </div>
@@ -71,9 +80,9 @@
     margin: 0;
   }
 
-  .twaos {
+  .cards {
     display: flex;
-    flex-direction: line;
+    flex-direction: column;
     align-items: center;
     gap: 20px;
     padding: 0 20px 20px;
@@ -81,7 +90,7 @@
     align-items: center;
   }
 
-  .twaos-card {
+  .card {
     font-family: 'sans-serif';
     display: flex;
     flex-direction: line;
@@ -97,29 +106,28 @@
     text-align: left;
   }
   
-  .twaos-card:hover {
+  .card:hover {
     transform: scale(1.02);
   }
 
-  .card-icon-twaos {
+  .card-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
   
-  .card-content-twaos {
+  .card-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .card-content-twaos h2 {
+  .card-content h2 {
     margin: 0;
-    font-family: 'Nightcore';
     font-size: 2rem;
   }
   
-  .card-content-twaos p {
+  .card-content p {
     font-family: 'Redwing';
     font-weight: 300;
     font-size: 1.2rem;

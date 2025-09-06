@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Hover from './lib/Hover.svelte';
   import { t } from '$lib/stores/i18n';
 
   let currentVideo: HTMLVideoElement;
@@ -12,7 +11,7 @@
     {
       title: $t('proj.twaos.st', 'Wishlist on Steam'),
       description: $t('proj.twaos.st.desc', 'The largest game distribution platform.'),
-      icon: '/icons/Logos/ThirdParty/steam.svg',
+      icon: '/icons/logos/ThirdParty/steam.svg',
       href: 'https://store.steampowered.com/app/2231750/The_Wonderful_Adventures_Of_Sip/'
     }
   ];
@@ -180,8 +179,6 @@
 <svelte:head>
   <title>TWAOS | ELECTRIS</title>
 </svelte:head>
-
-<Hover />
 
 <div class="hero">
   <div class="video-container">

@@ -29,7 +29,7 @@
   </div>
   
   <div class="discography">
-    <a href="/ems/music" class="disc-card">
+    <a href="/ems/music" class="card">
       <div class="icon">🎵</div>
       <div class="card-content">
         <h2>{$t('ems.card.music.title', 'Music')}</h2>
@@ -70,7 +70,7 @@
     align-items: center;
   }
 
-  .disc-card {
+  .card {
     display: flex;
     align-items: center;
     padding: 20px;
@@ -80,23 +80,23 @@
     transition: transform 0.2s;
   }
 
-  .disc-card:hover {
+  .card:hover {
     transform: scale(1.02);
   }
 
-  .disc-card .icon {
+  .card .icon {
     font-size: 3rem;
     margin-right: 20px;
   }
 
-  .disc-card h2 {
+  .card h2 {
     font-family: 'Redwing';
     font-weight: 700;
     margin: 0;
     font-size: 1.8rem;
   }
 
-  .disc-card p {
+  .card p {
     font-family: 'Redwing';
     font-weight: 300;
     letter-spacing: 0.07rem;
