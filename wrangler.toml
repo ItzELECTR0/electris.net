@@ -1,0 +1,2 @@
+name = "electris"
+compatibility_flags = ["nodejs_compat"]
