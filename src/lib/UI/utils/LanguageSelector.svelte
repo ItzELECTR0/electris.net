@@ -6,9 +6,7 @@
   let isOpen = false;
   let currentInfo: AvailableLocale;
   
-  currentLocaleInfo.subscribe(info => {
-    currentInfo = info;
-  });
+  $: currentInfo = $currentLocaleInfo;
   
   function handleClickOutside(event: MouseEvent) {
     if (isOpen) {
@@ -90,7 +88,7 @@
   .language-selector {
     position: relative;
     display: inline-block;
-    width: 7vw;
+    width: 16vh;
   }
   
   .language-button {

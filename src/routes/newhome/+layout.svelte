@@ -4,8 +4,11 @@
   import { initializeI18n } from '$lib/stores/i18n';
   import '/src/app.base.css';
 
-  onMount(async () => {
-    await initializeI18n();
+  onMount(() => {
+    (async () => {
+      await initializeI18n();
+    })();
+
     const unsubscribe = theme.subscribe(currentTheme => {
       applyTheme(currentTheme);
     });
@@ -16,6 +19,9 @@
 
 <svelte:head>
   <title>ELECTRIS NewHome</title>
+  <link rel="icon" type="image/svg+xml" href="/icons/logos/FirstParty/NewHome/newhome.svg" />
+  <link rel="alternate icon" href="/icons/logos/FirstParty/NewHome/newhome.svg" />
+  <link rel="mask-icon" href="/icons/logos/FirstParty/NewHome/newhome.svg" color="#ff6811" />
   <meta property="og:title" content="ELECTRIS NewHome" />
   <meta property="og:description" content="ELECTRIS NewHome | A New Home for your browser"/>
   <meta property="og:url" content="https://new.electris.net/" />

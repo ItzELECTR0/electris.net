@@ -149,17 +149,17 @@
   }
   
   .open.hovered .line-top {
-    transform: translateY(-0.9vh) translateX(0) rotate(-45deg);
+    transform: translateY(-0.9vh) translateX(0.5vh) rotate(-45deg);
     width: 3.5vh;
   }
   
   .open.hovered .line-middle {
-    transform: translateX(0) scaleX(1);
+    transform: translateX(0.5vh) scaleX(1);
     opacity: 1;
   }
   
   .open.hovered .line-bottom {
-    transform: translateY(0.9vh) translateX(0) rotate(45deg);
+    transform: translateY(0.9vh) translateX(0.5vh) rotate(45deg);
     width: 3.5vh;
   }
   

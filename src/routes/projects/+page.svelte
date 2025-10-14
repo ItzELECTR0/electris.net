@@ -104,6 +104,7 @@
     transition: transform 0.2s;
     justify-content: left;
     text-align: left;
+    transition: background-color 0.2s ease;
   }
   
   .card:hover {

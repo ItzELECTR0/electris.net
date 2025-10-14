@@ -11,6 +11,7 @@
       "devDependencies": {
         "@eslint/compat": "^1.2.5",
         "@eslint/js": "^9.18.0",
+        "@sveltejs/adapter-auto": "^6.1.0",
         "@sveltejs/adapter-cloudflare": "^5.0.1",
         "@sveltejs/adapter-static": "^3.0.8",
         "@sveltejs/kit": "^2.16.0",
@@ -226,6 +227,8 @@
     "@rollup/rollup-win32-ia32-msvc": ["@rollup/rollup-win32-ia32-msvc@4.34.9", "", { "os": "win32", "cpu": "ia32" }, "sha512-KB48mPtaoHy1AwDNkAJfHXvHp24H0ryZog28spEs0V48l3H1fr4i37tiyHsgKZJnCmvxsbATdZGBpbmxTE3a9w=="],
 
     "@rollup/rollup-win32-x64-msvc": ["@rollup/rollup-win32-x64-msvc@4.34.9", "", { "os": "win32", "cpu": "x64" }, "sha512-AyleYRPU7+rgkMWbEh71fQlrzRfeP6SyMnRf9XX4fCdDPAJumdSBqYEcWPMzVQ4ScAl7E4oFfK0GUVn77xSwbw=="],
+
+    "@sveltejs/adapter-auto": ["@sveltejs/adapter-auto@6.1.0", "", { "peerDependencies": { "@sveltejs/kit": "^2.0.0" } }, "sha512-shOuLI5D2s+0zTv2ab5M5PqfknXqWbKi+0UwB9yLTRIdzsK1R93JOO8jNhIYSHdW+IYXIYnLniu+JZqXs7h9Wg=="],
 
     "@sveltejs/adapter-cloudflare": ["@sveltejs/adapter-cloudflare@5.0.3", "", { "dependencies": { "@cloudflare/workers-types": "^4.20241106.0", "esbuild": "^0.24.0", "worktop": "0.8.0-next.18" }, "peerDependencies": { "@sveltejs/kit": "^2.0.0", "wrangler": "^3.87.0" } }, "sha512-jRJmt3JtGp5ockFxoDLKPisK0RPGnitNfHS9+xhRTpRaBV7jS/fQfAmpaey7rwKWaDUnkoHx0DV0WvISHNfUEA=="],
 

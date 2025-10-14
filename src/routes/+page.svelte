@@ -1,8 +1,34 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { t, currentLocale } from '$lib/stores/i18n';
+  import { useHoverConfig, type HoverConfig } from '$lib/stores/hoverConfig';
 
   $: isPageArabic = $currentLocale === 'ar';
+
+  const hoverConfigs: HoverConfig[] = [
+    {
+      type: [ 'a' ],
+      selectors: ['.creator-link'],
+      className: 'hovered-word-wrap',
+      requireAllSelectors: false,
+      lockPosition: true,
+      wrapText: {
+        sentences: true
+      }
+    },
+    {
+      selectors: ['.progress-text'],
+      className: 'hovered-word-wrap',
+      lockPosition: false,
+      wrapText: {
+        sentences: true,
+        ignoreCharacters: true,
+        ignorePunctuation: true
+      }
+    }
+  ];
+
+  useHoverConfig(hoverConfigs);
 
   onMount(() => {
     const cursorReset = () => {
@@ -40,7 +66,7 @@
       <h1><span class="glitch" data-text="{$t('update.title', 'WEBSITE UNDER RESTRUCTURE')}">{$t('update.title', 'WEBSITE UNDER RESTRUCTURE')}</span></h1>
       <p>{$t('update.progress.title', 'Due to not meeting the')} <a href="/about/creator-standard" class="creator-link" class:arabic={isPageArabic}><u>{$t('update.progress.title.link', 'Creator Standard')}</u></a></p>
       <div class="progress-container">
-        <div class="progress-text">{$t('update.progress.undertitle', 'Update in Progress...')}</div>
+        <span class="progress-text">{$t('update.progress.undertitle', 'Update in Progress...')}</span>
         <div class="progress-bar">
           <div class="progress-fill"></div>
           <div class="electric-spark electric-1"></div>
@@ -55,17 +81,16 @@
   
 <style>
   .hero {
-    min-height: calc(20vh - 25vh);
+    min-height: 5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 6vh;
+    padding-top: 7vh;
     text-align: center;
   }
 
   .hero h1 {
-    padding-top: 1vh;
     font-family: 'Letric';
     font-size: 4rem;
     margin: 0;
@@ -74,7 +99,7 @@
   .hero p {
     font-family: sans-serif;
     font-size: 1.5rem;
-    margin-top: 10px;
+    margin-top: 1vh;
     max-width: 80%;
   }
 
@@ -104,7 +129,7 @@
   .construction-icon {
     position: relative;
     margin-bottom: 3vh;
-    width: 8vh;
+    width: 9vh;
     height: 8vh;
   }
 
@@ -236,7 +261,7 @@
   .creator-link::after {
     content: '';
     position: absolute;
-    bottom: -0.2vh;
+    bottom: 0.1vh;
     left: 0;
     width: 0;
     height: 0.2vh;
@@ -259,7 +284,7 @@
     align-items: center;
     justify-content: center;
     width: 50vh;
-    max-width: 90vw;
+    max-width: 90vh;
     margin: 0 auto;
     position: relative;
   }
@@ -270,8 +295,6 @@
     font-weight: 300;
     color: rgba(246, 89, 1, 0.9);
     animation: fade 2s ease-in-out infinite;
-    margin-bottom: 1vh;
-    text-align: center;
   }
 
   .progress-bar {
@@ -282,6 +305,7 @@
     border-radius: 0.5vh;
     overflow: hidden;
     box-shadow: 0 0 1vh rgba(246, 89, 1, 0.3);
+    margin-top: 1vh;
   }
 
   .progress-fill {
@@ -289,7 +313,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 35%;
+    width: 65%;
     background: linear-gradient(90deg, #f65901, #ff6811, #f65901);
     border-radius: 0.5vh;
     animation: progress-pulse 3s ease-in-out infinite;

@@ -1,4 +1,4 @@
-import { writable, derived, readable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 import { browser } from '$app/environment';
 import { isNewHomeMode } from '$lib/utils/buildMode';
 
@@ -17,12 +17,28 @@ export interface EnvironmentInfo {
   isUnknown: boolean;
 }
 
+async function fetchSiteVersion(): Promise<string> {
+  if (!browser) return '';
+  
+  try {
+    const response = await fetch('/data/version/env.ver');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch version: ${response.status}`);
+    }
+    const version = await response.text();
+    return version.trim();
+  } catch (error) {
+    console.error('Error fetching site version:', error);
+    throw error;
+  }
+}
+
 function createEnvironmentStore() {
   const { subscribe, set } = writable<EnvironmentInfo>({
     environment: 'unknown',
     environmentSecondary: 'unknown',
     siteUrl: '',
-    siteVersion: 'v0.0.2',
+    siteVersion: '',
     hostname: '',
     isProduction: false,
     isCanary: false,
@@ -31,7 +47,7 @@ function createEnvironmentStore() {
     isUnknown: true
   });
 
-  function detectEnvironment(): EnvironmentInfo {
+  async function detectEnvironment(): Promise<EnvironmentInfo> {
     let environment: Environment = 'unknown';
     let environmentSecondary: Environment = 'unknown';
     let hostname = '';
@@ -57,7 +73,7 @@ function createEnvironmentStore() {
       }
     }
 
-    const siteVersion = import.meta.env.VITE_SITE_VER || "v0.0.2";
+    const siteVersion = await fetchSiteVersion();
 
     const envInfo: EnvironmentInfo = {
       environment,
@@ -67,7 +83,7 @@ function createEnvironmentStore() {
       hostname,
       isProduction: environment === 'production',
       isCanary: environment === 'canary',
-      isDevelopment: environment === 'development' || environment === 'newhome' && environmentSecondary === 'development',
+      isDevelopment: environment === 'development' || environmentSecondary === 'development',
       isNewHome: environment === 'newhome',
       isUnknown: environment === 'unknown'
     };
@@ -75,10 +91,26 @@ function createEnvironmentStore() {
     return envInfo;
   }
 
-  function initialize() {
+  async function initialize() {
     if (browser) {
-      const envInfo = detectEnvironment();
-      set(envInfo);
+      try {
+        const envInfo = await detectEnvironment();
+        set(envInfo);
+      } catch (error) {
+        console.error('Failed to initialize environment store:', error);
+        set({
+          environment: 'unknown',
+          environmentSecondary: 'unknown',
+          siteUrl: '',
+          siteVersion: 'v0',
+          hostname: browser ? window.location.hostname : '',
+          isProduction: false,
+          isCanary: false,
+          isDevelopment: false,
+          isNewHome: false,
+          isUnknown: true
+        });
+      }
     }
   }
 
@@ -100,16 +132,31 @@ export const hostname = derived(environmentStore, $env => $env.hostname);
 
 export function getCurrentEnvironment(): Environment {
   if (!browser) return 'unknown';
-  return environmentStore.detectEnvironment().environment;
+
+  const hostname = window.location.hostname;
+  
+  if (hostname === "canary.electris.net") {
+    return "canary";
+  } else if (hostname === "electris.net") {
+    return "production";
+  } else if (hostname === "new.electris.net" && isNewHomeMode()) {
+    return "newhome";
+  } else if (hostname === "localhost" && isNewHomeMode()) {
+    return "newhome";
+  } else if (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "testing.electris.net") {
+    return "development";
+  } else {
+    return "unknown";
+  }
 }
 
-export function getEnvironmentInfo(): EnvironmentInfo {
+export async function getEnvironmentInfo(): Promise<EnvironmentInfo> {
   if (!browser) {
     return {
       environment: 'unknown',
       environmentSecondary: 'unknown',
       siteUrl: '',
-      siteVersion: import.meta.env.VITE_SITE_VER || "v0.0.2",
+      siteVersion: '',
       hostname: '',
       isProduction: false,
       isCanary: false,
@@ -118,7 +165,7 @@ export function getEnvironmentInfo(): EnvironmentInfo {
       isUnknown: true
     };
   }
-  return environmentStore.detectEnvironment();
+  return await environmentStore.detectEnvironment();
 }
 
 export function generateEnvironmentUrl(path: string = '', search: string = ''): string {

@@ -1,8 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { t } from '$lib/stores/i18n';
+  import { t, currentLocale } from '$lib/stores/i18n';
   import { loadBlogPosts, filterPosts, getAllTags, formatDate } from '$lib/utils/blog';
   import type { BlogPost } from '$lib/types/blog';
+
+  $: isPageArabic = $currentLocale === 'ar';
 
   let posts: BlogPost[] = [];
   let filteredPosts: BlogPost[] = [];

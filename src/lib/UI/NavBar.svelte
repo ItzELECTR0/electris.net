@@ -2,9 +2,20 @@
   import { onMount, onDestroy } from 'svelte';
   import { slide, fade } from 'svelte/transition';
   import { afterNavigate } from '$app/navigation';
-  import LanguageSelector from '$lib/Localization/LanguageSelector.svelte';
-  import { theme, applyTheme, setTheme } from '$lib/stores/theme';
   import { t, initializeI18n } from '$lib/stores/i18n';
+  import { useHoverConfig, type HoverConfig } from '$lib/stores/hoverConfig';
+  import LanguageSelector from '$lib/UI/utils/LanguageSelector.svelte';
+  import { 
+    theme, 
+    colorScheme,
+    setTheme, 
+    setColorScheme,
+    applyStyles,
+    type Theme,
+    type ColorScheme,
+    availableThemes,
+    availableColorSchemes
+  } from '$lib/stores/theme';
   import { 
     environmentStore, 
     generateEnvironmentUrl, 
@@ -18,8 +29,6 @@
   } from '$lib/utils/devTools';
   import Hamburger from './utils/Hamburger.svelte';
 
-  type Theme = 'auto'| 'light' |'dark' | 'midnight';
-
   interface ThemeOption {
     value: Theme;
     label: string;
@@ -27,15 +36,23 @@
     description?: string;
   }
 
+  interface ColorSchemeOption {
+    value: ColorScheme;
+    label: string;
+    icon: string;
+    description?: string;
+  }
+
   let showOptions = false;
   let showThemeDropdown = false;
+  let showColorSchemeDropdown = false;
   let showCookieConfirmDialog = false;
   let showStatesConfirmDialog = false;
   let showDevToolsSubmenu = false;
   let isOpen = false;
   let siteHref = "";
-  let currentTheme: string;
-  let availableThemes: ThemeOption[];
+  let currentTheme: Theme;
+  let currentColorScheme: ColorScheme;
   let gearElement: HTMLImageElement;
   let isHoveringGear = false;
   let animationId: number;
@@ -54,34 +71,99 @@
     currentTheme = value;
   });
 
-  $: availableThemes = [
-    { 
-      value: 'auto' as Theme, 
-      label: $t('nav.options.theme.auto', 'Automatic'), 
-      icon: '🔄',
-      description: $t('nav.options.theme.auto.desc', 'Follows system')
+  colorScheme.subscribe(value => {
+    currentColorScheme = value;
+  });
+
+  const hoverConfigs: HoverConfig[] = [
+    {
+      type: [ 'a' ],
+      selectors: ['.menu-item'],
+      className: 'hovered-menu-item',
+      lockPosition: true
     },
-    { 
-      value: 'light' as Theme, 
-      label: $t('nav.options.theme.light', 'Light'), 
-      icon: '☀️',
-      description: $t('nav.options.theme.light.desc', 'Clean and bright')
+    {
+      selectors: [ '.option' ],
+      className: 'hovered-word-wrap',
+      lockPosition: true
     },
-    { 
-      value: 'dark' as Theme, 
-      label: $t('nav.options.theme.dark', 'Dark'), 
-      icon: '🌙',
-      description: $t('nav.options.theme.dark.desc', 'Easy on the eyes')
+    {
+      selectors: ['.hamburger-footer', '.footer'],
+      className: 'hovered-hamburger-footer',
+      requireAllSelectors: false,
+      lockPosition: true,
     },
-    { 
-      value: 'midnight' as Theme, 
-      label: $t('nav.options.theme.oled', 'Midnight'), 
-      icon: '🌚',
-      description: $t('nav.options.theme.oled.desc', 'Blackout')
+    {
+      selectors: ['.hamburger-button'],
+      className: 'hovered-hamburger',
+      lockPosition: true
+    },
+    {
+      selectors: ['.settings-button'],
+      className: 'hovered-settings',
+      lockPosition: true
+    },
+    {
+      type: [ 'a' ],
+      selectors: ['.switch-button'],
+      className: 'hovered-word-wrap',
+      lockPosition: false,
+      wrapText: {
+        sentences: true
+      }
+    },
+    {
+      type: [ 'a' ],
+      selectors: ['.nav-button'],
+      className: 'hovered-word-wrap',
+      requireAllSelectors: false,
+      lockPosition: true,
+      wrapText: {
+        sentences: true
+      }
     }
   ];
 
-  $: currentThemeInfo = availableThemes.find(t => t.value === currentTheme) || availableThemes[0];
+  useHoverConfig(hoverConfigs);
+
+  $: themeOptions = [
+    { 
+      value: 'default' as Theme, 
+      label: $t('nav.options.theme.default', 'Default'), 
+      icon: '🎨',
+      description: $t('nav.options.theme.default.desc', 'Classic ELECTRIS')
+    }
+  ] as ThemeOption[];
+
+  $: colorSchemeOptions = [
+    { 
+      value: 'auto' as ColorScheme, 
+      label: $t('nav.options.color.auto', 'Automatic'), 
+      icon: '🔄',
+      description: $t('nav.options.color.auto.desc', 'Follows system')
+    },
+    { 
+      value: 'light' as ColorScheme, 
+      label: $t('nav.options.color.light', 'Light'), 
+      icon: '☀️',
+      description: $t('nav.options.color.light.desc', 'Clean and bright')
+    },
+    { 
+      value: 'dark' as ColorScheme, 
+      label: $t('nav.options.color.dark', 'Dark'), 
+      icon: '🌙',
+      description: $t('nav.options.color.dark.desc', 'Easy on the eyes')
+    },
+    { 
+      value: 'midnight' as ColorScheme, 
+      label: $t('nav.options.color.oled', 'Midnight'), 
+      icon: '🌚',
+      description: $t('nav.options.color.oled.desc', 'Blackout')
+    }
+  ] as ColorSchemeOption[];
+
+  $: currentThemeInfo = themeOptions.find(t => t.value === currentTheme) || themeOptions[0];
+  $: currentColorSchemeInfo = colorSchemeOptions.find(c => c.value === currentColorScheme) || colorSchemeOptions[0];
 
   $: menuItems = [
     { label: $t('nav.burger.home', 'Home'), href: '/', newTab: false },
@@ -172,11 +254,11 @@
   }
 
   onMount(async () => {
-    environmentStore.refresh();
+    await environmentStore.refresh();
     
     if (typeof document !== 'undefined') {
       document.addEventListener('click', handleClickOutside);
-      applyTheme(currentTheme as Theme);
+      applyStyles(currentTheme, currentColorScheme);
       await initializeI18n();
     }
   });
@@ -208,6 +290,7 @@
       ) {
         showOptions = false;
         showThemeDropdown = false;
+        showColorSchemeDropdown = false;
         showCookieConfirmDialog = false;
         showStatesConfirmDialog = false;
         showDevToolsSubmenu = false;
@@ -219,6 +302,13 @@
       const themeSelector = document.querySelector('.theme-selector');
       if (themeSelector && !themeSelector.contains(event.target as Node)) {
         showThemeDropdown = false;
+      }
+    }
+
+    if (showColorSchemeDropdown) {
+      const colorSchemeSelector = document.querySelector('.color-scheme-selector');
+      if (colorSchemeSelector && !colorSchemeSelector.contains(event.target as Node)) {
+        showColorSchemeDropdown = false;
       }
     }
 
@@ -235,14 +325,31 @@
     showThemeDropdown = false;
   }
 
+  function handleColorSchemeChange(colorSchemeValue: ColorScheme) {
+    setColorScheme(colorSchemeValue);
+    showColorSchemeDropdown = false;
+  }
+
   function toggleThemeDropdown(event: MouseEvent) {
     event.stopPropagation();
 
     if (showThemeDropdown === false) {
       closeLanguageDropdown();
+      showColorSchemeDropdown = false;
     }
     
     showThemeDropdown = !showThemeDropdown;
+  }
+
+  function toggleColorSchemeDropdown(event: MouseEvent) {
+    event.stopPropagation();
+
+    if (showColorSchemeDropdown === false) {
+      closeLanguageDropdown();
+      showThemeDropdown = false;
+    }
+    
+    showColorSchemeDropdown = !showColorSchemeDropdown;
   }
 
   function handleOptionsToggle(event: MouseEvent) {
@@ -250,6 +357,7 @@
     showOptions = !showOptions;
     if (!showOptions) {
       showThemeDropdown = false;
+      showColorSchemeDropdown = false;
       showCookieConfirmDialog = false;
       showStatesConfirmDialog = false;
       showDevToolsSubmenu = false;
@@ -372,42 +480,88 @@
 {#if showOptions}
   <div class="options-menu" transition:fade={{ duration: 200 }}>
     <div transition:slide={{ duration: 300 }}>
-      <h2 class="circle-no-interact">{$t('nav.options', 'Options')}</h2>
+      <h2>{$t('nav.options', 'Options')}</h2>
+      
       <div class="option">
         <span>{$t('nav.options.theme', 'Theme')}</span>
-        <div class="theme-selector">
+          <div class="theme-selector">
+            <button 
+              type="button" 
+              class="theme-button"
+              on:click={toggleThemeDropdown}
+              aria-expanded={showThemeDropdown}
+              aria-haspopup="listbox"
+            >
+              <span class="theme-icon">{currentThemeInfo.icon}</span>
+              <span class="theme-name">{currentThemeInfo.label}</span>
+              <span class="dropdown-arrow" class:open={showThemeDropdown}>▼</span>
+            </button>
+            
+            {#if showThemeDropdown}
+              <div class="theme-dropdown" transition:slide={{ duration: 200 }} role="listbox">
+                {#each themeOptions as themeOption}
+                  <button
+                    type="button"
+                    class="theme-option"
+                    class:active={currentTheme === themeOption.value}
+                    on:click={() => handleThemeChange(themeOption.value)}
+                    role="option"
+                    aria-selected={currentTheme === themeOption.value}
+                    title={themeOption.description}
+                  >
+                    <span class="wrap-no-interact">{themeOption.icon}</span>
+                    <div class="theme-info">
+                      <span class="theme-name">{themeOption.label}</span>
+                      {#if themeOption.description}
+                        <span class="theme-description">{themeOption.description}</span>
+                      {/if}
+                    </div>
+                    {#if currentTheme === themeOption.value}
+                      <span class="checkmark">✓</span>
+                    {/if}
+                  </button>
+                {/each}
+              </div>
+            {/if}
+          </div>
+      </div>
+
+      <!-- Color Scheme Selector -->
+      <div class="option">
+        <span>{$t('nav.options.color', 'Color')}</span>
+        <div class="color-scheme-selector">
           <button 
             type="button" 
-            class="theme-button"
-            on:click={toggleThemeDropdown}
-            aria-expanded={showThemeDropdown}
+            class="color-scheme-button"
+            on:click={toggleColorSchemeDropdown}
+            aria-expanded={showColorSchemeDropdown}
             aria-haspopup="listbox"
           >
-            <span class="theme-icon">{currentThemeInfo.icon}</span>
-            <span class="theme-name">{currentThemeInfo.label}</span>
-            <span class="dropdown-arrow" class:open={showThemeDropdown}>▼</span>
+            <span class="color-scheme-icon">{currentColorSchemeInfo.icon}</span>
+            <span class="color-scheme-name">{currentColorSchemeInfo.label}</span>
+            <span class="dropdown-arrow" class:open={showColorSchemeDropdown}>▼</span>
           </button>
           
-          {#if showThemeDropdown}
-            <div class="theme-dropdown" transition:slide={{ duration: 200 }} role="listbox">
-              {#each availableThemes as themeOption}
+          {#if showColorSchemeDropdown}
+            <div class="color-scheme-dropdown" transition:slide={{ duration: 200 }} role="listbox">
+              {#each colorSchemeOptions as colorOption}
                 <button
                   type="button"
-                  class="theme-option"
-                  class:active={currentTheme === themeOption.value}
-                  on:click={() => handleThemeChange(themeOption.value)}
+                  class="color-scheme-option"
+                  class:active={currentColorScheme === colorOption.value}
+                  on:click={() => handleColorSchemeChange(colorOption.value)}
                   role="option"
-                  aria-selected={currentTheme === themeOption.value}
-                  title={themeOption.description}
+                  aria-selected={currentColorScheme === colorOption.value}
+                  title={colorOption.description}
                 >
-                  <span class="theme-icon">{themeOption.icon}</span>
-                  <div class="theme-info">
-                    <span class="theme-name">{themeOption.label}</span>
-                    {#if themeOption.description}
-                      <span class="theme-description">{themeOption.description}</span>
+                  <span class="wrap-no-interact">{colorOption.icon}</span>
+                  <div class="color-scheme-info">
+                    <span class="color-scheme-name">{colorOption.label}</span>
+                    {#if colorOption.description}
+                      <span class="color-scheme-description">{colorOption.description}</span>
                     {/if}
                   </div>
-                  {#if currentTheme === themeOption.value}
+                  {#if currentColorScheme === colorOption.value}
                     <span class="checkmark">✓</span>
                   {/if}
                 </button>
@@ -416,6 +570,7 @@
           {/if}
         </div>
       </div>
+
       <div class="option">
         <span>{$t('nav.options.lang', 'Language')}</span>
         <LanguageSelector bind:this={languageSelectorRef} />
@@ -463,7 +618,7 @@
       {/if}
       <div class="option">
         {#if !isNewHome}
-          <a href={siteHref} class="rounded-button">
+          <a href={siteHref} class="switch-button">
             {#if envInfo.isProduction}
               {$t('nav.options.switch.test', 'Switch to Canary')}
             {:else if envInfo.isCanary || envInfo.isDevelopment}
@@ -521,7 +676,7 @@
       <div class="confirm-buttons">
         <button 
           type="button" 
-          class="confirm-btn confirm-cancel"
+          class="confirm-btn confirm-cancel" 
           on:click={cancelStatesReset}
         >
           Cancel
@@ -617,7 +772,7 @@
 
   .settings-icon {
     user-select: none;
-    height: 3vh;
+    height: 2.8vh;
     transition: none;
     transform-origin: center;
   }
@@ -630,8 +785,8 @@
     border-radius: 1vh;
     z-index: 200;
     color: #f65901;
-    min-width: 20vw;
-    max-width: 25vw;
+    min-width: 35vh;
+    max-width: 40vh;
     transition: all 0.3s ease;
   }
   
@@ -649,35 +804,37 @@
     margin-bottom: 1vh;
   }
 
-  .rounded-button {
+  .switch-button {
+    margin-top: 2vh;
     display: inline-block;
-    padding: 0.1em 0.2em;
+    padding: 0.1vh 0.2vh;
     border: 0.2vh solid hsl(22, 100%, 50%);
-    border-radius: 0.8vh;
+    border-radius: 0.5vh;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
     transition: 200.0ms;
   }
 
-  .rounded-button:hover {
+  .switch-button:hover {
     border: 0.2vh solid hsl(22, 100%, 60%);
     background: rgba(139, 59, 35, 0.274);
     transition: 200.0ms;
   }
 
+  /* Theme Selector Styles */
   .theme-selector {
     position: relative;
     display: inline-block;
-    width: 7vw;
+    width: 16vh;
   }
 
   .theme-button {
     background: none;
-    border: 1px solid #f65901;
+    border: 0.1vh solid #f65901;
     color: #f65901;
     padding: 0.5vh 1vh;
-    border-radius: 4px;
+    border-radius: 0.4vh;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -725,8 +882,8 @@
     left: 0;
     width: 100%;
     background: var(--bg-secondary, #1a1a1a);
-    border: 1px solid;
-    border-radius: 4px;
+    border: 0.1vh solid;
+    border-radius: 0.4vh;
     border-top: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -786,6 +943,116 @@
     margin-top: 0.1vh;
   }
 
+  .color-scheme-selector {
+    position: relative;
+    display: inline-block;
+    width: 16vh;
+  }
+
+  .color-scheme-button {
+    background: none;
+    border: 0.1vh solid #f65901;
+    color: #f65901;
+    padding: 0.5vh 1vh;
+    border-radius: 0.4vh;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5vh;
+    transition: background-color 0.2s;
+    font-family: inherit;
+    width: 100%;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .color-scheme-button:hover {
+    background-color: rgba(246, 89, 1, 0.1);
+  }
+
+  .color-scheme-icon {
+    font-size: 1rem;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .color-scheme-name {
+    font-size: 0.9rem;
+    flex-grow: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  .color-scheme-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-secondary, #1a1a1a);
+    border: 0.1vh solid;
+    border-radius: 0.4vh;
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    z-index: 1000;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+
+  .color-scheme-option {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #f65901;
+    padding: 0.75vh 1vh;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5vh;
+    transition: background-color 0.2s;
+    font-family: inherit;
+    text-align: left;
+    box-sizing: border-box;
+    min-height: 3.5vh;
+  }
+
+  .color-scheme-option:hover {
+    background-color: rgba(246, 89, 1, 0.1);
+  }
+
+  .color-scheme-option.active {
+    background-color: rgba(246, 89, 1, 0.2);
+    font-weight: 500;
+  }
+
+  .color-scheme-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .color-scheme-option .color-scheme-name {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .color-scheme-description {
+    font-size: 0.75rem;
+    color: rgba(246, 89, 1, 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0.1vh;
+  }
+
   .checkmark {
     color: #f65901;
     font-weight: bold;
@@ -803,7 +1070,7 @@
 
   .menu-item a {
     display: inline-block;
-    line-height: 1.5;
+    line-height: 2.25vh;
     font-family: sans-serif;
     text-decoration: none;
     color: #f65901;
@@ -814,7 +1081,7 @@
     margin-left: 0.5rem;
     color: #f65901;
     font-size: 0.8rem;
-    letter-spacing: 0.065vh;
+    letter-spacing: 0.045vh;
     background-color: rgba(246, 89, 1, 0.2);
     padding: 0.1rem 0.3rem;
     border-radius: 0.4vh;
@@ -914,17 +1181,17 @@
     align-items: center;
     justify-content: center;
     z-index: 300;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(0.5vh);
+    -webkit-backdrop-filter: blur(0.5vh);
   }
 
   .confirm-dialog {
     background: var(--bg-primary, #1a1a1a);
-    border: 2px solid #f65901;
+    border: 0.2vh solid #f65901;
     border-radius: 1vh;
     padding: 2vh;
-    max-width: 400px;
-    width: 90vw;
+    max-width: 30vh;
+    width: 30vh;
     text-align: center;
     color: #f65901;
   }
@@ -937,7 +1204,7 @@
 
   .confirm-dialog p {
     margin: 1vh 0;
-    line-height: 1.4;
+    line-height: 1.65vh;
     color: inherit;
   }
 
@@ -945,7 +1212,7 @@
     margin: 1vh 0;
     padding: 0.5vh;
     background: rgba(246, 89, 1, 0.1);
-    border-radius: 4px;
+    border-radius: 0.4vh;
   }
 
   .cookie-stats small {
@@ -962,12 +1229,12 @@
 
   .confirm-btn {
     padding: 0.7vh 1.2vh;
-    border-radius: 4px;
+    border-radius: 0.4vh;
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.2s;
-    border: 1px solid;
+    border: 0.1tx solid;
   }
 
   .confirm-cancel {
@@ -993,17 +1260,21 @@
     color: white;
   }
 
-  :global([data-theme="light"]) .theme-dropdown {
+  :global([data-theme="light"]) .theme-dropdown,
+  :global([data-theme="light"]) .color-scheme-dropdown {
     background: var(--bg-secondary, #f0f0f0);
     color: #333;
   }
 
   :global([data-theme="light"]) .theme-button,
-  :global([data-theme="light"]) .theme-option {
+  :global([data-theme="light"]) .theme-option,
+  :global([data-theme="light"]) .color-scheme-button,
+  :global([data-theme="light"]) .color-scheme-option {
     color: #f65901;
   }
 
-  :global([data-theme="light"]) .theme-description {
+  :global([data-theme="light"]) .theme-description,
+  :global([data-theme="light"]) .color-scheme-description {
     color: rgba(246, 89, 1, 0.6);
   }
 </style>

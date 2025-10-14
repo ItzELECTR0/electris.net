@@ -1,6 +1,34 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { t } from '$lib/stores/i18n';
+  import { useHoverConfig, type HoverConfig } from '$lib/stores/hoverConfig';
+
+  const hoverConfigs: HoverConfig[] = [
+    {
+      type: [ 'h1' ],
+      selectors: [ '.title' ],
+      className: 'hovered-word-wrap',
+      lockPosition: true,
+      wrapText: {
+        words: false,
+        sentences: true
+      }
+    },
+    {
+      type: [ 'p' ],
+      selectors: [ '.soon' ],
+      className: 'hovered-word-wrap',
+      lockPosition: true,
+      wrapText: {
+        words: true,
+        sentences: false,
+        ignoreCharacters: true,
+        ignorePunctuation: true
+      }
+    }
+  ];
+
+  useHoverConfig(hoverConfigs);
 
   onMount(() => {
     const cursorReset = () => {
@@ -19,8 +47,8 @@
 </svelte:head>
 
 <div class="hero">
-  <h1><u>{$t('about.title', 'About Us')}</u></h1>
-  <p>{$t('about.undertitle', '[More info coming here soon]')}</p>
+  <h1 class="title"><u>{$t('about.title', 'About Us')}</u></h1>
+  <p class="soon">{$t('about.undertitle', '[More info coming here soon]')}</p>
 </div>
   
 <style>

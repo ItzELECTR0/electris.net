@@ -3,8 +3,6 @@
   import { t, currentLocale } from '$lib/stores/i18n';
   import { browser } from '$app/environment';
 
-  export let handleHover: (event: MouseEvent, isEntering: boolean, type: 'button' | 'text' | 'search') => void;
-
   $: isPageArabic = $currentLocale === 'ar';
 
   let gridCols = 5;
@@ -245,22 +243,10 @@
               on:keydown={handlePinKeydown}
             />
             <div class="pin-edit-actions">
-              <button 
-                class="pin-save-btn" 
-                on:click={savePin}
-                on:mouseenter={(e) => handleHover(e, true, 'button')}
-                on:mouseleave={(e) => handleHover(e, false, 'button')}
-                title={$t('newhome.pin.edit.save', 'Save')}
-              >
+              <button class="pin-save-btn" on:click={savePin} title={$t('newhome.pin.edit.save', 'Save')}>
                 ✓
               </button>
-              <button 
-                class="pin-cancel-btn" 
-                on:click={cancelEditing}
-                on:mouseenter={(e) => handleHover(e, true, 'button')}
-                on:mouseleave={(e) => handleHover(e, false, 'button')}
-                title={$t('newhome.pin.edit.cancel', 'Cancel')}
-              >
+              <button class="pin-cancel-btn" on:click={cancelEditing} title={$t('newhome.pin.edit.cancel', 'Cancel')}>
                 ✕
               </button>
             </div>
@@ -271,8 +257,6 @@
             class="pin-link"
             target="_blank"
             rel="noopener noreferrer"
-            on:mouseenter={(e) => handleHover(e, true, 'button')}
-            on:mouseleave={(e) => handleHover(e, false, 'button')}
           >
             <div class="pin-favicon">
               <img 
@@ -288,31 +272,14 @@
             </div>
             <div class="pin-glow"></div>
           </a>
-          <button 
-            class="pin-edit-trigger"
-            on:click={() => startEditingPin(index)}
-            on:mouseenter={(e) => handleHover(e, true, 'button')}
-            on:mouseleave={(e) => handleHover(e, false, 'button')}
-            title={$t('newhome.pin.edit.button', 'Edit pin')}
-          >
+          <button class="pin-edit-trigger" on:click={() => startEditingPin(index)} title={$t('newhome.pin.edit.button', 'Edit pin')}>
             <img src="/icons/buttons/gear.svg" class="pin-gear" alt={$t('newhome.pin.edit.button', 'Edit')}>
           </button>
-          <button 
-            class="pin-delete-trigger"
-            on:click={() => deletePin(index)}
-            on:mouseenter={(e) => handleHover(e, true, 'button')}
-            on:mouseleave={(e) => handleHover(e, false, 'button')}
-            title={$t('newhome.pin.delete.button', 'Delete pin')}
-          >
+          <button class="pin-delete-trigger" on:click={() => deletePin(index)} title={$t('newhome.pin.delete.button', 'Delete pin')}>
             <img src="/icons/buttons/bin.svg" class="pin-trash" alt={$t('newhome.pin.delete.button', 'Delete')}>
           </button>
         {:else}
-          <button 
-            class="pin-empty" 
-            on:click={() => startEditingPin(index)}
-            on:mouseenter={(e) => handleHover(e, true, 'button')}
-            on:mouseleave={(e) => handleHover(e, false, 'button')}
-          >
+          <button class="pin-empty" on:click={() => startEditingPin(index)}>
             <div class="empty-icon">+</div>
             <div class="empty-text">{$t('newhome.pin.empty', 'Add Pin')}</div>
           </button>

@@ -7,12 +7,19 @@
   import NavBar from '$lib/UI/NavBar.svelte';
   import Cursor from '$lib/UI/Cursor.svelte';
   import Popup from '$lib/Mobile/Popup.svelte';
-  import { theme, applyTheme } from '$lib/stores/theme';
+  import { theme, colorScheme, applyStyles } from '$lib/stores/theme';
   import '/src/app.base.css';
 
   onMount(() => {
-    const unsubscribe = theme.subscribe(currentTheme => {
-      applyTheme(currentTheme);
+    // Subscribe to both theme and colorScheme changes
+    const unsubscribeTheme = theme.subscribe(currentTheme => {
+      const currentColorScheme = $colorScheme;
+      applyStyles(currentTheme, currentColorScheme);
+    });
+
+    const unsubscribeColorScheme = colorScheme.subscribe(currentColorScheme => {
+      const currentTheme = $theme;
+      applyStyles(currentTheme, currentColorScheme);
     });
 
     if (browser) {
@@ -29,12 +36,15 @@
       }
     }
 
-    return unsubscribe;
+    return () => {
+      unsubscribeTheme();
+      unsubscribeColorScheme();
+    };
   });
 
 </script>
 
-<main data-theme={$theme}>
+<main data-theme={$theme} data-color-scheme-selected={$colorScheme}>
   <NavBar />
   <Cursor />
   <Popup />

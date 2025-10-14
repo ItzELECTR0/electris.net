@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { t } from '$lib/stores/i18n';
+  import { useHoverConfig, type HoverConfig } from '$lib/stores/hoverConfig';
 
   let currentVideo: HTMLVideoElement;
   let nextVideo: HTMLVideoElement;
@@ -16,10 +17,24 @@
     }
   ];
 
+  const hoverConfigs: HoverConfig[] = [
+    {
+      selectors: ['.sip-icon'],
+      className: 'hovered-sip',
+      requireAllSelectors: false,
+      lockPosition: true,
+      customPositioning: {
+       targetSelector: '.styled-sip'
+      }
+    }
+  ];
+
+  useHoverConfig(hoverConfigs);
+
   function getNextClip(currentClip: number): number {
     const availableClips = [2, 3, 4, 5, 7];
     
-    // If we just played 7.mp4, we must play 8.mp4 next
+    // If 7.mp4 just played, 8.mp4 must play next
     if (currentClip === 7) {
       return 8;
     }
@@ -186,7 +201,7 @@
     <video bind:this={nextVideo} class="hero-video next" muted playsinline style="opacity:0;"></video>
     <div class="video-overlay"></div>
   </div>
-  <div class="hero-text">
+  <div class="cursor-no-interact hero-text">
     <span class="text-container"><h2 class="tw">{$t('proj.twaos.title.tw', 'The Wonderful')}</h2></span>
     <span class="text-container"><h3 class="ao">{$t('proj.twaos.title.ao', 'Adventures Of')}</h3></span>
     <span class="text-container"><h1 class="sip">{$t('proj.twaos.title.sip', 'SIP')}</h1></span>
@@ -195,11 +210,11 @@
   <div class="cards-wrapper">
     {#each pages as page}
       <div class="card-container">
-        <a class="game-card" href={page.href} target="_blank">
-          <div class="game-card-icon">
+        <a class="card" href={page.href} target="_blank">
+          <div class="card-icon">
             <img src={page.icon} alt="{page.title} - icon" style="width: 8vh; object-fit: contain;"/>
           </div>
-          <div class="game-card-content">
+          <div class="card-content">
             <h2>{page.title}</h2>
             <p>{page.description}</p>
           </div>
@@ -369,7 +384,7 @@
     gap: 1vh;
   }
 
-  .game-card {
+  .card {
     font-family: 'sans-serif';
     display: flex;
     flex-direction: line;
@@ -379,37 +394,37 @@
     text-decoration: none;
     color: #f65901;
     width: 35vh;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background-color 0.2s ease;
     justify-content: left;
     text-align: left;
     gap: 1vh;
   }
 
-  .game-card:hover {
+  .card:hover {
     transform: scale(1.02);
   }
 
-  .game-card-icon {
+  .card-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
   
-  .game-card-content {
+  .card-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-  .game-card-content h2 {
+  .card-content h2 {
     margin: 0;
     font-family: 'Nightcore';
     font-size: 2rem;
     color: #01f619;
   }
 
-  .game-card-content p {
+  .card-content p {
     font-family: 'Redwing';
     font-weight: 300;
     font-size: 1.2rem;

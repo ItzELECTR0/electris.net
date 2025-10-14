@@ -1,15 +1,30 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { t, currentLocale, initializeI18n } from '$lib/stores/i18n';
+  import { useHoverConfig, type HoverConfig } from '$lib/stores/hoverConfig';
   import PinsGrid from '$lib/NewHome/components/PinsGrid.svelte';
   import Customize from '$lib/NewHome/components/Customize.svelte';
+  import Search from '$lib/NewHome/components/Search.svelte';
   
   let currentTime = new Date();
-  let searchQuery = '';
-  let searchInput: HTMLInputElement;
-  let suggestions: string[] = [];
-  let selectedSuggestion = -1;
   let i18nInitialized = false;
+
+  const hoverConfigs: HoverConfig[] = [
+    {
+      selectors: ['.newhome-search', '.search-wrapper'],
+      className: 'hovered-new-search',
+      requireAllSelectors: true,
+      lockPosition: true,
+      wrapText: {
+        words: false,
+        sentences: false,
+        ignorePunctuation: false,
+        ignoreCharacters: false
+      }
+    }
+  ];
+
+  useHoverConfig(hoverConfigs);
   
   onMount(() => {
     (async () => {
@@ -88,59 +103,6 @@
     
     return date.toLocaleDateString(locale, dateOptions);
   }
-
-  function handleSearch(query: string = searchQuery) {
-    if (!query.trim()) return;
-    
-    const searchUrl = `https://searxng.electris.net/search?q=${encodeURIComponent(query)}`;
-    window.open(searchUrl, '_blank');
-    
-    searchQuery = '';
-  }
-
-  let searchTimeoutId: ReturnType<typeof setTimeout> | undefined;
-
-  function handleSearchInput(event: Event) {
-    const target = event.target as HTMLInputElement;
-    searchQuery = target.value;
-    
-    if (searchTimeoutId) {
-      clearTimeout(searchTimeoutId);
-    }
-  }
-
-  function handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      selectedSuggestion = -1;
-      searchInput.blur();
-    } else if (event.key === 'Enter') {
-      event.preventDefault();
-      if (selectedSuggestion >= 0 && suggestions[selectedSuggestion]) {
-        handleSearch(suggestions[selectedSuggestion]);
-      } else {
-        handleSearch();
-      }
-    } else if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      selectedSuggestion = Math.min(selectedSuggestion + 1, suggestions.length - 1);
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      selectedSuggestion = Math.max(selectedSuggestion - 1, -1);
-    }
-  }
-
-  function handleHover(event: MouseEvent, isEntering: boolean, type: 'button' | 'text' | 'search') {
-    const cursor = document.querySelector('.circle');
-    if (!cursor) return;
-    
-    if (isEntering) {
-      if (type === 'button') cursor.classList.add('hovered-button-grow');
-      else if (type === 'text') cursor.classList.add('hovered-text-grow');
-      else if (type === 'search') cursor.classList.add('hovered-button-grow');
-    } else {
-      cursor.classList.remove('hovered-button-grow', 'hovered-text-grow');
-    }
-  }
 </script>
 
 <svelte:head>
@@ -159,11 +121,7 @@
   </div>
   
   <div class="welcome-section">
-    <h1 
-      class="newhome-title" 
-      on:mouseenter={(e) => handleHover(e, true, 'text')}
-      on:mouseleave={(e) => handleHover(e, false, 'text')}
-    >
+    <h1 class="newhome-title">
       <span class="title-main">{$t('site.title', 'ELECTRIS')}</span>
       <span class="newhome-subtitle">{$t('site.newhome.version', 'NewHome')}</span>
     </h1>
@@ -174,37 +132,14 @@
     </div>
   </div>
 
-  <div class="search-section">
-    <div class="newhome-search">
-      <div class="search-wrapper">
-        <input
-          bind:this={searchInput}
-          bind:value={searchQuery}
-          on:input={handleSearchInput}
-          on:keydown={handleKeyDown}
-          type="text"
-          placeholder={$t('newhome.search.placeholder', 'Search with SearXNG...')}
-          class="search-input"
-        />
-        <button 
-          on:click={() => handleSearch()}
-          class="search-button"
-          on:mouseenter={(e) => handleHover(e, true, 'search')}
-          on:mouseleave={(e) => handleHover(e, false, 'search')}
-          title={$t('newhome.search.button', 'Search')}
-        >
-          <img src="/icons/buttons/search.svg" class="search-icon" alt={$t('newhome.search.button', 'Search')}/>
-        </button>
-      </div>
-    </div>
-  </div>
+  <Search/>
   
   <h2 class="section-title">
     {$t('newhome.pins.title', 'Quick Pins')}
   </h2>
 
-  <PinsGrid {handleHover} />
-  <Customize />
+  <PinsGrid/>
+  <Customize/>
 </div>
 
 <style>
@@ -401,76 +336,6 @@
     font-family: 'Redwing', sans-serif;
   }
 
-  .search-section {
-    width: 100%;
-    max-width: 24vw;
-    max-height: 10vh;
-    margin-bottom: 3rem;
-    position: relative;
-    z-index: 10;
-  }
-
-  .newhome-search {
-    position: relative;
-  }
-
-  .search-wrapper {
-    display: flex;
-    align-items: center;
-    background: rgba(246, 89, 1, 0.1);
-    border: .2vh solid rgba(246, 89, 1, 0.3);
-    border-radius: 1.65vh;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-  }
-
-  .search-wrapper:focus-within {
-    border-color: rgba(246, 89, 1, 0.6);
-    box-shadow: 0 0 20px rgba(246, 89, 1, 0.2);
-    transform: translateY(-2px);
-  }
-
-  .search-icon {
-    position: relative;
-    height: auto;
-    width: auto;
-  }
-
-  .search-input {
-    flex: 1;
-    padding: 1rem 1.5rem;
-    background: transparent;
-    border: none;
-    font-size: 1.1rem;
-    font-family: 'Redwing';
-    color: inherit;
-    outline: none;
-  }
-
-  .search-input::placeholder {
-    color: rgba(246, 89, 1, 0.6);
-  }
-
-  .search-button {
-    position: relative;
-    width: 15%;
-    padding: 1rem 1.5rem;
-    background: rgba(246, 89, 1, 0.2);
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: inherit;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .search-button:hover {
-    background: rgba(246, 89, 1, 0.4);
-  }
-
   .section-title {
     text-align: center;
     font-size: 1.8rem;
@@ -491,10 +356,6 @@
     .time {
       font-size: 2.5rem;
     }
-
-    .search-section {
-      max-width: 50vh;
-    }
   }
 
   @media (max-width: 48vh) {
@@ -512,15 +373,6 @@
 
     .section-title {
       font-size: 1.4rem;
-    }
-
-    .search-input {
-      font-size: 1rem;
-      padding: 0.8rem 1.2rem;
-    }
-
-    .search-button {
-      padding: 0.8rem 1.2rem;
     }
   }
 </style>
