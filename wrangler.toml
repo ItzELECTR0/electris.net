@@ -1,2 +1,2 @@
-name = "electris"
+name = "electris-net"
 compatibility_flags = ["nodejs_compat"]
