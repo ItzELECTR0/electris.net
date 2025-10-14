@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { theme, applyTheme } from '$lib/stores/theme';
+  import { theme, colorScheme, applyStyles } from '$lib/stores/theme';
   import { initializeI18n } from '$lib/stores/i18n';
   import '/src/app.base.css';
 
@@ -9,11 +9,20 @@
       await initializeI18n();
     })();
 
-    const unsubscribe = theme.subscribe(currentTheme => {
-      applyTheme(currentTheme);
+    const unsubscribeTheme = theme.subscribe(currentTheme => {
+      const currentColorScheme = $colorScheme;
+      applyStyles(currentTheme, currentColorScheme);
     });
 
-    return unsubscribe;
+    const unsubscribeColorScheme = colorScheme.subscribe(currentColorScheme => {
+      const currentTheme = $theme;
+      applyStyles(currentTheme, currentColorScheme);
+    });
+
+    return () => {
+      unsubscribeTheme();
+      unsubscribeColorScheme();
+    };
   });
 </script>
 

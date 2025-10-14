@@ -11,7 +11,6 @@
   import '/src/app.base.css';
 
   onMount(() => {
-    // Subscribe to both theme and colorScheme changes
     const unsubscribeTheme = theme.subscribe(currentTheme => {
       const currentColorScheme = $colorScheme;
       applyStyles(currentTheme, currentColorScheme);
