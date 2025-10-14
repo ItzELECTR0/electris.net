@@ -2,7 +2,9 @@
 
 # [ELECTRIS.net](https://electris.net)
 #### The official website for the ELECTRIS Project.<br>Built with Svelte and Typescript.
+#### The official website for the ELECTRIS Project.<br>Built with Svelte and Typescript.
 
+## How to set up dev environment?
 ## How to set up dev environment?
 
 #### First, clone the project and navigate into the directory
