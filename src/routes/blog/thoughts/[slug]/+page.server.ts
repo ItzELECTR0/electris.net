@@ -1,8 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { extractMetadata } from '$lib/utils/blog';
 import type { PageServerLoad } from './$types';
-import { readFileSync, existsSync } from 'fs';
-import { join } from 'path';
 
 export const load: PageServerLoad = async ({ params }) => {
   const { slug } = params;
@@ -12,13 +10,18 @@ export const load: PageServerLoad = async ({ params }) => {
   }
   
   try {
-    const filePath = join(process.cwd(), 'src', 'routes', 'blog', 'thoughts', `${slug}.html`);
+    const modules = import.meta.glob('/src/routes/blog/thoughts/*.html', { 
+      as: 'raw', 
+      eager: true 
+    });
     
-    if (!existsSync(filePath)) {
+    const filePath = `/src/routes/blog/thoughts/${slug}.html`;
+    const content = modules[filePath];
+    
+    if (!content) {
       throw error(404, 'Post not found');
     }
     
-    const content = readFileSync(filePath, 'utf-8');
     const metadata = extractMetadata(content);
     
     if (!metadata) {
