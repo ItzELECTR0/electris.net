@@ -17,7 +17,7 @@
       title: $t('site.newhome.version', 'NewHome'),
       font: $t('Letric'),
       description: $t('site.newhome.slogan', 'A New Home for your browser'),
-      icon: '/icons/logos/FirstParty/NewHome/newhome.svg',
+      icon: '/icons/Logos/FirstParty/NewHome/newhome.svg',
       width: 8,
       link: 'https://new.electris.net/newhome'
     }
@@ -101,10 +101,9 @@
     color: #f65901;
     width: 100%;
     max-width: 600px;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background-color 0.2s ease;
     justify-content: left;
     text-align: left;
-    transition: background-color 0.2s ease;
   }
   
   .card:hover {
