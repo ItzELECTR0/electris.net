@@ -12,7 +12,7 @@
     {
       title: $t('proj.twaos.st', 'Wishlist on Steam'),
       description: $t('proj.twaos.st.desc', 'The largest game distribution platform.'),
-      icon: '/icons/logos/ThirdParty/steam.svg',
+      icon: '/icons/Logos/ThirdParty/steam.svg',
       href: 'https://store.steampowered.com/app/2231750/The_Wonderful_Adventures_Of_Sip/'
     }
   ];
@@ -26,6 +26,10 @@
       customPositioning: {
        targetSelector: '.styled-sip'
       }
+    },
+    {
+      selectors: ['.hero-text'],
+      className: 'hovered-button-grow'
     }
   ];
 
@@ -201,13 +205,15 @@
     <video bind:this={nextVideo} class="hero-video next" muted playsinline style="opacity:0;"></video>
     <div class="video-overlay"></div>
   </div>
-  <div class="cursor-no-interact hero-text">
-    <span class="text-container"><h2 class="tw">{$t('proj.twaos.title.tw', 'The Wonderful')}</h2></span>
-    <span class="text-container"><h3 class="ao">{$t('proj.twaos.title.ao', 'Adventures Of')}</h3></span>
-    <span class="text-container"><h1 class="sip">{$t('proj.twaos.title.sip', 'SIP')}</h1></span>
+  <div class="hero-text">
+    <div class="wrap-no-interact-all twaos-title">
+      <span class="text-container"><h2 class="tw">{$t('proj.twaos.title.tw', 'The Wonderful')}</h2></span>
+      <span class="text-container"><h3 class="ao">{$t('proj.twaos.title.ao', 'Adventures Of')}</h3></span>
+      <span class="text-container"><h1 class="sip">{$t('proj.twaos.title.sip', 'SIP')}</h1></span>
+    </div>
     <span class="text-container"><h5>{$t('proj.twaos.desc.short', 'An open-source Indie Game created by a Solo Developer')}</h5></span>
   </div>
-  <div class="cards-wrapper">
+  <div class="wrap-no-interact-all cards-wrapper">
     {#each pages as page}
       <div class="card-container">
         <a class="card" href={page.href} target="_blank">
@@ -253,6 +259,7 @@
     overflow: hidden;
   }
 
+  .twaos-title,
   .hero-text {
     position: relative;
     z-index: 1;

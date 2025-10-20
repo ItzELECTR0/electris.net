@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import { afterNavigate } from '$app/navigation';
   import { hoverConfigStore, type HoverConfig } from '$lib/stores/hoverConfig';
-  import type { ClassValue } from "svelte/elements";
 
   let resetCursorFunction: () => void;
   let circleElement: HTMLElement | null = null;
@@ -39,11 +38,50 @@
     return (vw / 100) * window.innerWidth;
   }
 
+  function hasNoInteractClass(element: HTMLElement, checkAll: boolean = false): boolean {
+    const classToCheck = checkAll ? 'circle-no-interact-all' : 'circle-no-interact';
+    
+    if (element.classList.contains('circle-no-interact') || element.classList.contains('circle-no-interact-all')) {
+      return true;
+    }
+    
+    let parent = element.parentElement;
+    while (parent) {
+      if (parent.classList.contains('circle-no-interact-all')) {
+        return true;
+      }
+      parent = parent.parentElement;
+    }
+    
+    return false;
+  }
+
+  function hasNoWrapClass(element: HTMLElement): boolean {
+    if (element.classList.contains('wrap-no-interact') || element.classList.contains('wrap-no-interact-all')) {
+      return true;
+    }
+    
+    let parent = element.parentElement;
+    while (parent) {
+      if (parent.classList.contains('wrap-no-interact-all')) {
+        return true;
+      }
+      parent = parent.parentElement;
+    }
+    
+    return false;
+  }
+
   function getWordAtPosition(x: number, y: number, wrapConfig: HoverConfig['wrapText'], targetElement?: HTMLElement): { element: HTMLElement, bounds: DOMRect, text: string } | null {
     if (!wrapConfig) return null;
     
     const words = wrapConfig.words ?? false;
     const sentences = wrapConfig.sentences ?? false;
+    
+    if (words === false && sentences === false) {
+      return null;
+    }
+    
     const ignorePunctuation = wrapConfig.ignorePunctuation ?? false;
     const ignoreCharacters = wrapConfig.ignoreCharacters ?? false;
     
@@ -61,11 +99,11 @@
     for (const element of elements) {
       const textElement = element as HTMLElement;
       
-      if (targetElement && !targetElement.contains(textElement) && targetElement !== textElement) {
+      if (hasNoWrapClass(textElement)) {
         continue;
       }
       
-      if (textElement.closest('cursor-no-interact') || textElement.closest('wrap-no-interact')) {
+      if (targetElement && !targetElement.contains(textElement) && targetElement !== textElement) {
         continue;
       }
       
@@ -144,7 +182,7 @@
         let actualEnd = wordEnd;
         
         if (filterConfig.ignorePunctuation && filterConfig.ignoreCharacters) {
-          const match = word.match(/[a-zA-Z0-9]+/);
+          const match = word.match(/[\p{L}\p{N}]+/u);
           if (match) {
             cleanWord = match[0];
             const cleanStart = word.indexOf(cleanWord);
@@ -155,7 +193,7 @@
             continue;
           }
         } else if (filterConfig.ignorePunctuation) {
-          const match = word.match(/[a-zA-Z0-9\s\[\]{}|\\\/\-_+=<>~`@#$%^&*()]+/);
+          const match = word.match(/[\p{L}\p{N}\s\[\]{}|\\\/\-_+=<>~`@#$%^&*()'"]+/u);
           if (match) {
             cleanWord = match[0];
             const cleanStart = word.indexOf(cleanWord);
@@ -163,7 +201,7 @@
             actualEnd = actualStart + cleanWord.length;
           }
         } else if (filterConfig.ignoreCharacters) {
-          const match = word.match(/[a-zA-Z0-9.,;:!?'"()-]+/);
+          const match = word.match(/[\p{L}\p{N}.,;:!?'"()-]+/u);
           if (match) {
             cleanWord = match[0];
             const cleanStart = word.indexOf(cleanWord);
@@ -252,44 +290,44 @@
   }
 
   function getElementCenter(element: HTMLElement, config?: HoverConfig): { x: number, y: number } {
-  let targetElement = element;
-  let offsetX = 0;
-  let offsetY = 0;
+    let targetElement = element;
+    let offsetX = 0;
+    let offsetY = 0;
 
-  if (config?.className === 'hovered-pin') {
-    return getPinCenter(element);
-  }
-
-  if (config?.wrapText) {
-    const wordBounds = getWordHoverBounds();
-    return { x: wordBounds.x, y: wordBounds.y };
-  }
-
-  if (config?.customPositioning) {
-    const customTarget = document.querySelector(config.customPositioning.targetSelector) as HTMLElement;
-    if (customTarget) {
-      targetElement = customTarget;
+    if (config?.className === 'hovered-pin') {
+      return getPinCenter(element);
     }
-    offsetX = config.customPositioning.offsetX ? vwToPx(config.customPositioning.offsetX) : 0;
-    offsetY = config.customPositioning.offsetY ? vhToPx(config.customPositioning.offsetY) : 0;
-  }
 
-  const rect = targetElement.getBoundingClientRect();
-  let centerX = rect.left + rect.width / 2 + offsetX;
-  let centerY = rect.top + rect.height / 2 + offsetY;
-
-  if (targetElement.closest('.newhome-search')) {
-    const searchWrapper = targetElement.closest('.search-wrapper');
-    if (searchWrapper) {
-      const searchRect = searchWrapper.getBoundingClientRect();
-      centerX = searchRect.left + searchRect.width / 2;
-      centerY = searchRect.top + searchRect.height / 2;
-      centerY -= vhToPx(0.1);
+    if (config?.wrapText) {
+      const wordBounds = getWordHoverBounds();
+      return { x: wordBounds.x, y: wordBounds.y };
     }
-  }
 
-  return { x: centerX, y: centerY };
-}
+    if (config?.customPositioning) {
+      const customTarget = document.querySelector(config.customPositioning.targetSelector) as HTMLElement;
+      if (customTarget) {
+        targetElement = customTarget;
+      }
+      offsetX = config.customPositioning.offsetX ? vwToPx(config.customPositioning.offsetX) : 0;
+      offsetY = config.customPositioning.offsetY ? vhToPx(config.customPositioning.offsetY) : 0;
+    }
+
+    const rect = targetElement.getBoundingClientRect();
+    let centerX = rect.left + rect.width / 2 + offsetX;
+    let centerY = rect.top + rect.height / 2 + offsetY;
+
+    if (targetElement.closest('.newhome-search')) {
+      const searchWrapper = targetElement.closest('.search-wrapper');
+      if (searchWrapper) {
+        const searchRect = searchWrapper.getBoundingClientRect();
+        centerX = searchRect.left + searchRect.width / 2;
+        centerY = searchRect.top + searchRect.height / 2;
+        centerY -= vhToPx(0.1);
+      }
+    }
+
+    return { x: centerX, y: centerY };
+  }
 
   function getCurrentLockedPosition(): { x: number, y: number } {
     if (!lockedElement || !lockedConfig) {
@@ -331,6 +369,10 @@
   }
 
   function elementMatchesConfig(target: HTMLElement, config: HoverConfig): { matches: boolean, element: HTMLElement | null } {
+    if (hasNoInteractClass(target)) {
+      return { matches: false, element: null };
+    }
+
     if (config.type && config.type.length > 0) {
       const elementTagName = target.tagName.toLowerCase();
       const matchesType = config.type.some(type => type.toLowerCase() === elementTagName);
@@ -340,17 +382,27 @@
     }
 
     if (config.requireAllSelectors) {
-      const matchesAll = config.selectors.every(selector => target.closest(selector));
+      const matchesAll = config.selectors.every(selector => {
+        const matchedElement = target.closest(selector);
+        return matchedElement && !hasNoInteractClass(matchedElement as HTMLElement);
+      });
       if (matchesAll) {
         const element = target.closest(config.selectors[0]) as HTMLElement;
-        return { matches: true, element };
+        if (element && !hasNoInteractClass(element)) {
+          return { matches: true, element };
+        }
       }
       return { matches: false, element: null };
     } else {
-      const matchedSelector = config.selectors.find(selector => target.closest(selector));
+      const matchedSelector = config.selectors.find(selector => {
+        const matchedElement = target.closest(selector);
+        return matchedElement && !hasNoInteractClass(matchedElement as HTMLElement);
+      });
       if (matchedSelector) {
         const element = target.closest(matchedSelector) as HTMLElement;
-        return { matches: true, element };
+        if (element && !hasNoInteractClass(element)) {
+          return { matches: true, element };
+        }
       }
       return { matches: false, element: null };
     }
@@ -361,8 +413,14 @@
     const configElementPairs: { config: HoverConfig, element: HTMLElement, matchResult: any }[] = [];
 
     for (const el of elements) {
+      const htmlElement = el as HTMLElement;
+      
+      if (hasNoInteractClass(htmlElement)) {
+        continue;
+      }
+
       for (const config of hoverConfigs) {
-        const matchResult = elementMatchesConfig(el as HTMLElement, config);
+        const matchResult = elementMatchesConfig(htmlElement, config);
         if (matchResult.matches && matchResult.element) {
           configElementPairs.push({
             config,
@@ -401,6 +459,10 @@
     
     const words = config.wrapText.words ?? false;
     const sentences = config.wrapText.sentences ?? false;
+    
+    if (words === false && sentences === false) {
+      return false;
+    }
     
     return words || sentences;
   }
@@ -516,6 +578,10 @@
 
   function handleHover(event: MouseEvent, config: HoverConfig, elementIndex?: number) {
     const target = event.target as HTMLElement;
+
+    if (hasNoInteractClass(target)) {
+      return;
+    }
 
     if (config.wrapText) {
       return;

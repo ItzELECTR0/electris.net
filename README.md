@@ -2,9 +2,7 @@
 
 # [ELECTRIS.net](https://electris.net)
 #### The official website for the ELECTRIS Project.<br>Built with Svelte and Typescript.
-#### The official website for the ELECTRIS Project.<br>Built with Svelte and Typescript.
 
-## How to set up dev environment?
 ## How to set up dev environment?
 
 #### First, clone the project and navigate into the directory
@@ -25,7 +23,7 @@
 ## Subdomains:
 ### For the Public
 
-#### [new.electris.net](https://new.electris.net)
+#### [new.electris.net](https://new.electris.net) (NOT AVAILABLE YET)
 ##### The NewHome page of our website.
 
 #### [canary.electris.net](https://canary.electris.net)
@@ -34,13 +32,5 @@
 #### [testing.electris.net](https://testing.electris.net)
 ##### It's only up when I am testing the website on my machine.<br>Updates in real time as I make changes to the code.
 
-### Everything else (My self hosted stuff)
-#### These only exist so I can remotely connect.
-
-#### [update.electris.net](https://update.electris.net)
-##### My CustOTA update server for my Pixel 7 Pro with GrapheneOS<br>(Self-signed OTA updates patched with Magisk)
-
-#### [searxng.electris.net](https://searxng.electris.net)
-##### My instance of the SearXNG search engine.<br>You can use it if you want, just don't abuse it or I'll take it down.
-
-###### There are others, but they are private.
+### Everything else (Self-hosted stuff)
+#### These only exist so I can remotely connect.<br>They are private.

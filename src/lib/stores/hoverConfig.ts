@@ -13,10 +13,12 @@ export interface HoverConfig {
     ignorePunctuation?: boolean;
     ignoreCharacters?: boolean;
   };
+  
   customEvent?: {
     hovered: string;
     unhovered: string;
   };
+  
   customPositioning?: {
     targetSelector: string;
     offsetX?: number;
@@ -56,9 +58,11 @@ function createHoverConfigStore() {
 
   return {
     subscribe,
+
     addConfigs: (configs: HoverConfig[]) => {
       update(existingConfigs => [...existingConfigs, ...configs]);
     },
+    
     removeConfigs: (configs: HoverConfig[]) => {
       update(existingConfigs => {
         return existingConfigs.filter(existing => 
@@ -68,6 +72,7 @@ function createHoverConfigStore() {
         );
       });
     },
+    
     resetToDefaults: () => {
       update(() => [...defaultHoverConfigs]);
     }

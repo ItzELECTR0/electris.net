@@ -13,8 +13,6 @@
     applyStyles,
     type Theme,
     type ColorScheme,
-    availableThemes,
-    availableColorSchemes
   } from '$lib/stores/theme';
   import { 
     environmentStore, 
@@ -85,18 +83,22 @@
     {
       selectors: [ '.option' ],
       className: 'hovered-word-wrap',
-      lockPosition: true
+      lockPosition: true,
+      wrapText: {
+        words: false,
+        sentences: false
+      }
     },
     {
       selectors: ['.hamburger-footer', '.footer'],
       className: 'hovered-hamburger-footer',
       requireAllSelectors: false,
-      lockPosition: true,
+      lockPosition: true
     },
     {
       selectors: ['.hamburger-button'],
       className: 'hovered-hamburger',
-      lockPosition: true
+      lockPosition: true,
     },
     {
       selectors: ['.settings-button'],
@@ -458,7 +460,7 @@
         {/each}
       {/if}
     </div>
-      <div class="hamburger-footer" role="region"
+      <div class="wrap-no-interact-all hamburger-footer" role="region"
         on:mouseenter={(e: MouseEvent) => {
           const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
           const centerX = rect.left + rect.width / 2;
@@ -492,7 +494,7 @@
               aria-expanded={showThemeDropdown}
               aria-haspopup="listbox"
             >
-              <span class="theme-icon">{currentThemeInfo.icon}</span>
+              <span class="wrap-no-interact theme-icon">{currentThemeInfo.icon}</span>
               <span class="theme-name">{currentThemeInfo.label}</span>
               <span class="dropdown-arrow" class:open={showThemeDropdown}>▼</span>
             </button>
