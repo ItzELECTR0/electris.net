@@ -133,7 +133,7 @@
       value: 'default' as Theme, 
       label: $t('nav.options.theme.default', 'Default'), 
       icon: '🎨',
-      description: $t('nav.options.theme.default.desc', 'Classic ELECTRIS')
+      description: $t('nav.options.theme.default.desc', 'The ELECTRIS Style')
     }
   ] as ThemeOption[];
 
@@ -486,7 +486,7 @@
       
       <div class="option">
         <span>{$t('nav.options.theme', 'Theme')}</span>
-          <div class="theme-selector">
+          <div class="selector">
             <button 
               type="button" 
               class="theme-button"
@@ -531,7 +531,7 @@
       <!-- Color Scheme Selector -->
       <div class="option">
         <span>{$t('nav.options.color', 'Color')}</span>
-        <div class="color-scheme-selector">
+        <div class="selector">
           <button 
             type="button" 
             class="color-scheme-button"
@@ -824,12 +824,13 @@
     transition: 200.0ms;
   }
 
-  /* Theme Selector Styles */
-  .theme-selector {
+  .selector {
     position: relative;
     display: inline-block;
-    width: 16vh;
+    width: 18vh;
   }
+
+  /* Theme Selector Styles */
 
   .theme-button {
     background: none;
@@ -943,12 +944,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-top: 0.1vh;
-  }
-
-  .color-scheme-selector {
-    position: relative;
-    display: inline-block;
-    width: 16vh;
   }
 
   .color-scheme-button {

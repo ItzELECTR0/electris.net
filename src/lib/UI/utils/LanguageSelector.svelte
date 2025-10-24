@@ -88,7 +88,7 @@
   .language-selector {
     position: relative;
     display: inline-block;
-    width: 16vh;
+    width: 18vh;
   }
   
   .language-button {
