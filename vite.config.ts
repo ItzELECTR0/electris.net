@@ -12,7 +12,11 @@ export default defineConfig(({ mode }) => {
 		},
 		server: {
 			host: '0.0.0.0',
-			allowedHosts: ['testing.electris.net']
+			allowedHosts: ['.electris.net']
+		},
+		preview: {
+			host: '0.0.0.0',
+			allowedHosts: ['.electris.net']
 		}
 	};
 });

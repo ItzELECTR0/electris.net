@@ -76,7 +76,7 @@ async function loadCommonData(): Promise<LocaleData> {
   }
   
   try {
-    const response = await fetch('/data/lang/.env.lang');
+    const response = await fetch('/data/lang/env.lang');
     if (!response.ok) {
       throw new Error('Failed to load common locale data');
     }
@@ -98,7 +98,7 @@ async function loadLanguageData(locale: string): Promise<LocaleData> {
   }
   
   try {
-    const response = await fetch(`/data//lang/.env.${locale}.lang`);
+    const response = await fetch(`/data/lang/env.${locale}.lang`);
     if (!response.ok) {
       throw new Error(`Failed to load locale ${locale}`);
     }
