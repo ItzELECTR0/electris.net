@@ -17,19 +17,19 @@
     {
       title: $t('site.title', 'ELECTRIS', 'en-US'),
       description: $t('site.slogan', 'Heart like a pen, On paper it bleeds'),
-      profilePicture: '/icons/logos/FirstParty/elts-v1.png',
+      profilePicture: '/icons/Logos/FirstParty/elts-v1.png',
       url: '/socials/ELTS'
     },
     {
       title: $t('site.author.eltr', 'ELECTRO', 'en-US'),
       description: $t('site.author.eltr.slogan', 'A Creator, Dancing with The Lightning'),
-      profilePicture: '/icons/logos/FirstParty/eltr-v10.png',
+      profilePicture: '/icons/Logos/FirstParty/eltr-v10.png',
       url: '/socials/ELTR'
     },
     {
       title: $t('site.author.vrrw', 'Varrow', 'en-US'),
       description: $t('site.author.vrrw.slogan', 'A Lazy Programmer'),
-      profilePicture: '/icons/logos/FirstParty/VArrow.png',
+      profilePicture: '/icons/Logos/FirstParty/VArrow.png',
       url: '/socials/VRRW'
     }
   ];

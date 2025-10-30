@@ -5,15 +5,15 @@
       {
         title: $t('site.platform.yt', 'YouTube'),
         description: $t('site.slogan', 'Heart like a pen, On paper it bleeds'),
-        platformLogo: '/icons/logos/ThirdParty/yt.svg',
-        profilePicture: '/icons/logos/FirstParty/elts-v1.png',
+        platformLogo: '/icons/Logos/ThirdParty/yt.svg',
+        profilePicture: '/icons/Logos/FirstParty/elts-v1.png',
         url: 'https://youtube.com/@ELECTRIS'
       },
       {
         title: $t('site.platform.ds', 'Discord'),
         description: $t('social.elts.ds.desc', 'Legends of Lightning'),
-        platformLogo: '/icons/logos/ThirdParty/discord.svg',
-        profilePicture: '/icons/logos/FirstParty/elts-v1.png',
+        platformLogo: '/icons/Logos/ThirdParty/discord.svg',
+        profilePicture: '/icons/Logos/FirstParty/elts-v1.png',
         url: 'https://discord.gg/TgtCGKxbZr'
       }
     ];
@@ -25,16 +25,16 @@
   
   <div class="socials-page">
     <div class="hero">
-      <h1>{$t('site.title', 'ELECTRIS')}</h1>
-      <p>{$t('site.slogan', 'Heart like a pen, On Paper it bleeds')}</p>
+      <h1>{$t('site.author.elts', 'ELECTRIS')}</h1>
+      <p>{$t('social.undertitle', 'Follow the changes all around')}</p>
     </div>
   
     <div class="hero">
       {#each socialCards as card}
-        <a class="social-card" href={card.url} target="_blank">
+        <a class="card" href={card.url} target="_blank">
           <div class="icons">
-            <img src={card.platformLogo} alt="Platform Logo" class="platform-logo" />
-            <img src={card.profilePicture} alt="Profile Picture" class="profile-picture" />
+            <img src={card.platformLogo} alt="Platform Logo" class="platform-logo"/>
+            <img src={card.profilePicture} alt="Profile Picture" class="profile-picture"/>
           </div>
           <div class="card-text">
             <h2>{card.title}</h2>
@@ -75,7 +75,7 @@
       font-family: sans-serif;
     }
   
-    .social-card {
+    .card {
       display: flex;
       align-items: center;
       padding: 15px;
@@ -83,10 +83,11 @@
       width: 100%;
       max-width: 600px;
       text-decoration: none;
+      color: #f65901;
       transition: transform 0.2s ease;
     }
   
-    .social-card:hover {
+    .card:hover {
       transform: scale(1.02);
     }
   

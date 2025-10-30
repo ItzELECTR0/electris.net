@@ -5,15 +5,15 @@
     {
       title: $t('site.platform.yt', 'YouTube'),
       description: $t('social.etlr.yt.desc', 'Dancing with the Lightning'),
-      platformLogo: '/icons/logos/ThirdParty/yt.svg',
-      profilePicture: '/icons/logos/FirstParty/eltr-v10.png',
+      platformLogo: '/icons/Logos/ThirdParty/yt.svg',
+      profilePicture: '/icons/Logos/FirstParty/eltr-v10.png',
       url: 'https://youtube.com/@ELEC7RO'
     },
     {
       title: $t('site.platform.gh', 'GitHub'),
       description: $t('social.eltr.gh.desc', 'Giving to the World'),
-      platformLogo: '/icons/logos/ThirdParty/github-nobg.svg',
-      profilePicture: '/icons/logos/FirstParty/eltr-v10.png',
+      platformLogo: '/icons/Logos/ThirdParty/github-nobg.svg',
+      profilePicture: '/icons/Logos/FirstParty/eltr-v10.png',
       url: 'https://github.com/ItzELECTR0'
     }
   ];
@@ -31,7 +31,7 @@
   
     <div class="hero">
       {#each socialCards as card}
-        <a class="social-card" href={card.url} target="_blank">
+        <a class="card" href={card.url} target="_blank">
           <div class="icons">
             <img src={card.platformLogo} alt="Platform Logo" class="platform-logo"/>
             <img src={card.profilePicture} alt="Profile Picture" class="profile-picture"/>
@@ -75,7 +75,7 @@
       font-family: sans-serif;
     }
   
-    .social-card {
+    .card {
       display: flex;
       align-items: center;
       padding: 15px;
@@ -86,7 +86,7 @@
       transition: transform 0.2s ease;
     }
   
-    .social-card:hover {
+    .card:hover {
       transform: scale(1.02);
     }
   
